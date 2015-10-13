@@ -6,10 +6,10 @@
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/web?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">webf</property>
-    <property name="hibernate.connection.password"></property>
-    <mapping resource="at/webf/ws/PersonCourseMembership.hbm.xml"/>
-    <mapping resource="at/webf/ws/Course.hbm.xml"/>
-    <mapping resource="at/webf/ws/Person.hbm.xml"/>
-    <mapping resource="at/webf/ws/CourseTeil.hbm.xml"/>
+    <property name="hibernate.connection.password"/>
+    <mapping class="" file="" jar="" package="" resource="at/webf/ws/person_course_membership.hbm.xml"/>
+    <mapping class="" file="" jar="" package="" resource="at/webf/ws/course.hbm.xml"/>
+    <mapping class="" file="" jar="" package="" resource="at/webf/ws/person.hbm.xml"/>
+    <mapping class="" file="" jar="" package="" resource="at/webf/ws/person_course_teil.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

@@ -5,4 +5,5 @@
   <table-filter match-name="person"/>
   <table-filter match-name="course"/>
   <table-filter match-name="person_course_membership"/>
+  <table-filter match-name="person_course_teil"/>
 </hibernate-reverse-engineering>
