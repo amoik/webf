@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 09.04.2015 08:20:19 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="webf.hibernate.db.Person" table="person" catalog="web" optimistic-lock="version">
+        <id name="personPk" type="java.lang.Integer">
+            <column name="person_pk" />
+            <generator class="identity" />
+        </id>
+        <property name="username" type="string">
+            <column name="username" length="30" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="30" not-null="true" />
+        </property>
+        <property name="role" type="string">
+            <column name="role" length="30" not-null="true" />
+        </property>
+        <set name="personCourseMemberships" table="person_course_membership" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="person_fk" not-null="true" />
+            </key>
+            <one-to-many class="webf.hibernate.db.PersonCourseMembership" />
+        </set>
+    </class>
+</hibernate-mapping>

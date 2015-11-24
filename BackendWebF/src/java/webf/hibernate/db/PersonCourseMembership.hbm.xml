@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 09.04.2015 08:20:19 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="webf.hibernate.db.PersonCourseMembership" table="person_course_membership" catalog="web" optimistic-lock="version">
+        <composite-id name="id" class="webf.hibernate.db.PersonCourseMembershipId">
+            <key-property name="personFk" type="int">
+                <column name="person_fk" />
+            </key-property>
+            <key-property name="courseFk" type="int">
+                <column name="course_fk" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="course" class="webf.hibernate.db.Course" update="false" insert="false" fetch="select">
+            <column name="course_fk" not-null="true" />
+        </many-to-one>
+        <many-to-one name="person" class="webf.hibernate.db.Person" update="false" insert="false" fetch="select">
+            <column name="person_fk" not-null="true" />
+        </many-to-one>
+        <property name="note" type="int">
+            <column name="note" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
