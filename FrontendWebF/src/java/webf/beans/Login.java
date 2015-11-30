@@ -42,7 +42,7 @@ public class Login {
     }
     
     
-    public void login(){
+    public String login(){
     
         //call WS        
         
@@ -62,8 +62,11 @@ public class Login {
         
         
         if(status.equals("Success!"))
-            tinf("Erfolgreich eingeloggt " + userId);
-        else
-            tinf("Login Fehlgeschlagen");
+        {
+            tinf("Erfolgreich eingeloggt " + userId); 
+            return "loggedin.xhtml";
+        }
+        tinf("Login Fehlgeschlagen");
+        return "index.xhtml";
     }
 }

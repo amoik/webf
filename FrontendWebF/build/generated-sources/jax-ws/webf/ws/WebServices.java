@@ -26,18 +26,36 @@ public interface WebServices {
 
     /**
      * 
+     * @param arg1
      * @param arg0
      * @return
      *     returns int
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "createUser", targetNamespace = "http://webservice.webf/", className = "webf.ws.CreateUser")
-    @ResponseWrapper(localName = "createUserResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.CreateUserResponse")
-    @Action(input = "http://webservice.webf/WebServices/createUserRequest", output = "http://webservice.webf/WebServices/createUserResponse")
-    public int createUser(
+    @RequestWrapper(localName = "inttest", targetNamespace = "http://webservice.webf/", className = "webf.ws.Inttest")
+    @ResponseWrapper(localName = "inttestResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.InttestResponse")
+    @Action(input = "http://webservice.webf/WebServices/inttestRequest", output = "http://webservice.webf/WebServices/inttestResponse")
+    public int inttest(
         @WebParam(name = "arg0", targetNamespace = "")
-        String arg0);
+        int arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        int arg1);
+
+    /**
+     * 
+     * @param parameter
+     * @return
+     *     returns webf.ws.LoginResponseType
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "login", targetNamespace = "http://webservice.webf/", className = "webf.ws.Login")
+    @ResponseWrapper(localName = "loginResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.LoginResponse")
+    @Action(input = "http://webservice.webf/WebServices/loginRequest", output = "http://webservice.webf/WebServices/loginResponse")
+    public LoginResponseType login(
+        @WebParam(name = "parameter", targetNamespace = "")
+        LoginRequestType parameter);
 
     /**
      * 
@@ -56,18 +74,18 @@ public interface WebServices {
 
     /**
      * 
-     * @param parameter
+     * @param arg0
      * @return
-     *     returns webf.ws.LoginResponseType
+     *     returns int
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "login", targetNamespace = "http://webservice.webf/", className = "webf.ws.Login")
-    @ResponseWrapper(localName = "loginResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.LoginResponse")
-    @Action(input = "http://webservice.webf/WebServices/loginRequest", output = "http://webservice.webf/WebServices/loginResponse")
-    public LoginResponseType login(
-        @WebParam(name = "parameter", targetNamespace = "")
-        LoginRequestType parameter);
+    @RequestWrapper(localName = "createUser", targetNamespace = "http://webservice.webf/", className = "webf.ws.CreateUser")
+    @ResponseWrapper(localName = "createUserResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.CreateUserResponse")
+    @Action(input = "http://webservice.webf/WebServices/createUserRequest", output = "http://webservice.webf/WebServices/createUserResponse")
+    public int createUser(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0);
 
     /**
      * 

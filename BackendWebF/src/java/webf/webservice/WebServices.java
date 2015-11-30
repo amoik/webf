@@ -103,4 +103,9 @@ public class WebServices {
         int k = i + j;
         return k;
       }
+    @WebMethod
+    public int inttest(@WebParam int i, @WebParam int j) {
+        int k = i - j;
+        return k;
+      }
 }
