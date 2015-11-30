@@ -17,4 +17,28 @@
             <managed-bean-class>webf.beans.Login</managed-bean-class>
             <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+                                
+    <managed-bean>
+            <managed-bean-name>createUser</managed-bean-name>
+            <managed-bean-class>webf.beans.CreateUser</managed-bean-class>
+            <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+                                
+    <managed-bean>
+            <managed-bean-name>hello</managed-bean-name>
+            <managed-bean-class>webf.beans.Hello</managed-bean-class>
+            <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+                                
+    <managed-bean>
+            <managed-bean-name>test</managed-bean-name>
+            <managed-bean-class>webf.beans.Test</managed-bean-class>
+            <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+                                
+    <managed-bean>
+            <managed-bean-name>add</managed-bean-name>
+            <managed-bean-class>webf.beans.Add</managed-bean-class>
+            <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 </faces-config>

@@ -1,5 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.1-b419 (branches/2.3.1.x-7937; 2014-08-04T08:11:03+0000) JAXWS-RI/2.2.10-b140803.1500 JAXWS-API/2.2.11 JAXB-RI/2.2.10-b140802.1033 JAXB-API/2.2.12-b140109.1041 svn-revision#unknown. --><xs:schema xmlns:tns="http://webservice.webf/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://webservice.webf/">
 
+<xs:element name="add" type="tns:add"/>
+
+<xs:element name="addResponse" type="tns:addResponse"/>
+
+<xs:element name="createUser" type="tns:createUser"/>
+
+<xs:element name="createUserResponse" type="tns:createUserResponse"/>
+
+<xs:element name="floattest" type="tns:floattest"/>
+
+<xs:element name="floattestResponse" type="tns:floattestResponse"/>
+
 <xs:element name="hello" type="tns:hello"/>
 
 <xs:element name="helloResponse" type="tns:helloResponse"/>
@@ -10,15 +22,16 @@
 
 <xs:element name="loginResponseType" type="tns:loginResponseType"/>
 
-<xs:complexType name="hello">
+<xs:complexType name="add">
 <xs:sequence>
-<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="arg0" type="xs:int"/>
+<xs:element name="arg1" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="helloResponse">
+<xs:complexType name="addResponse">
 <xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
+<xs:element name="return" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -58,6 +71,43 @@
 <xs:sequence>
 <xs:element name="status" type="xs:string" minOccurs="0"/>
 <xs:element name="userId" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createUser">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createUserResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="hello">
+<xs:sequence>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="helloResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="floattest">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int"/>
+<xs:element name="arg1" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="floattestResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>

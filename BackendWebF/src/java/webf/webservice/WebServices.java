@@ -15,7 +15,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import webf.hibernate.HibernateUtil;
 import webf.hibernate.db.Person;
-import webf.webservice.createUser.CreateUserResponse;
 import webf.webservice.login.types.LoginRequestType;
 import webf.webservice.login.LoginResponse;
 import webf.webservice.login.types.LoginResponseType;
@@ -30,15 +29,15 @@ public class WebServices {
     /**
      * This is a sample web service operation
      */
-    @WebMethod(operationName = "hello")
+    @WebMethod
     public String hello(@WebParam(name = "name") String txt) {
-        return "Hello " + txt + " !";
+        return "Diese Info kommt vom WS! Du hast '" + txt + "' geschickt!";
     }
 
     /**
      * Web service operation
      */
-    @WebMethod(operationName = "login")
+    @WebMethod
     public LoginResponseType login(@WebParam(name = "parameter") LoginRequestType parameter) {
         
         //String username = parameter.getLoginRequest().getUsername();
@@ -83,13 +82,25 @@ public class WebServices {
     }
     
     
-    @WebMethod(operationName = "createUser")
-    public CreateUserResponse createUser(@WebParam(name = "name") String name) {
-        
-        CreateUserResponse ret = new CreateUserResponse();
-        ret.setStatus("success");
-        
-        return ret;
+    @WebMethod
+    public int createUser(@WebParam String name)
+    {
+
+        return 1;
     }
 
+    /**
+     * Web service operation
+     */
+    @WebMethod
+    public double floattest(@WebParam int i, @WebParam int j) {
+        //TODO write your implementation code here:
+        double ret = 1.11341232344 + i + j;
+        return ret;
+    }
+    @WebMethod
+    public int add(@WebParam int i, @WebParam int j) {
+        int k = i + j;
+        return k;
+      }
 }

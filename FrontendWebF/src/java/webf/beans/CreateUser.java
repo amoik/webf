@@ -19,17 +19,18 @@ import webf.ws.WebServices_Service;
  */
 public class CreateUser {
     
-    public void CreateUser()
+    public void createUser()
     {
-        /*
+        tinf("lege user an...");
+        
         //call WS        
         
         WebServices_Service service = new WebServices_Service();
         WebServices port = service.getWebServicesPort();      
 
-        int ret =  port.createUser("heislbesn");
+        double ret = port.createUser("heisl");
         
-        tinf("return: " + ret);*/
+        tinf("return: " + ret);
     }
     
 }

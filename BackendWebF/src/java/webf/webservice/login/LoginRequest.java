@@ -6,6 +6,7 @@
 package webf.webservice.login;
 
 import java.util.Date;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  *

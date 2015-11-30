@@ -17,13 +17,25 @@ import webf.ws.HelloResponse;
  */
 public class Hello {
     
+    private String resp = "";
+    
     public void hello()
     {
         WebServices_Service service = new WebServices_Service();
         WebServices port = service.getWebServicesPort();  
 
         
-        String resp = port.hello("nudlaug");
-        tinf(resp);
+        String resp = port.hello("heislbesn");
+        this.setResp(resp);
     }
+
+    public String getResp() {
+        return resp;
+    }
+
+    public void setResp(String resp) {
+        this.resp = resp;
+    }
+    
+    
 }

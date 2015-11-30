@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlType;
  *
  * @author PU
  */
+
 @XmlType(name = "loginResponse2")
 public class LoginResponse {
     

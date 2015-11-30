@@ -26,8 +26,14 @@ public class ObjectFactory {
 
     private final static QName _Login_QNAME = new QName("http://webservice.webf/", "login");
     private final static QName _LoginResponseType_QNAME = new QName("http://webservice.webf/", "loginResponseType");
+    private final static QName _CreateUser_QNAME = new QName("http://webservice.webf/", "createUser");
+    private final static QName _Floattest_QNAME = new QName("http://webservice.webf/", "floattest");
     private final static QName _Hello_QNAME = new QName("http://webservice.webf/", "hello");
+    private final static QName _CreateUserResponse_QNAME = new QName("http://webservice.webf/", "createUserResponse");
+    private final static QName _AddResponse_QNAME = new QName("http://webservice.webf/", "addResponse");
     private final static QName _HelloResponse_QNAME = new QName("http://webservice.webf/", "helloResponse");
+    private final static QName _Add_QNAME = new QName("http://webservice.webf/", "add");
+    private final static QName _FloattestResponse_QNAME = new QName("http://webservice.webf/", "floattestResponse");
     private final static QName _LoginResponse_QNAME = new QName("http://webservice.webf/", "loginResponse");
 
     /**
@@ -35,6 +41,22 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link Add }
+     * 
+     */
+    public Add createAdd() {
+        return new Add();
+    }
+
+    /**
+     * Create an instance of {@link FloattestResponse }
+     * 
+     */
+    public FloattestResponse createFloattestResponse() {
+        return new FloattestResponse();
     }
 
     /**
@@ -46,11 +68,43 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link CreateUserResponse }
+     * 
+     */
+    public CreateUserResponse createCreateUserResponse() {
+        return new CreateUserResponse();
+    }
+
+    /**
+     * Create an instance of {@link AddResponse }
+     * 
+     */
+    public AddResponse createAddResponse() {
+        return new AddResponse();
+    }
+
+    /**
      * Create an instance of {@link HelloResponse }
      * 
      */
     public HelloResponse createHelloResponse() {
         return new HelloResponse();
+    }
+
+    /**
+     * Create an instance of {@link CreateUser }
+     * 
+     */
+    public CreateUser createCreateUser() {
+        return new CreateUser();
+    }
+
+    /**
+     * Create an instance of {@link Floattest }
+     * 
+     */
+    public Floattest createFloattest() {
+        return new Floattest();
     }
 
     /**
@@ -78,19 +132,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link LoginRequestType }
-     * 
-     */
-    public LoginRequestType createLoginRequestType() {
-        return new LoginRequestType();
-    }
-
-    /**
      * Create an instance of {@link LoginRequest }
      * 
      */
     public LoginRequest createLoginRequest() {
         return new LoginRequest();
+    }
+
+    /**
+     * Create an instance of {@link LoginRequestType }
+     * 
+     */
+    public LoginRequestType createLoginRequestType() {
+        return new LoginRequestType();
     }
 
     /**
@@ -120,6 +174,24 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CreateUser }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.webf/", name = "createUser")
+    public JAXBElement<CreateUser> createCreateUser(CreateUser value) {
+        return new JAXBElement<CreateUser>(_CreateUser_QNAME, CreateUser.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Floattest }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.webf/", name = "floattest")
+    public JAXBElement<Floattest> createFloattest(Floattest value) {
+        return new JAXBElement<Floattest>(_Floattest_QNAME, Floattest.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Hello }{@code >}}
      * 
      */
@@ -129,12 +201,48 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CreateUserResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.webf/", name = "createUserResponse")
+    public JAXBElement<CreateUserResponse> createCreateUserResponse(CreateUserResponse value) {
+        return new JAXBElement<CreateUserResponse>(_CreateUserResponse_QNAME, CreateUserResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AddResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.webf/", name = "addResponse")
+    public JAXBElement<AddResponse> createAddResponse(AddResponse value) {
+        return new JAXBElement<AddResponse>(_AddResponse_QNAME, AddResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link HelloResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://webservice.webf/", name = "helloResponse")
     public JAXBElement<HelloResponse> createHelloResponse(HelloResponse value) {
         return new JAXBElement<HelloResponse>(_HelloResponse_QNAME, HelloResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Add }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.webf/", name = "add")
+    public JAXBElement<Add> createAdd(Add value) {
+        return new JAXBElement<Add>(_Add_QNAME, Add.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link FloattestResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.webf/", name = "floattestResponse")
+    public JAXBElement<FloattestResponse> createFloattestResponse(FloattestResponse value) {
+        return new JAXBElement<FloattestResponse>(_FloattestResponse_QNAME, FloattestResponse.class, null, value);
     }
 
     /**

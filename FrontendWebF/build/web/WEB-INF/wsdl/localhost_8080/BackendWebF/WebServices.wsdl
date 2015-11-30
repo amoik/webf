@@ -4,11 +4,11 @@
 <xsd:import namespace="http://webservice.webf/" schemaLocation="http://localhost:8080/BackendWebF/WebServices?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="login">
-<part name="parameters" element="tns:login"/>
+<message name="createUser">
+<part name="parameters" element="tns:createUser"/>
 </message>
-<message name="loginResponse">
-<part name="parameters" element="tns:loginResponse"/>
+<message name="createUserResponse">
+<part name="parameters" element="tns:createUserResponse"/>
 </message>
 <message name="hello">
 <part name="parameters" element="tns:hello"/>
@@ -16,19 +16,49 @@
 <message name="helloResponse">
 <part name="parameters" element="tns:helloResponse"/>
 </message>
+<message name="login">
+<part name="parameters" element="tns:login"/>
+</message>
+<message name="loginResponse">
+<part name="parameters" element="tns:loginResponse"/>
+</message>
+<message name="floattest">
+<part name="parameters" element="tns:floattest"/>
+</message>
+<message name="floattestResponse">
+<part name="parameters" element="tns:floattestResponse"/>
+</message>
+<message name="add">
+<part name="parameters" element="tns:add"/>
+</message>
+<message name="addResponse">
+<part name="parameters" element="tns:addResponse"/>
+</message>
 <portType name="WebServices">
-<operation name="login">
-<input wsam:Action="http://webservice.webf/WebServices/loginRequest" message="tns:login"/>
-<output wsam:Action="http://webservice.webf/WebServices/loginResponse" message="tns:loginResponse"/>
+<operation name="createUser">
+<input wsam:Action="http://webservice.webf/WebServices/createUserRequest" message="tns:createUser"/>
+<output wsam:Action="http://webservice.webf/WebServices/createUserResponse" message="tns:createUserResponse"/>
 </operation>
 <operation name="hello">
 <input wsam:Action="http://webservice.webf/WebServices/helloRequest" message="tns:hello"/>
 <output wsam:Action="http://webservice.webf/WebServices/helloResponse" message="tns:helloResponse"/>
 </operation>
+<operation name="login">
+<input wsam:Action="http://webservice.webf/WebServices/loginRequest" message="tns:login"/>
+<output wsam:Action="http://webservice.webf/WebServices/loginResponse" message="tns:loginResponse"/>
+</operation>
+<operation name="floattest">
+<input wsam:Action="http://webservice.webf/WebServices/floattestRequest" message="tns:floattest"/>
+<output wsam:Action="http://webservice.webf/WebServices/floattestResponse" message="tns:floattestResponse"/>
+</operation>
+<operation name="add">
+<input wsam:Action="http://webservice.webf/WebServices/addRequest" message="tns:add"/>
+<output wsam:Action="http://webservice.webf/WebServices/addResponse" message="tns:addResponse"/>
+</operation>
 </portType>
 <binding name="WebServicesPortBinding" type="tns:WebServices">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="login">
+<operation name="createUser">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -38,6 +68,33 @@
 </output>
 </operation>
 <operation name="hello">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="login">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="floattest">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="add">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
