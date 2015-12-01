@@ -15,11 +15,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import static utils.Utils.dateToStr;
 import webf.hibernate.HibernateUtil;
 import webf.hibernate.db.Person;
-import webf.webservice.login.types.LoginRequestType;
-import webf.webservice.login.LoginResponse;
-import webf.webservice.login.types.LoginResponseType;
 import webf.webservice.student.Student;
 
 /**
@@ -103,7 +101,7 @@ public class WebServices
 
     
     @WebMethod
-    public Boolean createUser(@WebParam String name, @WebParam String password, @WebParam String role, @WebParam String firstname, @WebParam String lastname, @WebParam Date birthday)
+    public Boolean createUser(@WebParam String name, @WebParam String password, @WebParam String role, @WebParam String firstname, @WebParam String lastname, @WebParam String birthday)
     {
         
         SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
@@ -112,7 +110,9 @@ public class WebServices
         Boolean ret = false;
         
         try{
+
             tx = s.beginTransaction();
+            Date d = dateToStr(birthday);
             
             //neuer user
             Person p = new Person();
@@ -121,14 +121,15 @@ public class WebServices
             p.setRole(role);
             p.setFirstname(firstname);
             p.setLastname(lastname);
-            p.setBirthday(birthday);
+            p.setBirthday(d);
             
             s.save(p);
-            ret = true;
             
             tx.commit();            //Transaktion durchführen
+            ret = true;
         } catch (Exception e) {
             //failed
+            System.out.println("Save Fehlgeschlagen");
         
             if(tx !=null){
                 tx.rollback();      //Bei Fehlerfall => Rollback!

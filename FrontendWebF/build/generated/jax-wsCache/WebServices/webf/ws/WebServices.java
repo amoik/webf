@@ -7,7 +7,6 @@ import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.ws.Action;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
@@ -31,42 +30,6 @@ public interface WebServices {
      * @param arg1
      * @param arg0
      * @return
-     *     returns double
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "add", targetNamespace = "http://webservice.webf/", className = "webf.ws.Add")
-    @ResponseWrapper(localName = "addResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.AddResponse")
-    @Action(input = "http://webservice.webf/WebServices/addRequest", output = "http://webservice.webf/WebServices/addResponse")
-    public double add(
-        @WebParam(name = "arg0", targetNamespace = "")
-        double arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        double arg1);
-
-    /**
-     * 
-     * @param arg1
-     * @param arg0
-     * @return
-     *     returns double
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "divide", targetNamespace = "http://webservice.webf/", className = "webf.ws.Divide")
-    @ResponseWrapper(localName = "divideResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.DivideResponse")
-    @Action(input = "http://webservice.webf/WebServices/divideRequest", output = "http://webservice.webf/WebServices/divideResponse")
-    public double divide(
-        @WebParam(name = "arg0", targetNamespace = "")
-        double arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        double arg1);
-
-    /**
-     * 
-     * @param arg1
-     * @param arg0
-     * @return
      *     returns int
      */
     @WebMethod
@@ -79,6 +42,75 @@ public interface WebServices {
         String arg0,
         @WebParam(name = "arg1", targetNamespace = "")
         String arg1);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.lang.Boolean
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "deletePerson", targetNamespace = "http://webservice.webf/", className = "webf.ws.DeletePerson")
+    @ResponseWrapper(localName = "deletePersonResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.DeletePersonResponse")
+    @Action(input = "http://webservice.webf/WebServices/deletePersonRequest", output = "http://webservice.webf/WebServices/deletePersonResponse")
+    public Boolean deletePerson(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Person arg0);
+
+    /**
+     * 
+     * @param arg3
+     * @param arg2
+     * @param arg5
+     * @param arg4
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns java.lang.Boolean
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "createUser", targetNamespace = "http://webservice.webf/", className = "webf.ws.CreateUser")
+    @ResponseWrapper(localName = "createUserResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.CreateUserResponse")
+    @Action(input = "http://webservice.webf/WebServices/createUserRequest", output = "http://webservice.webf/WebServices/createUserResponse")
+    public Boolean createUser(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        String arg1,
+        @WebParam(name = "arg2", targetNamespace = "")
+        String arg2,
+        @WebParam(name = "arg3", targetNamespace = "")
+        String arg3,
+        @WebParam(name = "arg4", targetNamespace = "")
+        String arg4,
+        @WebParam(name = "arg5", targetNamespace = "")
+        String arg5);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<webf.ws.Student>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getStudents", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetStudents")
+    @ResponseWrapper(localName = "getStudentsResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetStudentsResponse")
+    @Action(input = "http://webservice.webf/WebServices/getStudentsRequest", output = "http://webservice.webf/WebServices/getStudentsResponse")
+    public List<Student> getStudents();
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<webf.ws.Person>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getPersons", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetPersons")
+    @ResponseWrapper(localName = "getPersonsResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetPersonsResponse")
+    @Action(input = "http://webservice.webf/WebServices/getPersonsRequest", output = "http://webservice.webf/WebServices/getPersonsResponse")
+    public List<Person> getPersons();
 
     /**
      * 
@@ -133,71 +165,38 @@ public interface WebServices {
 
     /**
      * 
-     * @param arg3
-     * @param arg2
-     * @param arg5
-     * @param arg4
      * @param arg1
      * @param arg0
      * @return
-     *     returns java.lang.Boolean
+     *     returns double
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "createUser", targetNamespace = "http://webservice.webf/", className = "webf.ws.CreateUser")
-    @ResponseWrapper(localName = "createUserResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.CreateUserResponse")
-    @Action(input = "http://webservice.webf/WebServices/createUserRequest", output = "http://webservice.webf/WebServices/createUserResponse")
-    public Boolean createUser(
+    @RequestWrapper(localName = "add", targetNamespace = "http://webservice.webf/", className = "webf.ws.Add")
+    @ResponseWrapper(localName = "addResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.AddResponse")
+    @Action(input = "http://webservice.webf/WebServices/addRequest", output = "http://webservice.webf/WebServices/addResponse")
+    public double add(
         @WebParam(name = "arg0", targetNamespace = "")
-        String arg0,
+        double arg0,
         @WebParam(name = "arg1", targetNamespace = "")
-        String arg1,
-        @WebParam(name = "arg2", targetNamespace = "")
-        String arg2,
-        @WebParam(name = "arg3", targetNamespace = "")
-        String arg3,
-        @WebParam(name = "arg4", targetNamespace = "")
-        String arg4,
-        @WebParam(name = "arg5", targetNamespace = "")
-        XMLGregorianCalendar arg5);
+        double arg1);
 
     /**
      * 
-     * @return
-     *     returns java.util.List<webf.ws.Student>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getStudents", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetStudents")
-    @ResponseWrapper(localName = "getStudentsResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetStudentsResponse")
-    @Action(input = "http://webservice.webf/WebServices/getStudentsRequest", output = "http://webservice.webf/WebServices/getStudentsResponse")
-    public List<Student> getStudents();
-
-    /**
-     * 
+     * @param arg1
      * @param arg0
      * @return
-     *     returns java.lang.Boolean
+     *     returns double
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "deletePerson", targetNamespace = "http://webservice.webf/", className = "webf.ws.DeletePerson")
-    @ResponseWrapper(localName = "deletePersonResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.DeletePersonResponse")
-    @Action(input = "http://webservice.webf/WebServices/deletePersonRequest", output = "http://webservice.webf/WebServices/deletePersonResponse")
-    public Boolean deletePerson(
+    @RequestWrapper(localName = "divide", targetNamespace = "http://webservice.webf/", className = "webf.ws.Divide")
+    @ResponseWrapper(localName = "divideResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.DivideResponse")
+    @Action(input = "http://webservice.webf/WebServices/divideRequest", output = "http://webservice.webf/WebServices/divideResponse")
+    public double divide(
         @WebParam(name = "arg0", targetNamespace = "")
-        Person arg0);
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<webf.ws.Person>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getPersons", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetPersons")
-    @ResponseWrapper(localName = "getPersonsResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetPersonsResponse")
-    @Action(input = "http://webservice.webf/WebServices/getPersonsRequest", output = "http://webservice.webf/WebServices/getPersonsResponse")
-    public List<Person> getPersons();
+        double arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        double arg1);
 
 }
