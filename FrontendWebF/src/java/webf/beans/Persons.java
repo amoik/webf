@@ -71,12 +71,8 @@ public class Persons
         WebServices port = service.getWebServicesPort();      
 
 
-<<<<<<< HEAD
-        
-        Boolean ret = port.createUser(username, password, role, "TestFirst", "TestLast", "2015-12-01");
-=======
         Boolean ret = port.createUser(username, password, role, "TestFirst", "TestLast", (new Date()).toString());
->>>>>>> 0e9e73eebcf8c08036133fd7206895fe3e20eb7a
+
         
         if(ret)
         {
