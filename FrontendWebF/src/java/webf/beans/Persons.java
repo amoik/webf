@@ -7,6 +7,8 @@ package webf.beans;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -17,7 +19,6 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.Duration;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.namespace.QName;
-import static webf.beans.utils.marshalDate;
 import static webf.beans.utils.tinf;
 import webf.ws.Person;
 import webf.ws.WebServices;
@@ -70,8 +71,7 @@ public class Persons
         WebServices port = service.getWebServicesPort();      
 
 
-        
-        Boolean ret = port.createUser(username, password, role, "TestFirst", "TestLast", marshalDate(new Date()));
+        Boolean ret = port.createUser(username, password, role, "TestFirst", "TestLast", (new Date()).toString());
         
         if(ret)
         {

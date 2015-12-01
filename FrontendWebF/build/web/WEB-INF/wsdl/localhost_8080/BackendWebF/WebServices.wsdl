@@ -4,23 +4,35 @@
 <xsd:import namespace="http://webservice.webf/" schemaLocation="http://localhost:8080/BackendWebF/WebServices?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="add">
-<part name="parameters" element="tns:add"/>
-</message>
-<message name="addResponse">
-<part name="parameters" element="tns:addResponse"/>
-</message>
-<message name="divide">
-<part name="parameters" element="tns:divide"/>
-</message>
-<message name="divideResponse">
-<part name="parameters" element="tns:divideResponse"/>
-</message>
 <message name="login">
 <part name="parameters" element="tns:login"/>
 </message>
 <message name="loginResponse">
 <part name="parameters" element="tns:loginResponse"/>
+</message>
+<message name="deletePerson">
+<part name="parameters" element="tns:deletePerson"/>
+</message>
+<message name="deletePersonResponse">
+<part name="parameters" element="tns:deletePersonResponse"/>
+</message>
+<message name="createUser">
+<part name="parameters" element="tns:createUser"/>
+</message>
+<message name="createUserResponse">
+<part name="parameters" element="tns:createUserResponse"/>
+</message>
+<message name="getStudents">
+<part name="parameters" element="tns:getStudents"/>
+</message>
+<message name="getStudentsResponse">
+<part name="parameters" element="tns:getStudentsResponse"/>
+</message>
+<message name="getPersons">
+<part name="parameters" element="tns:getPersons"/>
+</message>
+<message name="getPersonsResponse">
+<part name="parameters" element="tns:getPersonsResponse"/>
 </message>
 <message name="hello">
 <part name="parameters" element="tns:hello"/>
@@ -40,42 +52,38 @@
 <message name="subtractResponse">
 <part name="parameters" element="tns:subtractResponse"/>
 </message>
-<message name="createUser">
-<part name="parameters" element="tns:createUser"/>
+<message name="add">
+<part name="parameters" element="tns:add"/>
 </message>
-<message name="createUserResponse">
-<part name="parameters" element="tns:createUserResponse"/>
+<message name="addResponse">
+<part name="parameters" element="tns:addResponse"/>
 </message>
-<message name="getStudents">
-<part name="parameters" element="tns:getStudents"/>
+<message name="divide">
+<part name="parameters" element="tns:divide"/>
 </message>
-<message name="getStudentsResponse">
-<part name="parameters" element="tns:getStudentsResponse"/>
-</message>
-<message name="deletePerson">
-<part name="parameters" element="tns:deletePerson"/>
-</message>
-<message name="deletePersonResponse">
-<part name="parameters" element="tns:deletePersonResponse"/>
-</message>
-<message name="getPersons">
-<part name="parameters" element="tns:getPersons"/>
-</message>
-<message name="getPersonsResponse">
-<part name="parameters" element="tns:getPersonsResponse"/>
+<message name="divideResponse">
+<part name="parameters" element="tns:divideResponse"/>
 </message>
 <portType name="WebServices">
-<operation name="add">
-<input wsam:Action="http://webservice.webf/WebServices/addRequest" message="tns:add"/>
-<output wsam:Action="http://webservice.webf/WebServices/addResponse" message="tns:addResponse"/>
-</operation>
-<operation name="divide">
-<input wsam:Action="http://webservice.webf/WebServices/divideRequest" message="tns:divide"/>
-<output wsam:Action="http://webservice.webf/WebServices/divideResponse" message="tns:divideResponse"/>
-</operation>
 <operation name="login">
 <input wsam:Action="http://webservice.webf/WebServices/loginRequest" message="tns:login"/>
 <output wsam:Action="http://webservice.webf/WebServices/loginResponse" message="tns:loginResponse"/>
+</operation>
+<operation name="deletePerson">
+<input wsam:Action="http://webservice.webf/WebServices/deletePersonRequest" message="tns:deletePerson"/>
+<output wsam:Action="http://webservice.webf/WebServices/deletePersonResponse" message="tns:deletePersonResponse"/>
+</operation>
+<operation name="createUser">
+<input wsam:Action="http://webservice.webf/WebServices/createUserRequest" message="tns:createUser"/>
+<output wsam:Action="http://webservice.webf/WebServices/createUserResponse" message="tns:createUserResponse"/>
+</operation>
+<operation name="getStudents">
+<input wsam:Action="http://webservice.webf/WebServices/getStudentsRequest" message="tns:getStudents"/>
+<output wsam:Action="http://webservice.webf/WebServices/getStudentsResponse" message="tns:getStudentsResponse"/>
+</operation>
+<operation name="getPersons">
+<input wsam:Action="http://webservice.webf/WebServices/getPersonsRequest" message="tns:getPersons"/>
+<output wsam:Action="http://webservice.webf/WebServices/getPersonsResponse" message="tns:getPersonsResponse"/>
 </operation>
 <operation name="hello">
 <input wsam:Action="http://webservice.webf/WebServices/helloRequest" message="tns:hello"/>
@@ -89,44 +97,54 @@
 <input wsam:Action="http://webservice.webf/WebServices/subtractRequest" message="tns:subtract"/>
 <output wsam:Action="http://webservice.webf/WebServices/subtractResponse" message="tns:subtractResponse"/>
 </operation>
-<operation name="createUser">
-<input wsam:Action="http://webservice.webf/WebServices/createUserRequest" message="tns:createUser"/>
-<output wsam:Action="http://webservice.webf/WebServices/createUserResponse" message="tns:createUserResponse"/>
+<operation name="add">
+<input wsam:Action="http://webservice.webf/WebServices/addRequest" message="tns:add"/>
+<output wsam:Action="http://webservice.webf/WebServices/addResponse" message="tns:addResponse"/>
 </operation>
-<operation name="getStudents">
-<input wsam:Action="http://webservice.webf/WebServices/getStudentsRequest" message="tns:getStudents"/>
-<output wsam:Action="http://webservice.webf/WebServices/getStudentsResponse" message="tns:getStudentsResponse"/>
-</operation>
-<operation name="deletePerson">
-<input wsam:Action="http://webservice.webf/WebServices/deletePersonRequest" message="tns:deletePerson"/>
-<output wsam:Action="http://webservice.webf/WebServices/deletePersonResponse" message="tns:deletePersonResponse"/>
-</operation>
-<operation name="getPersons">
-<input wsam:Action="http://webservice.webf/WebServices/getPersonsRequest" message="tns:getPersons"/>
-<output wsam:Action="http://webservice.webf/WebServices/getPersonsResponse" message="tns:getPersonsResponse"/>
+<operation name="divide">
+<input wsam:Action="http://webservice.webf/WebServices/divideRequest" message="tns:divide"/>
+<output wsam:Action="http://webservice.webf/WebServices/divideResponse" message="tns:divideResponse"/>
 </operation>
 </portType>
 <binding name="WebServicesPortBinding" type="tns:WebServices">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="add">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="divide">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
 <operation name="login">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="deletePerson">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="createUser">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getStudents">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getPersons">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -162,7 +180,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="createUser">
+<operation name="add">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -171,25 +189,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="getStudents">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="deletePerson">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getPersons">
+<operation name="divide">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
