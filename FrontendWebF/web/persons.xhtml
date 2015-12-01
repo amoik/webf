@@ -34,8 +34,8 @@
             </div>
         </h:form>
             <p><h:outputLabel>Ergebnis:#{persons.msg}</h:outputLabel></p>
-            <ui:repeat var="pers" value="#{persons.personen}">
-                <div><span style="margin-left:2%;">#{pers.username}</span><span style="margin-left:2%;">#{pers.role}</span></div>
+            <ui:repeat var="pers" value="#{persons.persons}">
+                <div><span style="margin-left:2%;">#{pers.personPk}</span><span style="margin-left:2%;">#{pers.username}</span><span style="margin-left:2%;">#{pers.role}</span></div>
             </ui:repeat>
     </h:body>
 </html>

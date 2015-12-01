@@ -34,6 +34,7 @@ public class ObjectFactory {
     private final static QName _Subtract_QNAME = new QName("http://webservice.webf/", "subtract");
     private final static QName _SubtractResponse_QNAME = new QName("http://webservice.webf/", "subtractResponse");
     private final static QName _Add_QNAME = new QName("http://webservice.webf/", "add");
+    private final static QName _DeletePerson_QNAME = new QName("http://webservice.webf/", "deletePerson");
     private final static QName _GetStudents_QNAME = new QName("http://webservice.webf/", "getStudents");
     private final static QName _LoginResponse_QNAME = new QName("http://webservice.webf/", "loginResponse");
     private final static QName _Multiply_QNAME = new QName("http://webservice.webf/", "multiply");
@@ -42,6 +43,7 @@ public class ObjectFactory {
     private final static QName _Hello_QNAME = new QName("http://webservice.webf/", "hello");
     private final static QName _GetPersons_QNAME = new QName("http://webservice.webf/", "getPersons");
     private final static QName _HelloResponse_QNAME = new QName("http://webservice.webf/", "helloResponse");
+    private final static QName _DeletePersonResponse_QNAME = new QName("http://webservice.webf/", "deletePersonResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: webf.ws
@@ -56,6 +58,14 @@ public class ObjectFactory {
      */
     public Add createAdd() {
         return new Add();
+    }
+
+    /**
+     * Create an instance of {@link DeletePerson }
+     * 
+     */
+    public DeletePerson createDeletePerson() {
+        return new DeletePerson();
     }
 
     /**
@@ -144,6 +154,14 @@ public class ObjectFactory {
      */
     public Login createLogin() {
         return new Login();
+    }
+
+    /**
+     * Create an instance of {@link DeletePersonResponse }
+     * 
+     */
+    public DeletePersonResponse createDeletePersonResponse() {
+        return new DeletePersonResponse();
     }
 
     /**
@@ -301,6 +319,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link DeletePerson }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.webf/", name = "deletePerson")
+    public JAXBElement<DeletePerson> createDeletePerson(DeletePerson value) {
+        return new JAXBElement<DeletePerson>(_DeletePerson_QNAME, DeletePerson.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetStudents }{@code >}}
      * 
      */
@@ -370,6 +397,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservice.webf/", name = "helloResponse")
     public JAXBElement<HelloResponse> createHelloResponse(HelloResponse value) {
         return new JAXBElement<HelloResponse>(_HelloResponse_QNAME, HelloResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link DeletePersonResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.webf/", name = "deletePersonResponse")
+    public JAXBElement<DeletePersonResponse> createDeletePersonResponse(DeletePersonResponse value) {
+        return new JAXBElement<DeletePersonResponse>(_DeletePersonResponse_QNAME, DeletePersonResponse.class, null, value);
     }
 
 }

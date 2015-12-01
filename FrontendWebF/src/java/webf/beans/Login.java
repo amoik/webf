@@ -24,7 +24,7 @@ public class Login {
     
     public void Login()
     {
-        errStr = "";
+        resetVars();
     }
 
     public String getUsername() {
@@ -65,7 +65,7 @@ public class Login {
         if(ret != -1)
         {
             tinf("Erfolgreich eingeloggt " + id); 
-            setErrStr("");
+            resetVars();
             return "loggedin.xhtml";
         }
         
@@ -74,6 +74,13 @@ public class Login {
         return "index.xhtml";
     }
 
+    public void resetVars()
+    {
+        errStr = "";
+        password = "";
+        username = "";
+    }
+    
     public String getErrStr() {
         return errStr;
     }

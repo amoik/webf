@@ -22,14 +22,15 @@ public class Persons
     private String password;
     private String role;
     
-    private List<Person> personen;
+    private List<Person> persons;
     
     private String msg;
     
     public Persons()
     {
-        personen = new ArrayList<Person>();
-        msg = "";
+        persons = new ArrayList<Person>();
+        getAll();
+        resetVars();
     }
     
     public void create()
@@ -62,9 +63,8 @@ public class Persons
         if(ret)
         {
             setMsg("wurde angelegt!");
-            setUsername("");
-            setPassword("");
-            setRole("");
+            resetVars();
+            getAll();
         }
         else
             setMsg("Fehlgeschlagen!");
@@ -75,19 +75,44 @@ public class Persons
         WebServices_Service service = new WebServices_Service();
         WebServices port = service.getWebServicesPort();  
 
-        setPersonen(port.getPersons());
+        setPersons(port.getPersons());
         
-        if( getPersonen() != null)
+        if( getPersons() != null)
+        {
             this.setMsg("Erfolgreich");
+        }
         else
             this.setMsg("Fehlgeschlagen!");
     }
   
+    public void deletePerson()
+    {
+        WebServices_Service service = new WebServices_Service();
+        WebServices port = service.getWebServicesPort();  
+
+        setPersons(port.deleteUser());
+        
+        if( getPersons() != null)
+        {
+            this.setMsg("Erfolgreich");
+        }
+        else
+            this.setMsg("Fehlgeschlagen!");
+    }
 
     public void printAllPersons()
     {
-        for(int i = 0; i < personen.size(); i++)
-            tinf(personen.get(i).getUsername() + " " + personen.get(i).getRole());
+        for(int i = 0; i < persons.size(); i++)
+            tinf(persons.get(i).getUsername() + " " + persons.get(i).getRole());
+    }
+    
+    public void resetVars()
+    {
+        setMsg("");
+        setUsername("");
+        setPassword("");
+        setRole("");
+        persons.clear();
     }
     
     public void uiGetAndPrint()
@@ -96,12 +121,12 @@ public class Persons
         printAllPersons();
     }
 
-    public List<Person> getPersonen() {
-        return personen;
+    public List<Person> getPersons() {
+        return persons;
     }
 
-    public void setPersonen(List<Person> personen) {
-        this.personen = personen;
+    public void setPersons(List<Person> persons) {
+        this.persons = persons;
     }
 
     public String getMsg() {

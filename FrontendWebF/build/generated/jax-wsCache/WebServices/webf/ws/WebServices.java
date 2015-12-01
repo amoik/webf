@@ -93,6 +93,21 @@ public interface WebServices {
 
     /**
      * 
+     * @param arg0
+     * @return
+     *     returns java.lang.Boolean
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "deletePerson", targetNamespace = "http://webservice.webf/", className = "webf.ws.DeletePerson")
+    @ResponseWrapper(localName = "deletePersonResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.DeletePersonResponse")
+    @Action(input = "http://webservice.webf/WebServices/deletePersonRequest", output = "http://webservice.webf/WebServices/deletePersonResponse")
+    public Boolean deletePerson(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Person arg0);
+
+    /**
+     * 
      * @return
      *     returns java.util.List<webf.ws.Person>
      */

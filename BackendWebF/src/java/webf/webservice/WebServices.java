@@ -72,6 +72,34 @@ public class WebServices
         return ret;
     }
     
+    @WebMethod
+    public Boolean deletePerson(@WebParam Person p)
+    {
+        
+        SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
+        Session s = sf.openSession();                           //Öffne eine Session 
+        Transaction tx = null;
+        Boolean ret = false;
+        
+        try{
+            tx = s.beginTransaction();
+            
+            s.delete(p);
+            ret = true;
+            
+            tx.commit();            //Transaktion durchführen
+        } catch (Exception e) {
+            //failed
+        
+            if(tx !=null){
+                tx.rollback();      //Bei Fehlerfall => Rollback!
+            }
+        } finally {
+            s.close();              //Session schließen egal ob Erfolg oder Fehler
+        }
+        return ret;
+    }
+
     
     @WebMethod
     public Boolean createUser(@WebParam String name, @WebParam String password, @WebParam String role)
@@ -104,8 +132,6 @@ public class WebServices
         } finally {
             s.close();              //Session schließen egal ob Erfolg oder Fehler
         }
-        
-        
         return ret;
     }
 
