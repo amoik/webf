@@ -85,14 +85,14 @@ public class Persons
             this.setMsg("Fehlgeschlagen!");
     }
   
-    public void deletePerson()
+    public void deletePerson(Person p)
     {
         WebServices_Service service = new WebServices_Service();
         WebServices port = service.getWebServicesPort();  
 
-        setPersons(port.deleteUser());
+        Boolean ret = port.deletePerson(p);
         
-        if( getPersons() != null)
+        if(ret)
         {
             this.setMsg("Erfolgreich");
         }
