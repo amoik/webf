@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -33,21 +33,29 @@ import javax.xml.bind.annotation.XmlType;
 public class CreateUserResponse {
 
     @XmlElement(name = "return")
-    protected int _return;
+    protected Boolean _return;
 
     /**
      * Ruft den Wert der return-Eigenschaft ab.
      * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
      */
-    public int getReturn() {
+    public Boolean isReturn() {
         return _return;
     }
 
     /**
      * Legt den Wert der return-Eigenschaft fest.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
      */
-    public void setReturn(int value) {
+    public void setReturn(Boolean value) {
         this._return = value;
     }
 

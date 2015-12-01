@@ -25,18 +25,23 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _Login_QNAME = new QName("http://webservice.webf/", "login");
-    private final static QName _LoginResponseType_QNAME = new QName("http://webservice.webf/", "loginResponseType");
+    private final static QName _DivideResponse_QNAME = new QName("http://webservice.webf/", "divideResponse");
     private final static QName _CreateUserResponse_QNAME = new QName("http://webservice.webf/", "createUserResponse");
     private final static QName _AddResponse_QNAME = new QName("http://webservice.webf/", "addResponse");
+    private final static QName _MultiplyResponse_QNAME = new QName("http://webservice.webf/", "multiplyResponse");
+    private final static QName _GetPersonsResponse_QNAME = new QName("http://webservice.webf/", "getPersonsResponse");
+    private final static QName _GetStudentsResponse_QNAME = new QName("http://webservice.webf/", "getStudentsResponse");
+    private final static QName _Subtract_QNAME = new QName("http://webservice.webf/", "subtract");
+    private final static QName _SubtractResponse_QNAME = new QName("http://webservice.webf/", "subtractResponse");
     private final static QName _Add_QNAME = new QName("http://webservice.webf/", "add");
-    private final static QName _FloattestResponse_QNAME = new QName("http://webservice.webf/", "floattestResponse");
+    private final static QName _GetStudents_QNAME = new QName("http://webservice.webf/", "getStudents");
     private final static QName _LoginResponse_QNAME = new QName("http://webservice.webf/", "loginResponse");
-    private final static QName _Inttest_QNAME = new QName("http://webservice.webf/", "inttest");
+    private final static QName _Multiply_QNAME = new QName("http://webservice.webf/", "multiply");
     private final static QName _CreateUser_QNAME = new QName("http://webservice.webf/", "createUser");
-    private final static QName _Floattest_QNAME = new QName("http://webservice.webf/", "floattest");
+    private final static QName _Divide_QNAME = new QName("http://webservice.webf/", "divide");
     private final static QName _Hello_QNAME = new QName("http://webservice.webf/", "hello");
+    private final static QName _GetPersons_QNAME = new QName("http://webservice.webf/", "getPersons");
     private final static QName _HelloResponse_QNAME = new QName("http://webservice.webf/", "helloResponse");
-    private final static QName _InttestResponse_QNAME = new QName("http://webservice.webf/", "inttestResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: webf.ws
@@ -54,11 +59,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link FloattestResponse }
+     * Create an instance of {@link GetStudents }
      * 
      */
-    public FloattestResponse createFloattestResponse() {
-        return new FloattestResponse();
+    public GetStudents createGetStudents() {
+        return new GetStudents();
     }
 
     /**
@@ -86,6 +91,54 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link MultiplyResponse }
+     * 
+     */
+    public MultiplyResponse createMultiplyResponse() {
+        return new MultiplyResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetPersonsResponse }
+     * 
+     */
+    public GetPersonsResponse createGetPersonsResponse() {
+        return new GetPersonsResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetStudentsResponse }
+     * 
+     */
+    public GetStudentsResponse createGetStudentsResponse() {
+        return new GetStudentsResponse();
+    }
+
+    /**
+     * Create an instance of {@link Subtract }
+     * 
+     */
+    public Subtract createSubtract() {
+        return new Subtract();
+    }
+
+    /**
+     * Create an instance of {@link SubtractResponse }
+     * 
+     */
+    public SubtractResponse createSubtractResponse() {
+        return new SubtractResponse();
+    }
+
+    /**
+     * Create an instance of {@link DivideResponse }
+     * 
+     */
+    public DivideResponse createDivideResponse() {
+        return new DivideResponse();
+    }
+
+    /**
      * Create an instance of {@link Login }
      * 
      */
@@ -94,11 +147,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link LoginResponseType }
+     * Create an instance of {@link GetPersons }
      * 
      */
-    public LoginResponseType createLoginResponseType() {
-        return new LoginResponseType();
+    public GetPersons createGetPersons() {
+        return new GetPersons();
     }
 
     /**
@@ -110,14 +163,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link InttestResponse }
-     * 
-     */
-    public InttestResponse createInttestResponse() {
-        return new InttestResponse();
-    }
-
-    /**
      * Create an instance of {@link CreateUser }
      * 
      */
@@ -126,11 +171,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Floattest }
+     * Create an instance of {@link Divide }
      * 
      */
-    public Floattest createFloattest() {
-        return new Floattest();
+    public Divide createDivide() {
+        return new Divide();
     }
 
     /**
@@ -142,35 +187,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Inttest }
+     * Create an instance of {@link Multiply }
      * 
      */
-    public Inttest createInttest() {
-        return new Inttest();
+    public Multiply createMultiply() {
+        return new Multiply();
     }
 
     /**
-     * Create an instance of {@link LoginRequest }
+     * Create an instance of {@link Student }
      * 
      */
-    public LoginRequest createLoginRequest() {
-        return new LoginRequest();
+    public Student createStudent() {
+        return new Student();
     }
 
     /**
-     * Create an instance of {@link LoginRequestType }
+     * Create an instance of {@link Person }
      * 
      */
-    public LoginRequestType createLoginRequestType() {
-        return new LoginRequestType();
-    }
-
-    /**
-     * Create an instance of {@link LoginResponse2 }
-     * 
-     */
-    public LoginResponse2 createLoginResponse2() {
-        return new LoginResponse2();
+    public Person createPerson() {
+        return new Person();
     }
 
     /**
@@ -183,12 +220,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link LoginResponseType }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link DivideResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservice.webf/", name = "loginResponseType")
-    public JAXBElement<LoginResponseType> createLoginResponseType(LoginResponseType value) {
-        return new JAXBElement<LoginResponseType>(_LoginResponseType_QNAME, LoginResponseType.class, null, value);
+    @XmlElementDecl(namespace = "http://webservice.webf/", name = "divideResponse")
+    public JAXBElement<DivideResponse> createDivideResponse(DivideResponse value) {
+        return new JAXBElement<DivideResponse>(_DivideResponse_QNAME, DivideResponse.class, null, value);
     }
 
     /**
@@ -210,6 +247,51 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link MultiplyResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.webf/", name = "multiplyResponse")
+    public JAXBElement<MultiplyResponse> createMultiplyResponse(MultiplyResponse value) {
+        return new JAXBElement<MultiplyResponse>(_MultiplyResponse_QNAME, MultiplyResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetPersonsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.webf/", name = "getPersonsResponse")
+    public JAXBElement<GetPersonsResponse> createGetPersonsResponse(GetPersonsResponse value) {
+        return new JAXBElement<GetPersonsResponse>(_GetPersonsResponse_QNAME, GetPersonsResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetStudentsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.webf/", name = "getStudentsResponse")
+    public JAXBElement<GetStudentsResponse> createGetStudentsResponse(GetStudentsResponse value) {
+        return new JAXBElement<GetStudentsResponse>(_GetStudentsResponse_QNAME, GetStudentsResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Subtract }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.webf/", name = "subtract")
+    public JAXBElement<Subtract> createSubtract(Subtract value) {
+        return new JAXBElement<Subtract>(_Subtract_QNAME, Subtract.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SubtractResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.webf/", name = "subtractResponse")
+    public JAXBElement<SubtractResponse> createSubtractResponse(SubtractResponse value) {
+        return new JAXBElement<SubtractResponse>(_SubtractResponse_QNAME, SubtractResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Add }{@code >}}
      * 
      */
@@ -219,12 +301,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link FloattestResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetStudents }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservice.webf/", name = "floattestResponse")
-    public JAXBElement<FloattestResponse> createFloattestResponse(FloattestResponse value) {
-        return new JAXBElement<FloattestResponse>(_FloattestResponse_QNAME, FloattestResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://webservice.webf/", name = "getStudents")
+    public JAXBElement<GetStudents> createGetStudents(GetStudents value) {
+        return new JAXBElement<GetStudents>(_GetStudents_QNAME, GetStudents.class, null, value);
     }
 
     /**
@@ -237,12 +319,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Inttest }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link Multiply }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservice.webf/", name = "inttest")
-    public JAXBElement<Inttest> createInttest(Inttest value) {
-        return new JAXBElement<Inttest>(_Inttest_QNAME, Inttest.class, null, value);
+    @XmlElementDecl(namespace = "http://webservice.webf/", name = "multiply")
+    public JAXBElement<Multiply> createMultiply(Multiply value) {
+        return new JAXBElement<Multiply>(_Multiply_QNAME, Multiply.class, null, value);
     }
 
     /**
@@ -255,12 +337,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Floattest }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link Divide }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservice.webf/", name = "floattest")
-    public JAXBElement<Floattest> createFloattest(Floattest value) {
-        return new JAXBElement<Floattest>(_Floattest_QNAME, Floattest.class, null, value);
+    @XmlElementDecl(namespace = "http://webservice.webf/", name = "divide")
+    public JAXBElement<Divide> createDivide(Divide value) {
+        return new JAXBElement<Divide>(_Divide_QNAME, Divide.class, null, value);
     }
 
     /**
@@ -273,21 +355,21 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetPersons }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.webf/", name = "getPersons")
+    public JAXBElement<GetPersons> createGetPersons(GetPersons value) {
+        return new JAXBElement<GetPersons>(_GetPersons_QNAME, GetPersons.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link HelloResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://webservice.webf/", name = "helloResponse")
     public JAXBElement<HelloResponse> createHelloResponse(HelloResponse value) {
         return new JAXBElement<HelloResponse>(_HelloResponse_QNAME, HelloResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link InttestResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservice.webf/", name = "inttestResponse")
-    public JAXBElement<InttestResponse> createInttestResponse(InttestResponse value) {
-        return new JAXBElement<InttestResponse>(_InttestResponse_QNAME, InttestResponse.class, null, value);
     }
 
 }

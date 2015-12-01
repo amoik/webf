@@ -18,6 +18,13 @@ import webf.ws.HelloResponse;
 public class Hello {
     
     private String resp = "";
+    private String msg = "";
+    
+    public void Hello()
+    {
+        resp = "";
+        msg = "";
+    }
     
     public void hello()
     {
@@ -25,7 +32,7 @@ public class Hello {
         WebServices port = service.getWebServicesPort();  
 
         
-        String resp = port.hello("heislbesn");
+        String resp = port.hello(msg);
         this.setResp(resp);
     }
 
@@ -35,6 +42,14 @@ public class Hello {
 
     public void setResp(String resp) {
         this.resp = resp;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
     
     

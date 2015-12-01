@@ -15,18 +15,18 @@ import webf.webservice.login.LoginResponse;
  */
 
 @XmlRootElement
-public class LoginResponseType {
+public class LoginResponseType
+{
     
     private LoginResponse loginResp;
 
-    public LoginResponse getLoginResponse() {
+    public LoginResponse getLoginResponse()
+    {
         return loginResp;
     }
 
-    public void setLoginResponse(LoginResponse loginResp) {
+    public void setLoginResponse(LoginResponse loginResp)
+    {
         this.loginResp = loginResp;
     }
-
-    
-    
 }

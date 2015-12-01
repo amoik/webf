@@ -7,11 +7,6 @@ package webf.beans;
 
 import javax.inject.Named;
 import static webf.beans.utils.tinf;
-import webf.ws.LoginRequest;
-import webf.ws.LoginRequestType;
-import webf.ws.LoginResponse;
-import webf.ws.LoginResponse2;
-import webf.ws.LoginResponseType;
 import webf.ws.WebServices;
 import webf.ws.WebServices_Service;
 
@@ -24,6 +19,13 @@ public class Login {
     
     private String username;
     private String password;
+    private String errStr;
+    private int id = -1;
+    
+    public void Login()
+    {
+        errStr = "";
+    }
 
     public String getUsername() {
         return username;
@@ -41,6 +43,12 @@ public class Login {
         this.password = password;
     }
     
+    public String logout()
+    {
+        setErrStr("");
+        setId(-1);
+        return "index.xhtml";
+    }
     
     public String login(){
     
@@ -49,24 +57,38 @@ public class Login {
         WebServices_Service service = new WebServices_Service();
         WebServices port = service.getWebServicesPort();      
         
-        LoginRequestType lrt = new LoginRequestType();
-        LoginRequest lr = new LoginRequest();
-        lr.setUsername(username);
-        lr.setPassw(password);
-        lrt.setLoginRequest(lr);
           
-        LoginResponseType lRespT =  port.login(lrt);
-        LoginResponse2 lResp = lRespT.getLoginResponse();
-        String status = lResp.getStatus();
-        String userId = lResp.getUserId();
+        int ret =  port.login(username, password);
+        setId(ret);
         
         
-        if(status.equals("Success!"))
+        if(ret != -1)
         {
-            tinf("Erfolgreich eingeloggt " + userId); 
+            tinf("Erfolgreich eingeloggt " + id); 
+            setErrStr("");
             return "loggedin.xhtml";
         }
+        
+        setErrStr("Login Fehlgeschlagen");
         tinf("Login Fehlgeschlagen");
         return "index.xhtml";
     }
+
+    public String getErrStr() {
+        return errStr;
+    }
+
+    public void setErrStr(String errStr) {
+        this.errStr = errStr;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    private void setId(int id) {
+        this.id = id;
+    }
+    
+    
 }

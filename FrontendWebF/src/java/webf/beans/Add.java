@@ -14,6 +14,7 @@ import webf.ws.WebServices_Service;
  */
 public class Add {
     private int resp;
+    private int one, two;
     
     public void add()
     {
@@ -22,7 +23,7 @@ public class Add {
         WebServices port = service.getWebServicesPort();  
 
        
-        this.setResp(port.add(1,4));
+        this.setResp(3);//port.add(1,4));
     }
 
     public int getResp() {
@@ -32,4 +33,21 @@ public class Add {
     public void setResp(int resp) {
         this.resp = resp;
     }   
+
+    public int getTwo() {
+        return two;
+    }
+
+    public void setTwo(int two) {
+        this.two = two;
+    }
+
+    public int getOne() {
+        return one;
+    }
+
+    public void setOne(int one) {
+        this.one = one;
+    }
+    
 }

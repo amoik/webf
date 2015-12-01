@@ -16,8 +16,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="arg0" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="arg1" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="arg0" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *         &lt;element name="arg1" type="{http://www.w3.org/2001/XMLSchema}double"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -33,14 +33,14 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Add {
 
-    protected int arg0;
-    protected int arg1;
+    protected double arg0;
+    protected double arg1;
 
     /**
      * Ruft den Wert der arg0-Eigenschaft ab.
      * 
      */
-    public int getArg0() {
+    public double getArg0() {
         return arg0;
     }
 
@@ -48,7 +48,7 @@ public class Add {
      * Legt den Wert der arg0-Eigenschaft fest.
      * 
      */
-    public void setArg0(int value) {
+    public void setArg0(double value) {
         this.arg0 = value;
     }
 
@@ -56,7 +56,7 @@ public class Add {
      * Ruft den Wert der arg1-Eigenschaft ab.
      * 
      */
-    public int getArg1() {
+    public double getArg1() {
         return arg1;
     }
 
@@ -64,7 +64,7 @@ public class Add {
      * Legt den Wert der arg1-Eigenschaft fest.
      * 
      */
-    public void setArg1(int value) {
+    public void setArg1(double value) {
         this.arg1 = value;
     }
 

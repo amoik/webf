@@ -8,98 +8,147 @@
 
 <xs:element name="createUserResponse" type="tns:createUserResponse"/>
 
-<xs:element name="floattest" type="tns:floattest"/>
+<xs:element name="divide" type="tns:divide"/>
 
-<xs:element name="floattestResponse" type="tns:floattestResponse"/>
+<xs:element name="divideResponse" type="tns:divideResponse"/>
+
+<xs:element name="getPersons" type="tns:getPersons"/>
+
+<xs:element name="getPersonsResponse" type="tns:getPersonsResponse"/>
+
+<xs:element name="getStudents" type="tns:getStudents"/>
+
+<xs:element name="getStudentsResponse" type="tns:getStudentsResponse"/>
 
 <xs:element name="hello" type="tns:hello"/>
 
 <xs:element name="helloResponse" type="tns:helloResponse"/>
 
-<xs:element name="inttest" type="tns:inttest"/>
-
-<xs:element name="inttestResponse" type="tns:inttestResponse"/>
-
 <xs:element name="login" type="tns:login"/>
 
 <xs:element name="loginResponse" type="tns:loginResponse"/>
 
-<xs:element name="loginResponseType" type="tns:loginResponseType"/>
+<xs:element name="multiply" type="tns:multiply"/>
+
+<xs:element name="multiplyResponse" type="tns:multiplyResponse"/>
+
+<xs:element name="subtract" type="tns:subtract"/>
+
+<xs:element name="subtractResponse" type="tns:subtractResponse"/>
+
+<xs:complexType name="subtract">
+<xs:sequence>
+<xs:element name="arg0" type="xs:double"/>
+<xs:element name="arg1" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="subtractResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPersons">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getPersonsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:person" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="person">
+<xs:sequence>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+<xs:element name="personCourseMemberships" type="xs:anyType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="personPk" type="xs:int" minOccurs="0"/>
+<xs:element name="role" type="xs:string" minOccurs="0"/>
+<xs:element name="username" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getStudents">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getStudentsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:student" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="student">
+<xs:sequence>
+<xs:element name="courses" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
 
 <xs:complexType name="add">
 <xs:sequence>
-<xs:element name="arg0" type="xs:int"/>
-<xs:element name="arg1" type="xs:int"/>
+<xs:element name="arg0" type="xs:double"/>
+<xs:element name="arg1" type="xs:double"/>
 </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="addResponse">
 <xs:sequence>
-<xs:element name="return" type="xs:int"/>
+<xs:element name="return" type="xs:double"/>
 </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="login">
 <xs:sequence>
-<xs:element name="parameter" type="tns:loginRequestType" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="loginRequestType">
-<xs:sequence>
-<xs:element name="loginRequest" type="tns:loginRequest" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="loginRequest">
-<xs:sequence>
-<xs:element name="loginDate" type="xs:dateTime" minOccurs="0"/>
-<xs:element name="passw" type="xs:string" minOccurs="0"/>
-<xs:element name="username" type="xs:string" minOccurs="0"/>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="loginResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:loginResponseType" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="loginResponseType">
-<xs:sequence>
-<xs:element name="loginResponse" type="tns:loginResponse2" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="loginResponse2">
-<xs:sequence>
-<xs:element name="status" type="xs:string" minOccurs="0"/>
-<xs:element name="userId" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="inttest">
-<xs:sequence>
-<xs:element name="arg0" type="xs:int"/>
-<xs:element name="arg1" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="inttestResponse">
-<xs:sequence>
 <xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="multiply">
+<xs:sequence>
+<xs:element name="arg0" type="xs:double"/>
+<xs:element name="arg1" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="multiplyResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
 </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="createUser">
 <xs:sequence>
 <xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+<xs:element name="arg2" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="createUserResponse">
 <xs:sequence>
-<xs:element name="return" type="xs:int"/>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="divide">
+<xs:sequence>
+<xs:element name="arg0" type="xs:double"/>
+<xs:element name="arg1" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="divideResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -112,19 +161,6 @@
 <xs:complexType name="helloResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="floattest">
-<xs:sequence>
-<xs:element name="arg0" type="xs:int"/>
-<xs:element name="arg1" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="floattestResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:double"/>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>

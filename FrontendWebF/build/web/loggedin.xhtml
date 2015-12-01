@@ -6,6 +6,18 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        erfolgreich eingeloggt
+        <h:form>
+            <div><h:commandButton value="Logout" action="#{login.logout}"/></div>
+        </h:form>
+        <div><h:outputLabel><h2>erfolgreich eingeloggt</h2></h:outputLabel></div>
+        <h:form>
+            <div>
+                <h:commandButton value="Calculator" action="calculator.xhtml"/>
+                <h:commandButton value="Settings" action="settings.xhtml"/>
+                <h:commandButton value="Studenten" action="students.xhtml"/>
+                <h:commandButton value="Personen" action="persons.xhtml"/>
+            </div>
+        </h:form>
+            <div><h:outputLabel>#{createUser.message}</h:outputLabel></div>
     </h:body>
 </html>

@@ -16,16 +16,8 @@
             <h:inputText id="password" value="#{login.password}"/>
 
             <h:commandButton value="Login" action="#{login.login}"/>
-            
-            <h:commandButton value="User anlegen" action="#{createUser.createUser}"/>
-            
-            <h:commandButton value="Sag hallo!" action="#{hello.hello}"/>
-            <h:commandButton value="Float Test" action="#{test.test}"/>
-            <h:commandButton value="add test" action="#{add.add}"/>
         </h:form>
-        <h:outputLabel>Hello:#{hello.resp}</h:outputLabel>
-        <h:outputLabel>Test:#{test.resp}</h:outputLabel>
-        <h:outputLabel>Add:#{add.resp}</h:outputLabel>
+        <p style="color:red;"><h:outputLabel>#{login.errStr}</h:outputLabel></p>
        
     </h:body>
 </html>

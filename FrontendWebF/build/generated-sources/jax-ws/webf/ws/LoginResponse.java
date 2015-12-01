@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://webservice.webf/}loginResponseType" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -33,29 +33,21 @@ import javax.xml.bind.annotation.XmlType;
 public class LoginResponse {
 
     @XmlElement(name = "return")
-    protected LoginResponseType _return;
+    protected int _return;
 
     /**
      * Ruft den Wert der return-Eigenschaft ab.
      * 
-     * @return
-     *     possible object is
-     *     {@link LoginResponseType }
-     *     
      */
-    public LoginResponseType getReturn() {
+    public int getReturn() {
         return _return;
     }
 
     /**
      * Legt den Wert der return-Eigenschaft fest.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link LoginResponseType }
-     *     
      */
-    public void setReturn(LoginResponseType value) {
+    public void setReturn(int value) {
         this._return = value;
     }
 
