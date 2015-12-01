@@ -15,7 +15,7 @@ import java.util.Locale;
  */
 public class Utils
 {
-    public static Date dateToStr(String d)
+    public static Date strToDate(String d)
     {
         Date da = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", new Locale("us"));

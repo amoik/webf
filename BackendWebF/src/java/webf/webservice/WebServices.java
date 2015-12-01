@@ -15,7 +15,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import static utils.Utils.dateToStr;
+import static utils.Utils.strToDate;
 import webf.hibernate.HibernateUtil;
 import webf.hibernate.db.Person;
 import webf.webservice.student.Student;
@@ -112,7 +112,7 @@ public class WebServices
         try{
 
             tx = s.beginTransaction();
-            Date d = dateToStr(birthday);
+            Date d = strToDate(birthday);
             
             //neuer user
             Person p = new Person();
