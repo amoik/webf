@@ -1,7 +1,8 @@
 package webf.hibernate.db;
-// Generated 09.04.2015 08:20:19 by Hibernate Tools 4.3.1
+// Generated 01.12.2015 18:38:26 by Hibernate Tools 4.3.1
 
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,21 +16,30 @@ public class Person  implements java.io.Serializable {
      private String username;
      private String password;
      private String role;
+     private String firstname;
+     private String lastname;
+     private Date birthday;
      private Set personCourseMemberships = new HashSet(0);
 
     public Person() {
     }
 
 	
-    public Person(String username, String password, String role) {
+    public Person(String username, String password, String role, String firstname, String lastname, Date birthday) {
         this.username = username;
         this.password = password;
         this.role = role;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.birthday = birthday;
     }
-    public Person(String username, String password, String role, Set personCourseMemberships) {
+    public Person(String username, String password, String role, String firstname, String lastname, Date birthday, Set personCourseMemberships) {
        this.username = username;
        this.password = password;
        this.role = role;
+       this.firstname = firstname;
+       this.lastname = lastname;
+       this.birthday = birthday;
        this.personCourseMemberships = personCourseMemberships;
     }
    
@@ -60,6 +70,27 @@ public class Person  implements java.io.Serializable {
     
     public void setRole(String role) {
         this.role = role;
+    }
+    public String getFirstname() {
+        return this.firstname;
+    }
+    
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+    public String getLastname() {
+        return this.lastname;
+    }
+    
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+    public Date getBirthday() {
+        return this.birthday;
+    }
+    
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
     public Set getPersonCourseMemberships() {
         return this.personCourseMemberships;

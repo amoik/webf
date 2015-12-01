@@ -65,6 +65,9 @@
 
 <xs:complexType name="person">
 <xs:sequence>
+<xs:element name="birthday" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="firstname" type="xs:string" minOccurs="0"/>
+<xs:element name="lastname" type="xs:string" minOccurs="0"/>
 <xs:element name="password" type="xs:string" minOccurs="0"/>
 <xs:element name="personCourseMemberships" type="xs:anyType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
 <xs:element name="personPk" type="xs:int" minOccurs="0"/>
@@ -90,18 +93,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="deletePerson">
-<xs:sequence>
-<xs:element name="arg0" type="tns:person" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="deletePersonResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:boolean" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="add">
 <xs:sequence>
 <xs:element name="arg0" type="xs:double"/>
@@ -112,6 +103,18 @@
 <xs:complexType name="addResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deletePerson">
+<xs:sequence>
+<xs:element name="arg0" type="tns:person" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deletePersonResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -141,6 +144,19 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="divide">
+<xs:sequence>
+<xs:element name="arg0" type="xs:double"/>
+<xs:element name="arg1" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="divideResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="createUser">
 <xs:sequence>
 <xs:element name="arg0" type="xs:string" minOccurs="0"/>
@@ -152,19 +168,6 @@
 <xs:complexType name="createUserResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:boolean" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="divide">
-<xs:sequence>
-<xs:element name="arg0" type="xs:double"/>
-<xs:element name="arg1" type="xs:double"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="divideResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:double"/>
 </xs:sequence>
 </xs:complexType>
 

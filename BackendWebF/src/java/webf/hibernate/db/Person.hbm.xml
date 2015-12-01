@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 09.04.2015 08:20:19 by Hibernate Tools 4.3.1 -->
+<!-- Generated 01.12.2015 18:38:28 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="webf.hibernate.db.Person" table="person" catalog="web" optimistic-lock="version">
+    <class name="webf.hibernate.db.Person" table="person" catalog="web">
         <id name="personPk" type="java.lang.Integer">
             <column name="person_pk" />
-            <generator class="identity" />
+            <generator class="identity"></generator>
         </id>
         <property name="username" type="string">
             <column name="username" length="30" not-null="true" />
@@ -16,6 +16,15 @@
         </property>
         <property name="role" type="string">
             <column name="role" length="30" not-null="true" />
+        </property>
+        <property name="firstname" type="string">
+            <column name="firstname" length="30" not-null="true" />
+        </property>
+        <property name="lastname" type="string">
+            <column name="lastname" length="30" not-null="true" />
+        </property>
+        <property name="birthday" type="date">
+            <column name="birthday" not-null="true" />
         </property>
         <set name="personCourseMemberships" table="person_course_membership" inverse="true" lazy="true" fetch="select">
             <key>

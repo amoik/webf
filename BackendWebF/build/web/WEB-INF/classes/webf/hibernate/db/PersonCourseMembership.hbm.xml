@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 09.04.2015 08:20:19 by Hibernate Tools 4.3.1 -->
+<!-- Generated 01.12.2015 18:38:28 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="webf.hibernate.db.PersonCourseMembership" table="person_course_membership" catalog="web" optimistic-lock="version">
+    <class name="webf.hibernate.db.PersonCourseMembership" table="person_course_membership" catalog="web">
         <composite-id name="id" class="webf.hibernate.db.PersonCourseMembershipId">
             <key-property name="personFk" type="int">
                 <column name="person_fk" />

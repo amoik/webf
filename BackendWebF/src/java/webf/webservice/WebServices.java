@@ -6,6 +6,7 @@
 package webf.webservice;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
@@ -102,7 +103,7 @@ public class WebServices
 
     
     @WebMethod
-    public Boolean createUser(@WebParam String name, @WebParam String password, @WebParam String role)
+    public Boolean createUser(@WebParam String name, @WebParam String password, @WebParam String role, @WebParam String firstname, @WebParam String lastname, @WebParam Date birthday)
     {
         
         SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
@@ -118,6 +119,9 @@ public class WebServices
             p.setUsername(name);
             p.setPassword(password);
             p.setRole(role);
+            p.setFirstname(firstname);
+            p.setLastname(lastname);
+            p.setBirthday(birthday);
             
             s.save(p);
             ret = true;

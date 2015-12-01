@@ -1,5 +1,5 @@
 package webf.hibernate.db;
-// Generated 09.04.2015 08:20:19 by Hibernate Tools 4.3.1
+// Generated 01.12.2015 18:38:26 by Hibernate Tools 4.3.1
 
 
 
@@ -36,23 +36,6 @@ public class PersonCourseMembershipId  implements java.io.Serializable {
     }
 
 
-   public boolean equals(Object other) {
-         if ( (this == other ) ) return true;
-		 if ( (other == null ) ) return false;
-		 if ( !(other instanceof PersonCourseMembershipId) ) return false;
-		 PersonCourseMembershipId castOther = ( PersonCourseMembershipId ) other; 
-         
-		 return (this.getPersonFk()==castOther.getPersonFk())
- && (this.getCourseFk()==castOther.getCourseFk());
-   }
-   
-   public int hashCode() {
-         int result = 17;
-         
-         result = 37 * result + this.getPersonFk();
-         result = 37 * result + this.getCourseFk();
-         return result;
-   }   
 
 
 }
