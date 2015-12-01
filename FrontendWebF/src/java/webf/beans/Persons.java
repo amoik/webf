@@ -71,7 +71,7 @@ public class Persons
 
 
         
-        Boolean ret = port.createUser(username, password, role, "TestFirst", "TestLast", marshalDate(new Date()));
+        Boolean ret = port.createUser(username, password, role, "TestFirst", "TestLast", "2015-12-01");
         
         if(ret)
         {
