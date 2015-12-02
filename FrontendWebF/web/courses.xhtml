@@ -1,8 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<html 
+    xmlns="http://www.w3.org/1999/xhtml"   
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui">
+    
     <h:head>
         <title>Studenten</title>
     </h:head>
@@ -15,6 +19,96 @@
             <p><h:commandButton value="Aktualisieren" action="#{students.getAllStudents}"/></p>
         </h:form>
         <p><h:outputLabel>#{students.msg}</h:outputLabel></p>
+        <div>
+            <h2>PRIMEFACES TEST</h2>
+            <!---->
+                <!--outcome="/ui/menu/tabMenu"-->
+            <h:form>
+            <p:tabMenu >
+    <p:menuitem value="Overview" activeIndex="2" icon="ui-icon-star">
+        <f:param name="i" value="0" />
+    </p:menuitem>
+    <p:menuitem value="Demos" icon="ui-icon-search">
+        <f:param name="i" value="1" />
+    </p:menuitem>
+    <p:menuitem value="Documentation" icon="ui-icon-document">
+        <f:param name="i" value="2" />
+    </p:menuitem>
+    <p:menuitem value="Support" icon="ui-icon-wrench">
+        <f:param name="i" value="3" />
+    </p:menuitem>
+    <p:menuitem value="Social" icon="ui-icon-person">
+        <f:param name="i" value="4" />
+    </p:menuitem>
+</p:tabMenu>
+            </h:form>
+            <h:form>
+    <p:growl id="msgs" showDetail="true" />
+ 
+    <p:panel header="Select a Location" style="margin-bottom:10px;">
+        <h:panelGrid columns="2" cellpadding="5">
+            <p:outputLabel for="country" value="Country: " />
+            <p:selectOneMenu id="country" value="#{dropdownView.country}" style="width:150px">
+                <p:ajax listener="#{dropdownView.onCountryChange}" update="city" />
+                <f:selectItem itemLabel="Select Country" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{dropdownView.countries}" />
+            </p:selectOneMenu>
+ 
+            <p:outputLabel for="city" value="City: " />
+            <p:selectOneMenu id="city" value="#{dropdownView.city}" style="width:150px">
+                <f:selectItem itemLabel="Select City" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{dropdownView.cities}" />
+            </p:selectOneMenu>
+        </h:panelGrid>
+ 
+        <p:separator />
+ 
+        <p:commandButton value="Submit" update="msgs" actionListener="#{dropdownView.displayLocation}" icon="ui-icon-check" />
+    </p:panel>
+</h:form>
+            <p:dataTable var="car" value="#{dtBasicView.cars}">
+    <p:column headerText="Id">
+        <h:outputText value="#{car.id}" />
+    </p:column>
+ 
+    <p:column headerText="Year">
+        <h:outputText value="#{car.year}" />
+    </p:column>
+ 
+    <p:column headerText="Brand">
+        <h:outputText value="#{car.brand}" />
+    </p:column>
+ 
+    <p:column headerText="Color">
+        <h:outputText value="#{car.color}" />
+    </p:column>
+</p:dataTable>
+            <p:inputText />
+            <!--outcome="productDetail"-->
+            <p:button value="Bookmark" icon="ui-icon-star">
+                <f:param name="productId" value="10" />
+            </p:button>
+            <h:panelGrid columns="1" cellpadding="5">
+                <p:commandButton value="Basic" type="button" onclick="PF('dlg1').show();" />
+                <p:commandButton value="Modal" type="button" onclick="PF('dlg2').show();" />
+                <p:commandButton value="Effects" type="button" onclick="PF('dlg3').show();" /> 
+            </h:panelGrid>
+
+            <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
+                <h:outputText value="Resistance to PrimeFaces is futile!" />
+            </p:dialog>
+
+            <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
+                <h:outputText value="This is a Modal Dialog." />
+            </p:dialog>   
+
+            <p:dialog header="Effects" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">
+                <h:outputText value="This dialog has nice effects." />
+            </p:dialog>
+            
+            
+            
+        </div>
         <table>
             <tr>
                 <th>Username</th><th>Vorname</th><th>Nachname</th>
