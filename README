@@ -1,0 +1,18 @@
+ANLEITUNG:
+
+neuen Webservice hinzufügen:
+
+-in "src/java/webf/webservice/WebServices.java" die funktion anlegen.
+-ein einfaches "@WebMethod" vor der neuen Funktion hinzufügen*
+-und "@WebParam" vor jedem übergebenen Parameter*
+-speichern
+-im frontend rechte maustaste auf /Web Service References/WebServices und im menü auf Refresh.
+-(checkbox auf "an" lassen) und Yes
+-nun können sie im Frontend konsumiert werden, zB:
+        WebServices_Service service = new WebServices_Service();
+        WebServices port = service.getWebServicesPort();
+        double ergebnis = port.add(9, 3);
+
+
+* "(name="...")" kann optional angegeben werden, wenn der webservice anders als die methode heißen soll
+

@@ -27,18 +27,21 @@ public interface WebServices {
 
     /**
      * 
-     * @param name
+     * @param arg1
+     * @param arg0
      * @return
-     *     returns java.lang.String
+     *     returns int
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "hello", targetNamespace = "http://webservice.webf/", className = "webf.ws.Hello")
-    @ResponseWrapper(localName = "helloResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.HelloResponse")
-    @Action(input = "http://webservice.webf/WebServices/helloRequest", output = "http://webservice.webf/WebServices/helloResponse")
-    public String hello(
-        @WebParam(name = "name", targetNamespace = "")
-        String name);
+    @RequestWrapper(localName = "login", targetNamespace = "http://webservice.webf/", className = "webf.ws.Login")
+    @ResponseWrapper(localName = "loginResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.LoginResponse")
+    @Action(input = "http://webservice.webf/WebServices/loginRequest", output = "http://webservice.webf/WebServices/loginResponse")
+    public int login(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        String arg1);
 
     /**
      * 
@@ -57,27 +60,18 @@ public interface WebServices {
 
     /**
      * 
+     * @param name
      * @return
-     *     returns java.util.List<webf.ws.Person>
+     *     returns java.lang.String
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getStudents", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetStudents")
-    @ResponseWrapper(localName = "getStudentsResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetStudentsResponse")
-    @Action(input = "http://webservice.webf/WebServices/getStudentsRequest", output = "http://webservice.webf/WebServices/getStudentsResponse")
-    public List<Person> getStudents();
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<webf.ws.Person>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getPersons", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetPersons")
-    @ResponseWrapper(localName = "getPersonsResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetPersonsResponse")
-    @Action(input = "http://webservice.webf/WebServices/getPersonsRequest", output = "http://webservice.webf/WebServices/getPersonsResponse")
-    public List<Person> getPersons();
+    @RequestWrapper(localName = "hello", targetNamespace = "http://webservice.webf/", className = "webf.ws.Hello")
+    @ResponseWrapper(localName = "helloResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.HelloResponse")
+    @Action(input = "http://webservice.webf/WebServices/helloRequest", output = "http://webservice.webf/WebServices/helloResponse")
+    public String hello(
+        @WebParam(name = "name", targetNamespace = "")
+        String name);
 
     /**
      * 
@@ -111,45 +105,27 @@ public interface WebServices {
 
     /**
      * 
-     * @param arg1
-     * @param arg0
      * @return
-     *     returns int
+     *     returns java.util.List<webf.ws.Person>
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "login", targetNamespace = "http://webservice.webf/", className = "webf.ws.Login")
-    @ResponseWrapper(localName = "loginResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.LoginResponse")
-    @Action(input = "http://webservice.webf/WebServices/loginRequest", output = "http://webservice.webf/WebServices/loginResponse")
-    public int login(
-        @WebParam(name = "arg0", targetNamespace = "")
-        String arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        String arg1);
+    @RequestWrapper(localName = "getStudents", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetStudents")
+    @ResponseWrapper(localName = "getStudentsResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetStudentsResponse")
+    @Action(input = "http://webservice.webf/WebServices/getStudentsRequest", output = "http://webservice.webf/WebServices/getStudentsResponse")
+    public List<Person> getStudents();
 
     /**
      * 
      * @return
-     *     returns java.util.List<webf.ws.PersonCourseMembership>
+     *     returns java.util.List<webf.ws.Person>
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getAllMemberships", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetAllMemberships")
-    @ResponseWrapper(localName = "getAllMembershipsResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetAllMembershipsResponse")
-    @Action(input = "http://webservice.webf/WebServices/getAllMembershipsRequest", output = "http://webservice.webf/WebServices/getAllMembershipsResponse")
-    public List<PersonCourseMembership> getAllMemberships();
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<webf.ws.Course>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getAllCourses", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetAllCourses")
-    @ResponseWrapper(localName = "getAllCoursesResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetAllCoursesResponse")
-    @Action(input = "http://webservice.webf/WebServices/getAllCoursesRequest", output = "http://webservice.webf/WebServices/getAllCoursesResponse")
-    public List<Course> getAllCourses();
+    @RequestWrapper(localName = "getPersons", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetPersons")
+    @ResponseWrapper(localName = "getPersonsResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetPersonsResponse")
+    @Action(input = "http://webservice.webf/WebServices/getPersonsRequest", output = "http://webservice.webf/WebServices/getPersonsResponse")
+    public List<Person> getPersons();
 
     /**
      * 
@@ -168,21 +144,27 @@ public interface WebServices {
 
     /**
      * 
-     * @param arg1
-     * @param arg0
      * @return
-     *     returns double
+     *     returns java.util.List<webf.ws.Course>
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "subtract", targetNamespace = "http://webservice.webf/", className = "webf.ws.Subtract")
-    @ResponseWrapper(localName = "subtractResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.SubtractResponse")
-    @Action(input = "http://webservice.webf/WebServices/subtractRequest", output = "http://webservice.webf/WebServices/subtractResponse")
-    public double subtract(
-        @WebParam(name = "arg0", targetNamespace = "")
-        double arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        double arg1);
+    @RequestWrapper(localName = "getAllCourses", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetAllCourses")
+    @ResponseWrapper(localName = "getAllCoursesResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetAllCoursesResponse")
+    @Action(input = "http://webservice.webf/WebServices/getAllCoursesRequest", output = "http://webservice.webf/WebServices/getAllCoursesResponse")
+    public List<Course> getAllCourses();
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<webf.ws.PersonCourseMembership>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getAllMemberships", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetAllMemberships")
+    @ResponseWrapper(localName = "getAllMembershipsResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetAllMembershipsResponse")
+    @Action(input = "http://webservice.webf/WebServices/getAllMembershipsRequest", output = "http://webservice.webf/WebServices/getAllMembershipsResponse")
+    public List<PersonCourseMembership> getAllMemberships();
 
     /**
      * 
@@ -197,6 +179,24 @@ public interface WebServices {
     @ResponseWrapper(localName = "multiplyResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.MultiplyResponse")
     @Action(input = "http://webservice.webf/WebServices/multiplyRequest", output = "http://webservice.webf/WebServices/multiplyResponse")
     public double multiply(
+        @WebParam(name = "arg0", targetNamespace = "")
+        double arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        double arg1);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns double
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "subtract", targetNamespace = "http://webservice.webf/", className = "webf.ws.Subtract")
+    @ResponseWrapper(localName = "subtractResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.SubtractResponse")
+    @Action(input = "http://webservice.webf/WebServices/subtractRequest", output = "http://webservice.webf/WebServices/subtractResponse")
+    public double subtract(
         @WebParam(name = "arg0", targetNamespace = "")
         double arg0,
         @WebParam(name = "arg1", targetNamespace = "")
