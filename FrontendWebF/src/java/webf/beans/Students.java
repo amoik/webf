@@ -9,10 +9,10 @@ import static java.lang.System.in;
 import java.util.ArrayList;
 import static java.util.Collections.list;
 import java.util.List;
-import static webf.beans.utils.tinf;
+import static webf.beans.Utils.tinf;
+import webf.ws.Person;
 import webf.ws.WebServices;
 import webf.ws.WebServices_Service;
-import webf.ws.Student;
 
 /**
  *
@@ -20,15 +20,15 @@ import webf.ws.Student;
  */
 public class Students
 {
-    private List<Student> students;
+    private List<Person> students;
     private String msg;
     
     public void Students()
     {
-        students = new ArrayList<Student>();
+        students = new ArrayList<Person>();
     }
     
-    public void getStudents()
+    public void getAllStudents()
     {
         WebServices_Service service = new WebServices_Service();
         WebServices port = service.getWebServicesPort();
@@ -40,18 +40,12 @@ public class Students
     {
         for(int i = 0; i < students.size(); i++)
         {
-            tinf("Student: " + students.get(i).getName());
+            tinf("Student: " + students.get(i).getUsername());
         }
     }
-    
-    public void uiGetAndPrint()
-    {
-        getStudents();
-        printAllStudents();
-    }
 
 
-    public void setStudents(List<Student> students) {
+    public void setStudents(List<Person> students) {
         this.students = students;
     }
 
@@ -62,5 +56,10 @@ public class Students
     public void setMsg(String msg) {
         this.msg = msg;
     }
+
+    public List<Person> getStudents() {
+        return students;
+    }
+    
     
 }

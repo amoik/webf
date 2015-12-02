@@ -30,4 +30,9 @@ public class Utils
         }
         return da;
     }
+    static public void tinf(String msg)
+    {
+        System.out.println(msg);
+    }
+    
 }

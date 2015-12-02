@@ -6,7 +6,7 @@
 package webf.beans;
 
 import javax.inject.Named;
-import static webf.beans.utils.tinf;
+import static webf.beans.Utils.tinf;
 import webf.ws.WebServices;
 import webf.ws.WebServices_Service;
 

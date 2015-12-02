@@ -8,12 +8,12 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java-Klasse für createUserResponse complex type.
+ * <p>Java-Klasse für createPersonResponse complex type.
  * 
  * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * 
  * <pre>
- * &lt;complexType name="createUserResponse">
+ * &lt;complexType name="createPersonResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
@@ -27,10 +27,10 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "createUserResponse", propOrder = {
+@XmlType(name = "createPersonResponse", propOrder = {
     "_return"
 })
-public class CreateUserResponse {
+public class CreatePersonResponse {
 
     @XmlElement(name = "return")
     protected Boolean _return;

@@ -12,7 +12,7 @@
         </h:form>
         <h1>Personen</h1>
         <h:form>
-            <p><h:commandButton value="uiGetAndPrint" action="#{persons.uiGetAndPrint}"/></p>
+            <p><h:commandButton value="Aktualisieren" action="#{persons.getAll}"/></p>
         </h:form>
         <h:form>
             <div>
@@ -29,14 +29,35 @@
                     <h:inputText id="role" value="#{persons.role}"/>
                 </div>
                 <div>
-                    <h:commandButton value="User anlegen" action="#{persons.create}"/>
+                    <h:outputLabel for="firstname">Vorname:</h:outputLabel>
+                    <h:inputText id="firstname" value="#{persons.firstname}"/>
+                </div>
+                <div>
+                    <h:outputLabel for="lastname">Nachname:</h:outputLabel>
+                    <h:inputText id="lastname" value="#{persons.lastname}"/>
+                </div>
+                <div>
+                    <h:commandButton value="User anlegen" action="#{persons.createPerson}"/>
                 </div>
             </div>
         </h:form>
-            <p><h:outputLabel>Ergebnis:#{persons.msg}</h:outputLabel></p>
+        <p><h:outputLabel>#{persons.msg}</h:outputLabel></p>
+        <table>
+            <tr>
+                <th>Username</th><th>Vorname</th><th>Nachname</th><th>Rolle</th><th>Löschen</th>
+            </tr>
             <ui:repeat var="pers" value="#{persons.persons}">
-                <div><span style="margin-left:2%;">#{pers.personPk}</span><span style="margin-left:2%;">#{pers.username}</span><span style="margin-left:2%;">#{pers.role}</span></div>
+                <tr>
+                    <h:form>
+                        <td><span style="margin-left:2%;">#{pers.username}</span></td>
+                        <td><span style="margin-left:2%;">#{pers.firstname}</span></td>
+                        <td><span style="margin-left:2%;">#{pers.lastname}</span></td>
+                        <td><span style="margin-left:2%;">#{pers.role}</span></td>
+                        <td><h:commandButton value="Löschen" action="#{persons.deletePerson(pers.personPk)}"/></td>
+                    </h:form>
+                </tr>
             </ui:repeat>
+        </table>
     </h:body>
 </html>
 

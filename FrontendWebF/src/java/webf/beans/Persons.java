@@ -5,21 +5,10 @@
  */
 package webf.beans;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.Duration;
-import javax.xml.datatype.XMLGregorianCalendar;
-import javax.xml.namespace.QName;
-import static webf.beans.utils.tinf;
+import static webf.beans.Utils.tinf;
 import webf.ws.Person;
 import webf.ws.WebServices;
 import webf.ws.WebServices_Service;
@@ -33,6 +22,8 @@ public class Persons
     private String username;
     private String password;
     private String role;
+    private String firstname;
+    private String lastname;
     
     private List<Person> persons;
     
@@ -41,13 +32,10 @@ public class Persons
     public Persons()
     {
         persons = new ArrayList<Person>();
-        getAll();
-        resetVars();
     }
     
-    public void create()
+    public void createPerson()
     {
-        tinf("lege user an...");
         
         if(getUsername().equals(""))
         {
@@ -66,12 +54,15 @@ public class Persons
             return;
         }
         
+        tinf("lege user "+getUsername()+" an...");
         
         WebServices_Service service = new WebServices_Service();
         WebServices port = service.getWebServicesPort();      
 
+        Date dt = new Date();
+        dt.setTime(0);
 
-        Boolean ret = port.createUser(username, password, role, "TestFirst", "TestLast", (new Date()).toString());
+        Boolean ret = port.createPerson(username, password, role, firstname, lastname, dt.toString());
 
         
         if(ret)
@@ -99,16 +90,17 @@ public class Persons
             this.setMsg("Fehlgeschlagen!");
     }
   
-    public void deletePerson(Person p)
+    public void deletePerson(int id)
     {
         WebServices_Service service = new WebServices_Service();
         WebServices port = service.getWebServicesPort();  
 
-        Boolean ret = port.deletePerson(p);
+        Boolean ret = port.deletePerson(id);
         
         if(ret)
         {
             this.setMsg("Erfolgreich");
+            getAll();
         }
         else
             this.setMsg("Fehlgeschlagen!");
@@ -116,8 +108,9 @@ public class Persons
 
     public void printAllPersons()
     {
-        for(int i = 0; i < persons.size(); i++)
-            tinf(persons.get(i).getUsername() + " " + persons.get(i).getRole());
+        for (Person person : persons) {
+            tinf(person.getUsername() + " " + person.getRole());
+        }
     }
     
     public void resetVars()
@@ -126,13 +119,10 @@ public class Persons
         setUsername("");
         setPassword("");
         setRole("");
+        setFirstname("");
+        setLastname("");
+      
         persons.clear();
-    }
-    
-    public void uiGetAndPrint()
-    {
-        getAll();
-        printAllPersons();
     }
 
     public List<Person> getPersons() {
@@ -148,7 +138,7 @@ public class Persons
     }
 
     public void setMsg(String msg) {
-        this.msg = msg;
+        this.msg = "Ergebnis: " + msg;
     }
 
     public String getUsername() {
@@ -173,6 +163,22 @@ public class Persons
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
     
     

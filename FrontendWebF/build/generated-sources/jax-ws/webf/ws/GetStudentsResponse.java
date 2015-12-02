@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://webservice.webf/}student" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://webservice.webf/}person" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 public class GetStudentsResponse {
 
     @XmlElement(name = "return")
-    protected List<Student> _return;
+    protected List<Person> _return;
 
     /**
      * Gets the value of the return property.
@@ -55,13 +55,13 @@ public class GetStudentsResponse {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Student }
+     * {@link Person }
      * 
      * 
      */
-    public List<Student> getReturn() {
+    public List<Person> getReturn() {
         if (_return == null) {
-            _return = new ArrayList<Student>();
+            _return = new ArrayList<Person>();
         }
         return this._return;
     }

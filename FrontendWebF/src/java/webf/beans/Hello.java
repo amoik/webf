@@ -1,6 +1,6 @@
 package webf.beans;
 
-import static webf.beans.utils.tinf;
+import static webf.beans.Utils.tinf;
 import webf.ws.WebServices;
 import webf.ws.WebServices_Service;
 import webf.ws.HelloResponse;

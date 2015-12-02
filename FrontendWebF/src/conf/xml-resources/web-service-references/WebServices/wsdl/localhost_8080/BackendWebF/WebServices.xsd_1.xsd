@@ -4,9 +4,9 @@
 
 <xs:element name="addResponse" type="tns:addResponse"/>
 
-<xs:element name="createUser" type="tns:createUser"/>
+<xs:element name="createPerson" type="tns:createPerson"/>
 
-<xs:element name="createUserResponse" type="tns:createUserResponse"/>
+<xs:element name="createPersonResponse" type="tns:createPersonResponse"/>
 
 <xs:element name="deletePerson" type="tns:deletePerson"/>
 
@@ -15,6 +15,18 @@
 <xs:element name="divide" type="tns:divide"/>
 
 <xs:element name="divideResponse" type="tns:divideResponse"/>
+
+<xs:element name="getAllCourses" type="tns:getAllCourses"/>
+
+<xs:element name="getAllCoursesResponse" type="tns:getAllCoursesResponse"/>
+
+<xs:element name="getAllMemberships" type="tns:getAllMemberships"/>
+
+<xs:element name="getAllMembershipsResponse" type="tns:getAllMembershipsResponse"/>
+
+<xs:element name="getPerson" type="tns:getPerson"/>
+
+<xs:element name="getPersonResponse" type="tns:getPersonResponse"/>
 
 <xs:element name="getPersons" type="tns:getPersons"/>
 
@@ -40,19 +52,6 @@
 
 <xs:element name="subtractResponse" type="tns:subtractResponse"/>
 
-<xs:complexType name="subtract">
-<xs:sequence>
-<xs:element name="arg0" type="xs:double"/>
-<xs:element name="arg1" type="xs:double"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="subtractResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:double"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="getPersons">
 <xs:sequence/>
 </xs:complexType>
@@ -76,26 +75,117 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="getPerson">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPersonResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:person" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="multiply">
+<xs:sequence>
+<xs:element name="arg0" type="xs:double"/>
+<xs:element name="arg1" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="multiplyResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="divide">
+<xs:sequence>
+<xs:element name="arg0" type="xs:double"/>
+<xs:element name="arg1" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="divideResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="hello">
+<xs:sequence>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="helloResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="subtract">
+<xs:sequence>
+<xs:element name="arg0" type="xs:double"/>
+<xs:element name="arg1" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="subtractResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllMemberships">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getAllMembershipsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:personCourseMembership" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="personCourseMembership">
+<xs:sequence>
+<xs:element name="course" type="tns:course" minOccurs="0"/>
+<xs:element name="id" type="tns:personCourseMembershipId" minOccurs="0"/>
+<xs:element name="note" type="xs:int"/>
+<xs:element name="person" type="tns:person" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="course">
+<xs:sequence>
+<xs:element name="coursePk" type="xs:int" minOccurs="0"/>
+<xs:element name="description" type="xs:string" minOccurs="0"/>
+<xs:element name="personCourseMemberships" type="xs:anyType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="title" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="personCourseMembershipId">
+<xs:sequence>
+<xs:element name="courseFk" type="xs:int"/>
+<xs:element name="personFk" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="getStudents">
 <xs:sequence/>
 </xs:complexType>
 
 <xs:complexType name="getStudentsResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:student" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="student">
-<xs:sequence>
-<xs:element name="courses" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="return" type="tns:person" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="deletePerson">
 <xs:sequence>
-<xs:element name="arg0" type="tns:person" minOccurs="0"/>
+<xs:element name="arg0" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -131,20 +221,7 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="multiply">
-<xs:sequence>
-<xs:element name="arg0" type="xs:double"/>
-<xs:element name="arg1" type="xs:double"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="multiplyResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:double"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="createUser">
+<xs:complexType name="createPerson">
 <xs:sequence>
 <xs:element name="arg0" type="xs:string" minOccurs="0"/>
 <xs:element name="arg1" type="xs:string" minOccurs="0"/>
@@ -155,34 +232,19 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="createUserResponse">
+<xs:complexType name="createPersonResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:boolean" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="divide">
-<xs:sequence>
-<xs:element name="arg0" type="xs:double"/>
-<xs:element name="arg1" type="xs:double"/>
-</xs:sequence>
+<xs:complexType name="getAllCourses">
+<xs:sequence/>
 </xs:complexType>
 
-<xs:complexType name="divideResponse">
+<xs:complexType name="getAllCoursesResponse">
 <xs:sequence>
-<xs:element name="return" type="xs:double"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="hello">
-<xs:sequence>
-<xs:element name="name" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="helloResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
+<xs:element name="return" type="tns:course" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>
