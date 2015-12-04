@@ -6,25 +6,33 @@
     xmlns:f="http://java.sun.com/jsf/core"  
     xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Login</title>
     </h:head>
     <h:body>
+        
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:outputLabel for="username" value="Username: " />
+                <p:inputText id="username" value="#{login.username}"/>
+                <p:outputLabel for="password" value="Passwort: " />
+                <p:password id="password" value="#{login.password}"/>
+            
+                <p:commandButton value="Login" action="#{login.login}"/>
+            </h:panelGrid>
+        
+        </h:form>
+        
+        
+        
+        
 <h:form>
-    <p:inputText />
     <h:panelGrid columns="2" cellpadding="5">
-        <h:outputText value="Basic: " />
-        <p:password id="nonFeedback" value="#{login.password}" />
+        <h:outputText value="Username: " />
+        <p:inputText value="#{login.username}"/>
  
-        <h:outputText value="Feedback: " />
-        <p:password id="feedback" value="#{login.password}" feedback="true" />
- 
-        <h:outputText value="Feedback (Turkish): " />
-        <p:password id="turkishFeedback" value="#{login.password}" feedback="true"
-                    promptLabel="Lütfen şifre giriniz" weakLabel="Zayıf"
-                    goodLabel="Orta seviye" strongLabel="Güçlü" />
- 
-        <h:outputText value="Inline Feedback: " />
-        <p:password id="inlineFeedback" value="#{login.password}" feedback="true" inline="true" />
+        <h:outputText value="Passwort: " />
+        <p:password value="#{login.password}" />
+        <p:commandButton value="Login" onclick="#{login.login()}"/>
     </h:panelGrid>
  
     <p:spacer height="10" />

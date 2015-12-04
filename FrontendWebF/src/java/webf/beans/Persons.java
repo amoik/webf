@@ -8,6 +8,7 @@ package webf.beans;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.faces.component.html.HtmlDataTable;
 import static webf.beans.Utils.tinf;
 import webf.ws.Person;
 import webf.ws.WebServices;
@@ -25,6 +26,7 @@ public class Persons
     private String firstname;
     private String lastname;
     private Date birthday;
+    private HtmlDataTable dataTable;
     
     private List<Person> persons;
     
@@ -93,13 +95,14 @@ public class Persons
             this.setMsg("Fehlgeschlagen!");
     }
   
-    public void deletePerson(Person p)
+    public void deletePerson()
     {
+        Person p = (Person) getDataTable().getRowData();
         tinf("person " + p.getUsername() + " wird gelöscht");
         WebServices_Service service = new WebServices_Service();
         WebServices port = service.getWebServicesPort();  
 
-        Boolean ret = port.deletePerson(p.getPersonPk);
+        Boolean ret = port.deletePerson(p.getPersonPk());
         
         if(ret)
         {
@@ -191,6 +194,14 @@ public class Persons
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public HtmlDataTable getDataTable() {
+        return dataTable;
+    }
+
+    public void setDataTable(HtmlDataTable dataTable) {
+        this.dataTable = dataTable;
     }
     
     

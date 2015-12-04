@@ -57,7 +57,7 @@ public class Login {
     
     public String login(){
     
-        //call WS        
+        //call WS       
         
         WebServices_Service service = new WebServices_Service();
         WebServices port = service.getWebServicesPort();      
@@ -75,7 +75,7 @@ public class Login {
         }
         
         setErrStr("Login Fehlgeschlagen");
-        tinf("Login Fehlgeschlagen");
+        tinf("Login Fehlgeschlagen (" + username + "/" + password + ")");
         return "index.xhtml";
     }
 

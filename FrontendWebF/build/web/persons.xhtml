@@ -19,7 +19,7 @@
         </h:form>
         
         <h:form>
-            <p:dataTable var="person" value="#{persons.persons}">
+            <p:dataTable binding="#{persons.dataTable}" var="person" value="#{persons.persons}">
                 <p:column headerText="Vorname">
                     <h:outputText value="#{person.firstname}" />
                 </p:column>
@@ -46,7 +46,7 @@
                 </p:column>
 
                 <p:column headerText="Löschen">
-                    <p:commandButton value="Löschen" icon="ui-icon-trash" type="button" action="#{persons.deletePerson(person)}" ajax="false"/>
+                    <p:commandButton value="Löschen" icon="ui-icon-trash" type="button" action="#{persons.deletePerson}" ajax="false"/>
                 </p:column>
             </p:dataTable>
         </h:form>
