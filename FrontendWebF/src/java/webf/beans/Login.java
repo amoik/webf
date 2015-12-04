@@ -50,6 +50,11 @@ public class Login {
         return "index.xhtml";
     }
     
+    public void setCenter(String subSite)
+    {
+        tinf("Center will be set to: " + subSite);
+    }
+    
     public String login(){
     
         //call WS        

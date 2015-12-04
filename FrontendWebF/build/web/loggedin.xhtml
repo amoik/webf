@@ -1,24 +1,42 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        <h:form>
-            <div><h:commandButton value="Logout" action="#{login.logout}"/></div>
-        </h:form>
-        <div><h:outputLabel><h2>erfolgreich eingeloggt</h2></h:outputLabel></div>
-        <h:form>
-            <div>
-                <h:commandButton value="Calculator" action="calculator.xhtml"/>
-                <h:commandButton value="Settings" action="settings.xhtml"/>
-                <h:commandButton value="Studenten" action="students.xhtml"/>
-                <h:commandButton value="Personen" action="persons.xhtml"/>
-                <h:commandButton value="Kurse" action="courses.xhtml"/>
-            </div>
-        </h:form>
-            <div><h:outputLabel>#{createUser.message}</h:outputLabel></div>
-    </h:body>
+<html 
+    xmlns="http://www.w3.org/1999/xhtml"   
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui">
+    
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Verwaltung</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="west" size="175" header="Verwaltung" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Resources">
+                            <p:menuitem value="Studenten" icon="ui-icon-star" outcome="students.xhtml" />
+                            <p:menuitem value="Personen" icon="ui-icon-check" outcome="persons.xhtml" />
+                            <p:menuitem value="Kurse" icon="ui-icon-search" outcome="courses.xhtml" />
+                            <p:menuitem value="Einstellungen" icon="ui-icon-document" outcome="settings.xhtml" />
+                            <p:menuitem value="PrimeFaces" icon="ui-icon-wrench" outcome="welcomePrimefaces" />
+                            <p:menuitem value="Daham" icon="ui-icon-person" url="http://84.115.3.61" />
+                            <p:menuitem value="Logout" icon="ui-icon-logout" outcome="#{login.logout()}" />
+                        </p:submenu>
+
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    Willkommen in der Verwaltungssoftware für Fachhochschulen
+                </p:layoutUnit>
+            </p:layout>
+        </h:body>
+    </f:view>
 </html>

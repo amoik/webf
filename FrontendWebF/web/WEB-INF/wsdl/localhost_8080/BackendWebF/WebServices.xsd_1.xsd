@@ -24,13 +24,13 @@
 
 <xs:element name="getAllMembershipsResponse" type="tns:getAllMembershipsResponse"/>
 
+<xs:element name="getAllPersons" type="tns:getAllPersons"/>
+
+<xs:element name="getAllPersonsResponse" type="tns:getAllPersonsResponse"/>
+
 <xs:element name="getPerson" type="tns:getPerson"/>
 
 <xs:element name="getPersonResponse" type="tns:getPersonResponse"/>
-
-<xs:element name="getPersons" type="tns:getPersons"/>
-
-<xs:element name="getPersonsResponse" type="tns:getPersonsResponse"/>
 
 <xs:element name="getStudents" type="tns:getStudents"/>
 
@@ -52,13 +52,15 @@
 
 <xs:element name="subtractResponse" type="tns:subtractResponse"/>
 
-<xs:complexType name="getPersons">
-<xs:sequence/>
+<xs:complexType name="getPerson">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int"/>
+</xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getPersonsResponse">
+<xs:complexType name="getPersonResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:person" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="return" type="tns:person" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -72,18 +74,6 @@
 <xs:element name="personPk" type="xs:int" minOccurs="0"/>
 <xs:element name="role" type="xs:string" minOccurs="0"/>
 <xs:element name="username" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getPerson">
-<xs:sequence>
-<xs:element name="arg0" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getPersonResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:person" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -218,6 +208,16 @@
 <xs:complexType name="loginResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllPersons">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getAllPersonsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:person" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 

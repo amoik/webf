@@ -47,4 +47,10 @@
             <managed-bean-class>webf.beans.Persons</managed-bean-class>
             <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+                                
+    <managed-bean>
+            <managed-bean-name>courses</managed-bean-name>
+            <managed-bean-class>webf.beans.Courses</managed-bean-class>
+            <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 </faces-config>

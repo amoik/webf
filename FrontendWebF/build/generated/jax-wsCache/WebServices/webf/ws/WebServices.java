@@ -45,6 +45,18 @@ public interface WebServices {
 
     /**
      * 
+     * @return
+     *     returns java.util.List<webf.ws.Person>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getAllPersons", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetAllPersons")
+    @ResponseWrapper(localName = "getAllPersonsResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetAllPersonsResponse")
+    @Action(input = "http://webservice.webf/WebServices/getAllPersonsRequest", output = "http://webservice.webf/WebServices/getAllPersonsResponse")
+    public List<Person> getAllPersons();
+
+    /**
+     * 
      * @param arg0
      * @return
      *     returns java.lang.Boolean
@@ -114,18 +126,6 @@ public interface WebServices {
     @ResponseWrapper(localName = "getStudentsResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetStudentsResponse")
     @Action(input = "http://webservice.webf/WebServices/getStudentsRequest", output = "http://webservice.webf/WebServices/getStudentsResponse")
     public List<Person> getStudents();
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<webf.ws.Person>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getPersons", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetPersons")
-    @ResponseWrapper(localName = "getPersonsResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetPersonsResponse")
-    @Action(input = "http://webservice.webf/WebServices/getPersonsRequest", output = "http://webservice.webf/WebServices/getPersonsResponse")
-    public List<Person> getPersons();
 
     /**
      * 

@@ -16,31 +16,31 @@
         </h:form>
         <h1>Kurse</h1>
         <h:form>
-            <p><h:commandButton value="Aktualisieren" action="#{students.getAllStudents}"/></p>
+            <p><h:commandButton value="Aktualisieren" action="#{courses.getAllCourses}"/></p>
         </h:form>
-        <p><h:outputLabel>#{students.msg}</h:outputLabel></p>
+        <p><h:outputLabel>#{courses.msg}</h:outputLabel></p>
         <div>
             <h2>PRIMEFACES TEST</h2>
             <!---->
                 <!--outcome="/ui/menu/tabMenu"-->
             <h:form>
-            <p:tabMenu >
-    <p:menuitem value="Overview" icon="ui-icon-star">
-        <f:param name="i" value="0" />
-    </p:menuitem>
-    <p:menuitem value="Demos" icon="ui-icon-search">
-        <f:param name="i" value="1" />
-    </p:menuitem>
-    <p:menuitem value="Documentation" icon="ui-icon-document">
-        <f:param name="i" value="2" />
-    </p:menuitem>
-    <p:menuitem value="Support" icon="ui-icon-wrench">
-        <f:param name="i" value="3" />
-    </p:menuitem>
-    <p:menuitem value="Social" icon="ui-icon-person">
-        <f:param name="i" value="4" />
-    </p:menuitem>
-</p:tabMenu>
+            <p:tabMenu activeIndex="1">
+                <p:menuitem value="Overview" icon="ui-icon-star" onclick="#{courses.setTab(0)}">
+                    <f:param name="i" value="0"/>
+                </p:menuitem>
+                <p:menuitem value="Demos" icon="ui-icon-search" onclick="#{courses.setTab(1)}">
+                    <f:param name="i" value="1" />
+                </p:menuitem>
+                <p:menuitem value="Documentation" icon="ui-icon-document" onclick="#{courses.setTab(2)}">
+                    <f:param name="i" value="2" />
+                </p:menuitem>
+                <p:menuitem value="Support" icon="ui-icon-wrench" onclick="#{courses.setTab(3)}">
+                    <f:param name="i" value="3" />
+                </p:menuitem>
+                <p:menuitem value="Social" icon="ui-icon-person" onclick="#{courses.setTab(4)}">
+                    <f:param name="i" value="4" />
+                </p:menuitem>
+            </p:tabMenu>
             </h:form>
             <h:form>
     <p:growl id="msgs" showDetail="true" />
@@ -66,23 +66,15 @@
         <p:commandButton value="Submit" update="msgs" actionListener="#{dropdownView.displayLocation}" icon="ui-icon-check" />
     </p:panel>
 </h:form>
-            <p:dataTable var="car" value="#{dtBasicView.cars}">
-    <p:column headerText="Id">
-        <h:outputText value="#{car.id}" />
-    </p:column>
- 
-    <p:column headerText="Year">
-        <h:outputText value="#{car.year}" />
-    </p:column>
- 
-    <p:column headerText="Brand">
-        <h:outputText value="#{car.brand}" />
-    </p:column>
- 
-    <p:column headerText="Color">
-        <h:outputText value="#{car.color}" />
-    </p:column>
-</p:dataTable>
+            <p:dataTable var="course" value="#{courses.courses}">
+                <p:column headerText="Titel">
+                    <h:outputText value="#{course.title}" />
+                </p:column>
+
+                <p:column headerText="Beschreibung">
+                    <h:outputText value="#{course.description}" />
+                </p:column>
+            </p:dataTable>
             <p:inputText />
             <!--outcome="productDetail"-->
             <p:button value="Bookmark" icon="ui-icon-star">

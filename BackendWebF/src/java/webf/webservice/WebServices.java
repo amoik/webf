@@ -208,7 +208,7 @@ public class WebServices
     
     
     @WebMethod
-    public ArrayList<Person> getPersons()
+    public ArrayList<Person> getAllPersons()
     {
         SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
         Session s = sf.openSession();                           //Öffne eine Session 
@@ -231,6 +231,7 @@ public class WebServices
                 p.setPersonPk(((Person) result).getPersonPk());
                 p.setFirstname(((Person) result).getFirstname());
                 p.setLastname(((Person) result).getLastname());
+                p.setBirthday(((Person)result).getBirthday());
                 ret.add(p);
             }
             
@@ -301,7 +302,10 @@ public class WebServices
             
             for (Object result : results)
             {
-                ret.add((Course)result);
+                Course c = new Course();
+                c.setDescription(((Course)result).getDescription());
+                c.setTitle(((Course)result).getTitle());
+                ret.add(c);
             }
             
             

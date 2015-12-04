@@ -1,8 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<html 
+    xmlns="http://www.w3.org/1999/xhtml"   
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Personen</title>
     </h:head>
@@ -14,50 +17,75 @@
         <h:form>
             <p><h:commandButton value="Aktualisieren" action="#{persons.getAll}"/></p>
         </h:form>
+        
         <h:form>
-            <div>
-                <div>
-                    <h:outputLabel for="username">Username:</h:outputLabel>
-                    <h:inputText id="username" value="#{persons.username}"/>
-                </div>
-                <div>
-                    <h:outputLabel for="password">Password:</h:outputLabel>
-                    <h:inputText id="password" value="#{persons.password}"/>
-                </div>
-                <div>
-                    <h:outputLabel for="role">Rolle:</h:outputLabel>
-                    <h:inputText id="role" value="#{persons.role}"/>
-                </div>
-                <div>
-                    <h:outputLabel for="firstname">Vorname:</h:outputLabel>
-                    <h:inputText id="firstname" value="#{persons.firstname}"/>
-                </div>
-                <div>
-                    <h:outputLabel for="lastname">Nachname:</h:outputLabel>
-                    <h:inputText id="lastname" value="#{persons.lastname}"/>
-                </div>
-                <div>
-                    <h:commandButton value="User anlegen" action="#{persons.createPerson}"/>
-                </div>
-            </div>
+            <p:dataTable var="person" value="#{persons.persons}">
+                <p:column headerText="Vorname">
+                    <h:outputText value="#{person.firstname}" />
+                </p:column>
+
+                <p:column headerText="Nachname">
+                    <h:outputText value="#{person.lastname}" />
+                </p:column>
+
+                <p:column headerText="UID">
+                    <h:outputText value="#{person.username}" />
+                </p:column>
+
+                <p:column headerText="Geburtstag">
+                    <h:outputText value="#{person.birthday}" />
+                </p:column>
+
+                <p:column headerText="Rolle">
+                    <p:selectOneMenu id="role" style="width:100%;">
+                        <f:selectItem itemLabel="#{person.role}" itemValue="1"/>
+                        <f:selectItem itemLabel="Student" itemValue="2"/>
+                        <f:selectItem itemLabel="Lektor" itemValue="3"/>
+                        <f:selectItem itemLabel="Admin" itemValue="4"/>
+                    </p:selectOneMenu>
+                </p:column>
+
+                <p:column headerText="Löschen">
+                    <p:commandButton value="Löschen" icon="ui-icon-trash" type="button" action="#{persons.deletePerson(person)}" ajax="false"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        <h:form>
+            <table>
+                <th><p:outputLabel for="username" value="Username: " /></th>
+                <th><p:outputLabel for="password" value="Passwort: " /></th>
+                <th><p:outputLabel for="role" value="Rolle: " /></th>
+                <th><p:outputLabel for="firstname" value="Vorname: " /></th>
+                <th><p:outputLabel for="lastname" value="Nachname: " /></th>
+                <tr>
+                    <td>
+                        <p:inputText id="username" value="#{persons.username}"/>
+                    </td>
+                    <td>
+                        <p:inputText id="password" value="#{persons.password}"/>
+                    </td>
+                    <td>
+                        <p:column headerText="Rolle">
+                            <p:selectOneMenu id="role">
+                                <f:selectItem itemLabel="Student" itemValue="1"/>
+                                <f:selectItem itemLabel="Lektor" itemValue="2"/>
+                                <f:selectItem itemLabel="Admin" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </p:column>
+                    </td>
+                    <td>
+                        <p:inputText id="firstname" value="#{persons.firstname}"/>
+                    </td>
+                    <td>
+                        <p:inputText id="lastname" value="#{persons.lastname}"/>
+                    </td>
+                </tr>
+            </table>
+            
+            <h:commandButton value="User anlegen" action="#{persons.createPerson}"/>
+        
         </h:form>
         <p><h:outputLabel>#{persons.msg}</h:outputLabel></p>
-        <table>
-            <tr>
-                <th>Username</th><th>Vorname</th><th>Nachname</th><th>Rolle</th><th>Löschen</th>
-            </tr>
-            <ui:repeat var="pers" value="#{persons.persons}">
-                <tr>
-                    <h:form>
-                        <td><span style="margin-left:2%;">#{pers.username}</span></td>
-                        <td><span style="margin-left:2%;">#{pers.firstname}</span></td>
-                        <td><span style="margin-left:2%;">#{pers.lastname}</span></td>
-                        <td><span style="margin-left:2%;">#{pers.role}</span></td>
-                        <td><h:commandButton value="Löschen" action="#{persons.deletePerson(pers.personPk)}"/></td>
-                    </h:form>
-                </tr>
-            </ui:repeat>
-        </table>
     </h:body>
 </html>
 

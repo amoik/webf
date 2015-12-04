@@ -24,6 +24,7 @@ public class Persons
     private String role;
     private String firstname;
     private String lastname;
+    private Date birthday;
     
     private List<Person> persons;
     
@@ -36,6 +37,7 @@ public class Persons
     
     public void createPerson()
     {
+        setRole("Student");//TODO
         
         if(getUsername().equals(""))
         {
@@ -80,22 +82,24 @@ public class Persons
         WebServices_Service service = new WebServices_Service();
         WebServices port = service.getWebServicesPort();  
 
-        setPersons(port.getPersons());
+        setPersons(port.getAllPersons());
         
         if( getPersons() != null)
         {
             this.setMsg("Erfolgreich");
+            printAllPersons();
         }
         else
             this.setMsg("Fehlgeschlagen!");
     }
   
-    public void deletePerson(int id)
+    public void deletePerson(Person p)
     {
+        tinf("person " + p.getUsername() + " wird gelöscht");
         WebServices_Service service = new WebServices_Service();
         WebServices port = service.getWebServicesPort();  
 
-        Boolean ret = port.deletePerson(id);
+        Boolean ret = port.deletePerson(p.getPersonPk);
         
         if(ret)
         {
@@ -109,7 +113,7 @@ public class Persons
     public void printAllPersons()
     {
         for (Person person : persons) {
-            tinf(person.getUsername() + " " + person.getRole());
+            tinf(person.getUsername() + " " + person.getRole() + " " + person.getBirthday().toString());
         }
     }
     
@@ -179,6 +183,14 @@ public class Persons
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
     
     
