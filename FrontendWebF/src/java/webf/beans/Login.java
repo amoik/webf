@@ -21,6 +21,7 @@ public class Login {
     private String password;
     private String errStr;
     private int id = -1;
+    private String includedPage;
     
     public void Login()
     {
@@ -100,6 +101,14 @@ public class Login {
 
     private void setId(int id) {
         this.id = id;
+    }
+
+    public String getIncludedPage() {
+        return includedPage;
+    }
+
+    public void setIncludedPage(String includedPage) {
+        this.includedPage = includedPage;
     }
     
     

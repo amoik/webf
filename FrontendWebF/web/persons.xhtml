@@ -10,6 +10,55 @@
         <title>Personen</title>
     </h:head>
     <h:body>
+        
+        
+        
+        
+        
+        
+        
+        <h:form>
+            <p><h:commandButton value="Zurück" action="loggedin.xhtml"/></p>
+        </h:form>
+        <h1>Personen</h1>
+        <h:form>
+            <p><h:commandButton value="Aktualisieren" action="#{persons.getAll}"/></p>
+        </h:form>
+       
+        <p><h:outputLabel>#{persons.msg}</h:outputLabel></p>
+        <table>
+            <tr>
+                <th>Username</th><th>Vorname</th><th>Nachname</th><th>Rolle</th><th>Löschen</th>
+            </tr>
+            <ui:repeat var="pers" value="#{persons.persons}">
+                <tr>
+                    <h:form>
+                        <td><span style="margin-left:2%;">#{pers.username}</span></td>
+                        <td><span style="margin-left:2%;">#{pers.firstname}</span></td>
+                        <td><span style="margin-left:2%;">#{pers.lastname}</span></td>
+                        <td>
+                            <p:selectOneMenu id="role">
+                                <f:selectItem itemLabel="#{person.role}" itemValue="1"/>
+                                <f:selectItem itemLabel="Student" itemValue="2"/>
+                                <f:selectItem itemLabel="Lektor" itemValue="3"/>
+                                <f:selectItem itemLabel="Admin" itemValue="4"/>
+                            </p:selectOneMenu>
+                        </td>
+                        <td><p:commandButton value="Löschen" action="#{persons.deletePerson(pers.personPk)}"/></td>
+                    </h:form>
+                </tr>
+            </ui:repeat>
+        </table>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         <h:form>
             <p><h:commandButton value="Zurück" action="loggedin.xhtml"/></p>
         </h:form>
@@ -18,38 +67,6 @@
             <p><h:commandButton value="Aktualisieren" action="#{persons.getAll}"/></p>
         </h:form>
         
-        <h:form>
-            <p:dataTable binding="#{persons.dataTable}" var="person" value="#{persons.persons}">
-                <p:column headerText="Vorname">
-                    <h:outputText value="#{person.firstname}" />
-                </p:column>
-
-                <p:column headerText="Nachname">
-                    <h:outputText value="#{person.lastname}" />
-                </p:column>
-
-                <p:column headerText="UID">
-                    <h:outputText value="#{person.username}" />
-                </p:column>
-
-                <p:column headerText="Geburtstag">
-                    <h:outputText value="#{person.birthday}" />
-                </p:column>
-
-                <p:column headerText="Rolle">
-                    <p:selectOneMenu id="role" style="width:100%;">
-                        <f:selectItem itemLabel="#{person.role}" itemValue="1"/>
-                        <f:selectItem itemLabel="Student" itemValue="2"/>
-                        <f:selectItem itemLabel="Lektor" itemValue="3"/>
-                        <f:selectItem itemLabel="Admin" itemValue="4"/>
-                    </p:selectOneMenu>
-                </p:column>
-
-                <p:column headerText="Löschen">
-                    <p:commandButton value="Löschen" icon="ui-icon-trash" type="button" action="#{persons.deletePerson}" ajax="false"/>
-                </p:column>
-            </p:dataTable>
-        </h:form>
         <h:form>
             <table>
                 <th><p:outputLabel for="username" value="Username: " /></th>
@@ -86,6 +103,22 @@
         
         </h:form>
         <p><h:outputLabel>#{persons.msg}</h:outputLabel></p>
+        
+        
+        <h:form>
+            <p:dataList value="#{persons.persons}" var="person" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated">
+                <f:facet name="header">
+                    Paginator
+                </f:facet>
+                <p:commandLink oncomplete="" title="View Detail" styleClass="ui-icon ui-icon-trash" style="float:left;margin-right:10px">
+
+                    <h:outputText value="#{person.firstname}, #{person.lastname}" />
+                </p:commandLink>
+                <h:outputText value="#{person.role}, #{person.username}" style="display:inline-block"/>
+            </p:dataList>
+        </h:form>
+        
+        
     </h:body>
 </html>
 
