@@ -5,7 +5,12 @@
  */
 package webf.beans;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
+import org.primefaces.context.RequestContext;
+import static webf.beans.Utils.addMessage;
 import static webf.beans.Utils.tinf;
 import webf.ws.WebServices;
 import webf.ws.WebServices_Service;
@@ -15,40 +20,47 @@ import webf.ws.WebServices_Service;
  * @author PU
  */
 @Named
-public class Login {
+public class Login 
+{
     
     private String username;
     private String password;
     private String errStr;
     private int id = -1;
-    private String includedPage;
+    private String includedPage = "welcome.xhtml";
     
     public void Login()
     {
         resetVars();
     }
 
-    public String getUsername() {
+    public String getUsername() 
+    {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(String username) 
+    {
         this.username = username;
     }
 
-    public String getPassword() {
+    public String getPassword() 
+    {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password) 
+    {
         this.password = password;
     }
+   
     
     public String logout()
     {
         setErrStr("");
         setId(-1);
-        return "index.xhtml";
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "index.xhtml?faces-redirect=true";
     }
     
     public void setCenter(String subSite)
@@ -56,7 +68,8 @@ public class Login {
         tinf("Center will be set to: " + subSite);
     }
     
-    public String login(){
+    public String login()
+    {
     
         //call WS       
         
@@ -70,14 +83,19 @@ public class Login {
         
         if(ret != -1)
         {
-            tinf("Erfolgreich eingeloggt " + id); 
             resetVars();
-            return "loggedin.xhtml";
+            return "loggedin.xhtml?faces-redirect=true";
         }
         
-        setErrStr("Login Fehlgeschlagen");
-        tinf("Login Fehlgeschlagen (" + username + "/" + password + ")");
+        addMessage("Fehler","Login Fehlgeschlagen");
         return "index.xhtml";
+    }
+    
+    public void onload()
+    {
+        tinf("servas");
+        addMessage("Erfolg","Erfolgreich eingeloggt");
+        setIncludedPage("welcome.xhtml");
     }
 
     public void resetVars()
@@ -87,27 +105,34 @@ public class Login {
         username = "";
     }
     
-    public String getErrStr() {
+    public String getErrStr()
+    {
         return errStr;
     }
 
-    public void setErrStr(String errStr) {
+    public void setErrStr(String errStr)
+    {
         this.errStr = errStr;
     }
 
-    public int getId() {
+    public int getId()
+    {
         return id;
     }
 
-    private void setId(int id) {
+    private void setId(int id)
+    {
         this.id = id;
     }
 
-    public String getIncludedPage() {
+    public String getIncludedPage()
+    {
         return includedPage;
     }
 
-    public void setIncludedPage(String includedPage) {
+    public void setIncludedPage(String includedPage)
+    {
+        tinf("showing page: '" + includedPage + "'");
         this.includedPage = includedPage;
     }
     

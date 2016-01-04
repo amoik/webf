@@ -12,46 +12,18 @@
         
         <h:form>
             <h:panelGrid columns="2" cellpadding="5">
-                <p:outputLabel for="username" value="Username: " />
-                <p:inputText id="username" value="#{login.username}"/>
-                <p:outputLabel for="password" value="Passwort: " />
-                <p:password id="password" value="#{login.password}"/>
+                <p:outputLabel for="loginUsername" value="Username: " />
+                <p:inputText id="loginUsername" value="#{login.username}"/>
+                <p:outputLabel for="loginPassword" value="Passwort: " />
+                <p:password id="loginPassword" value="#{login.password}"/>
             
                 <p:commandButton value="Login" action="#{login.login}"/>
             </h:panelGrid>
         
         </h:form>
-        
-        
-        
-        
-<h:form>
-    <h:panelGrid columns="2" cellpadding="5">
-        <h:outputText value="Username: " />
-        <p:inputText value="#{login.username}"/>
- 
-        <h:outputText value="Passwort: " />
-        <p:password value="#{login.password}" />
-        <p:commandButton value="Login" onclick="#{login.login()}"/>
-    </h:panelGrid>
- 
-    <p:spacer height="10" />
- 
-    <p:separator />
- 
-    <p:messages id="messages" showDetail="true" autoUpdate="true" />
- 
-    <h:panelGrid columns="2" id="matchGrid" cellpadding="5">                   
-        <h:outputLabel for="inlineFeedback" value="Passwort:" />
-        <p:password id="inlineFeedback" value="#{login.password}" match="pwd2" label="Password 1" required="true" feedback="true" inline="true" />
- 
-        <h:outputLabel for="pwd2" value="Passwort wiederholen:" />
-        <p:password id="pwd2" value="#{login.password}" label="Password 2" required="true" />
-    </h:panelGrid>
- 
-    <p:commandButton update="matchGrid" value="Login" onclick="#{login.login()}"/>
-</h:form>
-        <p style="color:red;"><h:outputLabel>#{login.errStr}</h:outputLabel></p>
+        <p:spacer height="10" />
+        <p:separator />
+        <p:messages id="messages" showDetail="true" autoUpdate="true" />
     </h:body>
 </html>
 

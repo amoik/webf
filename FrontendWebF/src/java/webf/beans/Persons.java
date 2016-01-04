@@ -5,11 +5,11 @@
  */
 package webf.beans;
 
+import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.faces.component.html.HtmlDataTable;
-import org.primefaces.component.datatable.DataTable;
 import static webf.beans.Utils.tinf;
 import webf.ws.Person;
 import webf.ws.WebServices;
@@ -26,16 +26,20 @@ public class Persons
     private String role;
     private String firstname;
     private String lastname;
-    private Date birthday;
-    private DataTable dataTable;
+    private String birthday;
     
     private List<Person> persons;
     
-    private String msg;
     
     public Persons()
     {
         persons = new ArrayList<Person>();
+    }
+    
+    public void onload()
+    {
+        resetVars();
+        getAll();
     }
     
     public void createPerson()
@@ -44,18 +48,15 @@ public class Persons
         
         if(getUsername().equals(""))
         {
-            setMsg("kein Username angegeben");
             return;
         }
         
         if(getPassword().equals(""))
         {
-            setMsg("kein Passwort angegeben");
             return;
         }
         if(getRole().equals(""))
         {
-            setMsg("keine Rolle angegeben");
             return;
         }
         
@@ -72,12 +73,9 @@ public class Persons
         
         if(ret)
         {
-            setMsg("wurde angelegt!");
             resetVars();
             getAll();
         }
-        else
-            setMsg("Fehlgeschlagen!");
     }
     
     public void getAll()
@@ -89,17 +87,8 @@ public class Persons
         
         if( getPersons() != null)
         {
-            this.setMsg("Erfolgreich");
             printAllPersons();
         }
-        else
-            this.setMsg("Fehlgeschlagen!");
-    }
-    
-    public void deletePersonDataTable()
-    {
-        Person p = (Person) getDataTable().getRowData();
-        deletePerson(p.getPersonPk());
     }
   
     public void deletePerson(int id)
@@ -112,11 +101,8 @@ public class Persons
         
         if(ret)
         {
-            this.setMsg("Erfolgreich");
             getAll();
         }
-        else
-            this.setMsg("Fehlgeschlagen!");
     }
 
     public void printAllPersons()
@@ -128,7 +114,6 @@ public class Persons
     
     public void resetVars()
     {
-        setMsg("");
         setUsername("");
         setPassword("");
         setRole("");
@@ -136,6 +121,12 @@ public class Persons
         setLastname("");
       
         persons.clear();
+    }
+    public static String dateToStr(XMLGregorianCalendarImpl gcd)
+    {
+        Date d = gcd.toGregorianCalendar().getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.mm.yyyy");
+        return sdf.format(d);
     }
 
     public List<Person> getPersons() {
@@ -146,13 +137,6 @@ public class Persons
         this.persons = persons;
     }
 
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = "Ergebnis: " + msg;
-    }
 
     public String getUsername() {
         return username;
@@ -194,21 +178,11 @@ public class Persons
         this.lastname = lastname;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
-
-    public DataTable getDataTable() {
-        return dataTable;
-    }
-
-    public void setDataTable(DataTable dataTable) {
-        this.dataTable = dataTable;
-    }
-    
-    
 }

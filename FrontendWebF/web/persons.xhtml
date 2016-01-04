@@ -10,115 +10,64 @@
         <title>Personen</title>
     </h:head>
     <h:body>
-        
-        
-        
-        
-        
-        
-        
         <h:form>
-            <p><h:commandButton value="Zurück" action="loggedin.xhtml"/></p>
+            <p><p:commandButton value="Zurück" action="loggedin.xhtml?faces-redirect=true"/></p>
         </h:form>
-        <h1>Personen</h1>
         <h:form>
-            <p><h:commandButton value="Aktualisieren" action="#{persons.getAll}"/></p>
-        </h:form>
-       
-        <p><h:outputLabel>#{persons.msg}</h:outputLabel></p>
-        <table>
-            <tr>
-                <th>Username</th><th>Vorname</th><th>Nachname</th><th>Rolle</th><th>Löschen</th>
-            </tr>
-            <ui:repeat var="pers" value="#{persons.persons}">
-                <tr>
-                    <h:form>
-                        <td><span style="margin-left:2%;">#{pers.username}</span></td>
-                        <td><span style="margin-left:2%;">#{pers.firstname}</span></td>
-                        <td><span style="margin-left:2%;">#{pers.lastname}</span></td>
-                        <td>
-                            <p:selectOneMenu id="role">
-                                <f:selectItem itemLabel="#{person.role}" itemValue="1"/>
-                                <f:selectItem itemLabel="Student" itemValue="2"/>
-                                <f:selectItem itemLabel="Lektor" itemValue="3"/>
-                                <f:selectItem itemLabel="Admin" itemValue="4"/>
-                            </p:selectOneMenu>
-                        </td>
-                        <td><p:commandButton value="Löschen" action="#{persons.deletePerson(pers.personPk)}"/></td>
-                    </h:form>
-                </tr>
-            </ui:repeat>
-        </table>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <h:form>
-            <p><h:commandButton value="Zurück" action="loggedin.xhtml"/></p>
-        </h:form>
-        <h1>Personen</h1>
-        <h:form>
-            <p><h:commandButton value="Aktualisieren" action="#{persons.getAll}"/></p>
+            <p:remoteCommand name="onload" update=":personForm:personList" action="#{persons.onload}" autoRun="true" />
         </h:form>
         
-        <h:form>
-            <table>
-                <th><p:outputLabel for="username" value="Username: " /></th>
-                <th><p:outputLabel for="password" value="Passwort: " /></th>
-                <th><p:outputLabel for="role" value="Rolle: " /></th>
-                <th><p:outputLabel for="firstname" value="Vorname: " /></th>
-                <th><p:outputLabel for="lastname" value="Nachname: " /></th>
-                <tr>
-                    <td>
-                        <p:inputText id="username" value="#{persons.username}"/>
-                    </td>
-                    <td>
-                        <p:inputText id="password" value="#{persons.password}"/>
-                    </td>
-                    <td>
-                        <p:column headerText="Rolle">
-                            <p:selectOneMenu id="role">
-                                <f:selectItem itemLabel="Student" itemValue="1"/>
-                                <f:selectItem itemLabel="Lektor" itemValue="2"/>
-                                <f:selectItem itemLabel="Admin" itemValue="3"/>
-                            </p:selectOneMenu>
-                        </p:column>
-                    </td>
-                    <td>
-                        <p:inputText id="firstname" value="#{persons.firstname}"/>
-                    </td>
-                    <td>
-                        <p:inputText id="lastname" value="#{persons.lastname}"/>
-                    </td>
-                </tr>
-            </table>
-            
-            <h:commandButton value="User anlegen" action="#{persons.createPerson}"/>
-        
-        </h:form>
-        <p><h:outputLabel>#{persons.msg}</h:outputLabel></p>
         
         
-        <h:form>
-            <p:dataList value="#{persons.persons}" var="person" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated">
-                <f:facet name="header">
-                    Paginator
-                </f:facet>
-                <p:commandLink oncomplete="" title="View Detail" styleClass="ui-icon ui-icon-trash" style="float:left;margin-right:10px">
-
-                    <h:outputText value="#{person.firstname}, #{person.lastname}" />
-                </p:commandLink>
-                <h:outputText value="#{person.role}, #{person.username}" style="display:inline-block"/>
+        <h:form id="personForm">
+            <p:dataList id="personList" value="#{persons.persons}" widgetVar="personTable" var="person" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated">
+                <f:facet name="header">Personen</f:facet>
+                <p:panel>
+                    <h:outputLink value="#">
+                        <h3><p:commandLink update=":personForm:personList" title="#{person.firstname} #{person.lastname} löschen" actionListener="#{persons.deletePerson(person.personPk)}" styleClass="ui-icon ui-icon-trash" style="float:left;margin-right:10px"/>#{person.firstname} #{person.lastname} <span style="color:grey">#{person.username}</span></h3>
+                        <p><strong>#{person.role}</strong> #{persons.dateToStr(person.birthday)}</p>
+                    </h:outputLink>
+                </p:panel>
             </p:dataList>
         </h:form>
         
         
+        
+        
+        
+        
+        <h:form id="inputForm">
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:outputLabel for="username" value="Benutzername: " />
+                <p:inputText id="username" value="#{persons.username}" required="true"/>
+                
+                <p:outputLabel for="firstname" value="Vorname: " />
+                <p:inputText id="firstname" value="#{persons.firstname}" required="true"/>
+
+                <p:outputLabel for="lastname" value="Nachname: " />
+                <p:inputText id="lastname" value="#{persons.lastname}" required="true"/>
+
+                <p:outputLabel for="pwd1" value="Passwort: " />
+                <p:password id="pwd1" value="#{persons.password}" match="pwd2" label="Password 1" required="true" />
+
+                <p:outputLabel for="pwd2" value="Bestätigen: " />
+                <p:password id="pwd2" value="#{persons.password}" label="Password 2" required="true" />
+
+                <p:outputLabel for="role" value="Rolle: " />
+                <p:column headerText="Rolle">
+                    <p:selectOneMenu id="role" required="true">
+                        <f:selectItem itemLabel="Student" itemValue="1"/>
+                        <f:selectItem itemLabel="Lektor" itemValue="2"/>
+                        <f:selectItem itemLabel="Admin" itemValue="3"/>
+                    </p:selectOneMenu>
+                </p:column>
+
+                <p:outputLabel for="birthday" value="Geburtstag: "/>
+                <p:inputMask id="birthday" value="#{persons.birthday}" mask="99.99.9999" required="true"/>
+
+                <p:commandButton update=":personForm:personList,:inputForm" value="Anlegen" actionListener="#{persons.createPerson()}"/>
+            </h:panelGrid>
+        </h:form>
     </h:body>
 </html>
 

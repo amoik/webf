@@ -16,27 +16,33 @@
         </h:head>
 
         <h:body>
-            <p:layout fullPage="true">
-                <p:layoutUnit position="west" resizable="true" size="250" header="Verwaltung" collapsible="true">
-                    <p:menu>
-                        <p:menuitem value="Studenten" icon="ui-icon-star" outcome="students.xhtml" />
-                        <p:menuitem value="Personen" icon="ui-icon-check" outcome="persons.xhtml" />
-                        <p:menuitem value="Kurse" icon="ui-icon-search" outcome="courses.xhtml" />
-                        <p:menuitem value="Einstellungen" icon="ui-icon-document" outcome="settings.xhtml" />
-                        <p:menuitem value="PrimeFaces" icon="ui-icon-wrench" outcome="welcomePrimefaces" />
-                        <p:menuitem value="Daham" icon="ui-icon-person" url="http://84.115.3.61" />
-                        <p:menuitem value="Logout" icon="ui-icon-logout" outcome='#{login.logout()}' />
-                    </p:menu>
-                </p:layoutUnit>
-                
+            <h:form>
+                <p:remoteCommand name="onload" actionListener="#{login.onload}" autoRun="true" />
+            </h:form>
+            <h:form>
+                <p:layout fullPage="true">
+                    <p:layoutUnit position="north" size="80">
+                        <p:messages id="messages" showDetail="true" autoUpdate="true" />
+                    </p:layoutUnit>
+                    
+                    <p:layoutUnit position="west" size="250" header="Verwaltung" collapsible="true">
+                        <p:menu>
+                            <p:menuitem value="Studenten" icon="ui-icon-check" url="students.xhtml"/>
+                            <p:menuitem value="Personen" icon="ui-icon-person" url="persons.xhtml"/>
+                            <p:menuitem value="Kurse" icon="ui-icon-search" url="courses.xhtml"/>
+                            <p:menuitem value="Einstellungen" icon="ui-icon-wrench" url="settings.xhtml"/>
+                            <p:menuitem value="PrimeFaces" icon="ui-icon-document" url="welcomePrimefaces.xhtml"/>
 
-                <p:layoutUnit position="center">
-                    Willkommen in der Verwaltungssoftware für Fachhochschulen
-                    <p:panel id="myPanel">
-                        <ui:include src="#{login.includedPage}" />
-                    </p:panel>
-                </p:layoutUnit>
-            </p:layout>
+                            <p:menuitem value="Daham" icon="ui-icon-star" url="http://84.115.3.61" />
+                            <p:menuitem value="Logout" icon="ui-icon-logout" outcome='#{login.logout()}' />
+                        </p:menu>
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="center">
+                        <ui:include src='#{login.includedPage}' />
+                    </p:layoutUnit>
+                </p:layout>
+            </h:form>
         </h:body>
     </f:view>
 </html>
