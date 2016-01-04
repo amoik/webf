@@ -5,12 +5,12 @@
  */
 package webf.beans;
 
-import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.faces.context.FacesContext;
 import static webf.beans.Utils.tinf;
+import static webf.beans.Utils.addMessage;
 import webf.ws.Person;
 import webf.ws.WebServices;
 import webf.ws.WebServices_Service;
@@ -26,7 +26,7 @@ public class Persons
     private String role;
     private String firstname;
     private String lastname;
-    private String birthday;
+    private Date birthday;
     
     private List<Person> persons;
     
@@ -38,14 +38,26 @@ public class Persons
     
     public void onload()
     {
+        if(Login.getLoginName().equals(""))
+        {
+            tinf("not logged in!");
+            FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "failure.xhtml");
+        }
         resetVars();
         getAll();
     }
     
     public void createPerson()
-    {
-        setRole("Student");//TODO
+    {tinf("rolle: " + getRole());
         
+        if(getFirstname().equals(""))
+        {
+            return;
+        }
+        if(getLastname().equals(""))
+        {
+            return;
+        }
         if(getUsername().equals(""))
         {
             return;
@@ -59,16 +71,17 @@ public class Persons
         {
             return;
         }
+        if(getBirthday() == null)
+        {
+            return;
+        }
         
-        tinf("lege user "+getUsername()+" an...");
+        tinf("creating user "+getUsername()+"...");
         
         WebServices_Service service = new WebServices_Service();
         WebServices port = service.getWebServicesPort();      
 
-        Date dt = new Date();
-        dt.setTime(0);
-
-        Boolean ret = port.createPerson(username, password, role, firstname, lastname, dt.toString());
+        Boolean ret = port.createPerson(getUsername(), getPassword(), getRole(), getFirstname(), getLastname(), getBirthday().toString());
 
         
         if(ret)
@@ -98,16 +111,21 @@ public class Persons
         WebServices port = service.getWebServicesPort();  
 
         Boolean ret = port.deletePerson(id);
-        
+
         if(ret)
         {
             getAll();
+        }
+        else
+        {
+            addMessage("Fehler!", "Löschen fehlgeschlagen!");
         }
     }
 
     public void printAllPersons()
     {
-        for (Person person : persons) {
+        for (Person person : persons)
+        {
             tinf(person.getUsername() + " " + person.getRole() + " " + person.getBirthday().toString());
         }
     }
@@ -119,14 +137,9 @@ public class Persons
         setRole("");
         setFirstname("");
         setLastname("");
+        setBirthday(null);
       
         persons.clear();
-    }
-    public static String dateToStr(XMLGregorianCalendarImpl gcd)
-    {
-        Date d = gcd.toGregorianCalendar().getTime();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.mm.yyyy");
-        return sdf.format(d);
     }
 
     public List<Person> getPersons() {
@@ -178,11 +191,11 @@ public class Persons
         this.lastname = lastname;
     }
 
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 }

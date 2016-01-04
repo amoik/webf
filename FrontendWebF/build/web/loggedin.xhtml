@@ -22,19 +22,19 @@
             <h:form>
                 <p:layout fullPage="true">
                     <p:layoutUnit position="north" size="80">
-                        <p:messages id="messages" showDetail="true" autoUpdate="true" />
+                        <p:messages style="float:left" id="messages" showDetail="true" autoUpdate="true" />
+                        <p:commandButton style="float:right" value="Logout" icon="ui-icon-logout" actionListener='#{login.logout()}' action="index.xhtml?faces-redirect=true" />
                     </p:layoutUnit>
                     
                     <p:layoutUnit position="west" size="250" header="Verwaltung" collapsible="true">
                         <p:menu>
-                            <p:menuitem value="Studenten" icon="ui-icon-check" url="students.xhtml"/>
                             <p:menuitem value="Personen" icon="ui-icon-person" url="persons.xhtml"/>
+                            <p:menuitem value="Studenten" icon="ui-icon-check" url="students.xhtml"/>
+                            <p:menuitem value="Rollen" icon="ui-icon-document" url="roles.xhtml"/>
                             <p:menuitem value="Kurse" icon="ui-icon-search" url="courses.xhtml"/>
                             <p:menuitem value="Einstellungen" icon="ui-icon-wrench" url="settings.xhtml"/>
-                            <p:menuitem value="PrimeFaces" icon="ui-icon-document" url="welcomePrimefaces.xhtml"/>
 
                             <p:menuitem value="Daham" icon="ui-icon-star" url="http://84.115.3.61" />
-                            <p:menuitem value="Logout" icon="ui-icon-logout" outcome='#{login.logout()}' />
                         </p:menu>
                     </p:layoutUnit>
 

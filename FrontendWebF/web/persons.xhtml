@@ -16,6 +16,9 @@
         <h:form>
             <p:remoteCommand name="onload" update=":personForm:personList" action="#{persons.onload}" autoRun="true" />
         </h:form>
+        <h:form>
+            <p:messages id="messages" showDetail="true" autoUpdate="true" />
+        </h:form>
         
         
         
@@ -25,7 +28,7 @@
                 <p:panel>
                     <h:outputLink value="#">
                         <h3><p:commandLink update=":personForm:personList" title="#{person.firstname} #{person.lastname} löschen" actionListener="#{persons.deletePerson(person.personPk)}" styleClass="ui-icon ui-icon-trash" style="float:left;margin-right:10px"/>#{person.firstname} #{person.lastname} <span style="color:grey">#{person.username}</span></h3>
-                        <p><strong>#{person.role}</strong> #{persons.dateToStr(person.birthday)}</p>
+                        <p><strong>#{person.role}</strong> #{utils.dateToStr(person.birthday)}</p>
                     </h:outputLink>
                 </p:panel>
             </p:dataList>
@@ -55,16 +58,16 @@
 
                 <p:outputLabel for="role" value="Rolle: " />
                 <p:column headerText="Rolle">
-                    <p:selectOneMenu id="role" required="true">
+                    <p:selectOneMenu id="role" required="true" value="#{persons.role}">
                         <f:selectItem itemLabel="Student" itemValue="1"/>
                         <f:selectItem itemLabel="Lektor" itemValue="2"/>
                         <f:selectItem itemLabel="Admin" itemValue="3"/>
                     </p:selectOneMenu>
                 </p:column>
-
-                <p:outputLabel for="birthday" value="Geburtstag: "/>
-                <p:inputMask id="birthday" value="#{persons.birthday}" mask="99.99.9999" required="true"/>
-
+                
+                <p:outputLabel for="birthday" value="Geburtstag: " />
+                <p:calendar id="birthday" value="#{persons.birthday}"/>
+                
                 <p:commandButton update=":personForm:personList,:inputForm" value="Anlegen" actionListener="#{persons.createPerson()}"/>
             </h:panelGrid>
         </h:form>

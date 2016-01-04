@@ -3,36 +3,62 @@
 <html 
     xmlns="http://www.w3.org/1999/xhtml"   
     xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"  
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"  
     xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Studenten</title>
+        <title>Personen</title>
     </h:head>
     <h:body>
         <h:form>
             <p><p:commandButton value="Zurück" action="loggedin.xhtml?faces-redirect=true"/></p>
         </h:form>
-        <h1>Studenten</h1>
         <h:form>
-            <p:inputText />
-            <p><h:commandButton value="Aktualisieren" action="#{students.getAllStudents}"/></p>
+            <p:remoteCommand name="onload" update=":personForm:personList" action="#{students.onload}" autoRun="true" />
         </h:form>
-        <p><h:outputLabel>#{students.msg}</h:outputLabel></p>
-        <table>
-            <tr>
-                <th>Username</th><th>Vorname</th><th>Nachname</th>
-            </tr>
-            <ui:repeat var="student" value="#{students.students}">
-                <tr>
-                    <h:form>
-                        <td><span style="margin-left:2%;">#{student.username}</span></td>
-                        <td><span style="margin-left:2%;">#{student.firstname}</span></td>
-                        <td><span style="margin-left:2%;">#{student.lastname}</span></td>
-                    </h:form>
-                </tr>
-            </ui:repeat>
-        </table>
+        
+        
+        
+        <h:form id="personForm">
+            <p:dataList id="personList" value="#{students.persons}" widgetVar="personTable" var="person" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated">
+                <f:facet name="header">Studenten</f:facet>
+                <p:panel>
+                    <h:outputLink value="#">
+                        <h3><p:commandLink update=":personForm:personList" title="#{person.firstname} #{person.lastname} löschen" actionListener="#{persons.deletePerson(person.personPk)}" styleClass="ui-icon ui-icon-trash" style="float:left;margin-right:10px"/>#{person.firstname} #{person.lastname} <span style="color:grey">#{person.username}</span></h3>
+                        <p><strong>#{person.role}</strong> #{utils.dateToStr(students.birthday)}</p>
+                    </h:outputLink>
+                </p:panel>
+            </p:dataList>
+        </h:form>
+        
+        
+        
+        
+        
+        
+        <h:form id="inputForm">
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:outputLabel for="username" value="Benutzername: " />
+                <p:inputText id="username" value="#{students.username}" required="true"/>
+                
+                <p:outputLabel for="firstname" value="Vorname: " />
+                <p:inputText id="firstname" value="#{students.firstname}" required="true"/>
+
+                <p:outputLabel for="lastname" value="Nachname: " />
+                <p:inputText id="lastname" value="#{students.lastname}" required="true"/>
+
+                <p:outputLabel for="pwd1" value="Passwort: " />
+                <p:password id="pwd1" value="#{students.password}" match="pwd2" label="Password 1" required="true" />
+
+                <p:outputLabel for="pwd2" value="Bestätigen: " />
+                <p:password id="pwd2" value="#{students.password}" label="Password 2" required="true" />
+
+                <p:outputLabel for="birthday" value="Geburtstag: "/>
+                <p:inputMask id="birthday" value="#{students.birthday}" mask="99.99.9999" required="true"/>
+
+                <p:commandButton update=":personForm:personList,:inputForm" value="Anlegen" actionListener="#{students.createPerson()}"/>
+            </h:panelGrid>
+        </h:form>
     </h:body>
 </html>
 

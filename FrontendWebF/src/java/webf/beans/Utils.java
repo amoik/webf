@@ -1,5 +1,6 @@
 package webf.beans;
 
+import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -32,9 +33,16 @@ public class Utils {
         return da;
     }
     
+    public static String dateToStr(XMLGregorianCalendarImpl gcd)
+    {
+        Date d = gcd.toGregorianCalendar().getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.mm.yyyy");
+        return sdf.format(d);
+    }
     
          
-    public static void addMessage(String summary, String detail) {
+    public static void addMessage(String summary, String detail)
+    {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }

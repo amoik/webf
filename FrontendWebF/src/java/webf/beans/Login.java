@@ -5,11 +5,8 @@
  */
 package webf.beans;
 
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
-import org.primefaces.context.RequestContext;
 import static webf.beans.Utils.addMessage;
 import static webf.beans.Utils.tinf;
 import webf.ws.WebServices;
@@ -28,6 +25,7 @@ public class Login
     private String errStr;
     private int id = -1;
     private String includedPage = "welcome.xhtml";
+    private static String loginName = "";
     
     public void Login()
     {
@@ -55,12 +53,13 @@ public class Login
     }
    
     
-    public String logout()
+    public void logout()
     {
+        tinf("logging out...");
+        Login.setLoginName("");
         setErrStr("");
         setId(-1);
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "index.xhtml?faces-redirect=true";
     }
     
     public void setCenter(String subSite)
@@ -70,9 +69,6 @@ public class Login
     
     public String login()
     {
-    
-        //call WS       
-        
         WebServices_Service service = new WebServices_Service();
         WebServices port = service.getWebServicesPort();      
         
@@ -83,6 +79,7 @@ public class Login
         
         if(ret != -1)
         {
+            Login.setLoginName(getUsername());
             resetVars();
             return "loggedin.xhtml?faces-redirect=true";
         }
@@ -93,9 +90,13 @@ public class Login
     
     public void onload()
     {
+        if(Login.getLoginName().equals(""))
+        {
+            tinf("not logged in!");
+            FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "failure.xhtml");
+        }
         tinf("servas");
-        addMessage("Erfolg","Erfolgreich eingeloggt");
-        setIncludedPage("welcome.xhtml");
+        addMessage("Eingeloggt",getLoginName());
     }
 
     public void resetVars()
@@ -135,6 +136,12 @@ public class Login
         tinf("showing page: '" + includedPage + "'");
         this.includedPage = includedPage;
     }
-    
-    
+
+    public static String getLoginName() {
+        return loginName;
+    }
+
+    public static void setLoginName(String loginName) {
+        Login.loginName = loginName;
+    }
 }

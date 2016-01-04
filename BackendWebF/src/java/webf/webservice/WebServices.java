@@ -83,13 +83,14 @@ public class WebServices
         Boolean ret = false;
         Person p = getPerson(id);
         
-        try{
+        try
+        {
             tx = s.beginTransaction();
             
             s.delete(p);
-            ret = true;
-            
             tx.commit();            //Transaktion durchführen
+            
+            ret = true;
         } catch (Exception e) {
             tinf("delete of person " + id + " failed");
         
@@ -261,7 +262,7 @@ public class WebServices
         
         try{
             tx = s.beginTransaction();
-            String hql = "FROM Person P WHERE P.personPk = :id";
+            String hql = "FROM Person P WHERE P.personPk = :id JOIN roles on roles.id=Person.role";
             Query query = s.createQuery(hql);
             query.setParameter("id",id);
             List results = query.list();

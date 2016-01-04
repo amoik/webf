@@ -13,6 +13,12 @@
     </navigation-rule>
                                 
     <managed-bean>
+            <managed-bean-name>utils</managed-bean-name>
+            <managed-bean-class>webf.beans.Utils</managed-bean-class>
+            <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+                                
+    <managed-bean>
             <managed-bean-name>login</managed-bean-name>
             <managed-bean-class>webf.beans.Login</managed-bean-class>
             <managed-bean-scope>session</managed-bean-scope>
