@@ -21,7 +21,7 @@ import webf.hibernate.HibernateUtil;
 import webf.hibernate.db.Course;
 import webf.hibernate.db.Person;
 import webf.hibernate.db.PersonCourseMembership;
-import webf.webservice.student.Student;
+import webf.hibernate.db.Role;
 
 /**
  *
@@ -102,10 +102,56 @@ public class WebServices
         }
         return ret;
     }
+    @WebMethod
+    public Role getRoleById(@WebParam int id)
+    {
+        SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
+        Session s = sf.openSession();                           //Öffne eine Session 
+        Transaction tx = null;
+        
+        Role r = new Role();
+        
+        
+        try
+        {
+            tx = s.beginTransaction();
+            String hql = "FROM Role R WHERE R.roleId = :role_id";
+            Query query = s.createQuery(hql);
+            query.setParameter("role_id",id);
+            List results = query.list();
+            
+            
+            for (Object result : results)
+            {
+                r.setRoleId(((Role) result).getRoleId());
+                r.setTitle(((Role) result).getTitle());
+            }
+            
+            tx.commit();            //Transaktion durchführen
+        } catch (Exception e)
+        {
+            tinf("EXCEPTION: " + e);
+            if(tx !=null){
+                tx.rollback();      //Bei Fehlerfall => Rollback!
+            }
+            r.setRoleId(0);
+        } finally
+        {
+            s.close();              //Session schließen egal ob Erfolg oder Fehler
+        }
+
+        if(!(r.getRoleId() >= 0))
+        {
+            r.setRoleId(0);
+            r.setTitle("ERROR");
+        }
+        
+        return r;
+    }
 
     
     @WebMethod
-    public Boolean createPerson(@WebParam String name, @WebParam String password, @WebParam String role, @WebParam String firstname, @WebParam String lastname, @WebParam String birthday)
+    public Boolean createPerson(@WebParam String name, @WebParam String password, @WebParam int role, @WebParam String firstname, @WebParam String lastname, @WebParam String birthday)
     {
         
         SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
@@ -122,7 +168,7 @@ public class WebServices
             Person p = new Person();
             p.setUsername(name);
             p.setPassword(password);
-            p.setRole(role);
+            p.setRole(getRoleById(role));
             p.setFirstname(firstname);
             p.setLastname(lastname);
             p.setBirthday(d);
@@ -133,7 +179,7 @@ public class WebServices
             ret = true;
         } catch (Exception e) {
             //failed
-            System.out.println("Save Fehlgeschlagen");
+            System.out.println("EXCEPTION: " + e);
         
             if(tx !=null){
                 tx.rollback();      //Bei Fehlerfall => Rollback!
@@ -145,7 +191,7 @@ public class WebServices
     }
 
     @WebMethod
-    public ArrayList<Person> getStudents()
+    public ArrayList<Person> getAllStudents()
     {
         SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
         Session s = sf.openSession();                           //Öffne eine Session 
@@ -155,25 +201,39 @@ public class WebServices
         
         try{
             tx = s.beginTransaction();
-            String hql = "FROM Person P WHERE P.role = 'Student'";
+            String hql = "FROM Person P";
             Query query = s.createQuery(hql);
             List results = query.list();
+
             
             for (Object result : results)
             {
-                Person p = new Person();
-                p.setUsername(((Person) result).getUsername());
-                p.setRole(((Person) result).getRole());
-                p.setPersonPk(((Person) result).getPersonPk());
-                p.setFirstname(((Person) result).getFirstname());
-                p.setLastname(((Person) result).getLastname());
-                p.setBirthday(((Person) result).getBirthday());
-                ret.add(p);
+                
+                if(((Person) result).getRole().getTitle().equals("Student"))
+                {
+                    Person p = new Person();
+
+                    Role r = new Role();
+                    r.setRoleId(((Person) result).getRole().getRoleId());
+                    r.setTitle(((Person) result).getRole().getTitle());
+
+
+                    p.setUsername(((Person) result).getUsername());
+                    p.setRole(r);
+                    p.setPersonPk(((Person) result).getPersonPk());
+                    p.setFirstname(((Person) result).getFirstname());
+                    p.setLastname(((Person) result).getLastname());
+                    p.setBirthday(((Person)result).getBirthday());
+
+
+                    ret.add(p);
+                }
             }
             
             
             tx.commit();            //Transaktion durchführen
         } catch (Exception e) {
+            tinf("EXCEPTION: " + e);
             ret = null;
             if(tx !=null){
                 tx.rollback();      //Bei Fehlerfall => Rollback!
@@ -226,19 +286,68 @@ public class WebServices
             
             for (Object result : results)
             {
+                
                 Person p = new Person();
+                
+                Role r = new Role();
+                r.setRoleId(((Person) result).getRole().getRoleId());
+                r.setTitle(((Person) result).getRole().getTitle());
+                
+                        
                 p.setUsername(((Person) result).getUsername());
-                p.setRole(((Person) result).getRole());
+                p.setRole(r);
                 p.setPersonPk(((Person) result).getPersonPk());
                 p.setFirstname(((Person) result).getFirstname());
                 p.setLastname(((Person) result).getLastname());
                 p.setBirthday(((Person)result).getBirthday());
+                
+                
                 ret.add(p);
             }
             
             
             tx.commit();            //Transaktion durchführen
         } catch (Exception e) {
+            tinf("EXCEPTION: " + e);
+            ret = null;
+            if(tx !=null){
+                tx.rollback();      //Bei Fehlerfall => Rollback!
+            }
+        } finally {
+            s.close();              //Session schließen egal ob Erfolg oder Fehler
+        }
+        
+        return ret;
+    }
+    
+    @WebMethod
+    public ArrayList<Role> getAllRoles()
+    {
+        SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
+        Session s = sf.openSession();                           //Öffne eine Session 
+        Transaction tx = null;
+        
+        ArrayList<Role> ret = new ArrayList<Role>();
+        
+        try{
+            tx = s.beginTransaction();
+            String hql = "FROM Role R";
+            Query query = s.createQuery(hql);
+            List results = query.list();
+
+            
+            for (Object result : results)
+            {
+                Role r = new Role();
+                r.setRoleId(((Role) result).getRoleId());
+                r.setTitle(((Role) result).getTitle());
+                ret.add(r);
+            }
+            
+            
+            tx.commit();            //Transaktion durchführen
+        } catch (Exception e) {
+            tinf("EXCEPTION: " + e);
             ret = null;
             if(tx !=null){
                 tx.rollback();      //Bei Fehlerfall => Rollback!
@@ -262,7 +371,7 @@ public class WebServices
         
         try{
             tx = s.beginTransaction();
-            String hql = "FROM Person P WHERE P.personPk = :id JOIN roles on roles.id=Person.role";
+            String hql = "FROM Person P WHERE P.personPk = :id";
             Query query = s.createQuery(hql);
             query.setParameter("id",id);
             List results = query.list();
@@ -354,6 +463,70 @@ public class WebServices
             s.close();              //Session schließen egal ob Erfolg oder Fehler
         }
         
+        return ret;
+    }
+    
+    
+    @WebMethod
+    public Boolean createRole(@WebParam String title)
+    {
+        SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
+        Session s = sf.openSession();                           //Öffne eine Session 
+        Transaction tx = null;
+        Boolean ret = false;
+        
+        try{
+
+            tx = s.beginTransaction();
+            
+            Role r = new Role();
+            r.setTitle(title);
+            
+            s.save(r);
+            
+            tx.commit();            //Transaktion durchführen
+            ret = true;
+        } catch (Exception e) {
+            //failed
+            System.out.println("EXCEPTION: " + e);
+        
+            if(tx !=null){
+                tx.rollback();      //Bei Fehlerfall => Rollback!
+            }
+        } finally {
+            s.close();              //Session schließen egal ob Erfolg oder Fehler
+        }
+        return ret;
+    }
+    
+    @WebMethod
+    public Boolean deleteRole(@WebParam int id)
+    {
+        SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
+        Session s = sf.openSession();                           //Öffne eine Session 
+        Transaction tx = null;
+        Boolean ret = false;
+        Role r = getRoleById(id);
+        if(!(r.getRoleId() > 0))
+            return ret;
+        
+        try
+        {
+            tx = s.beginTransaction();
+            
+            s.delete(r);
+            tx.commit();            //Transaktion durchführen
+            
+            ret = true;
+        } catch (Exception e) {
+            tinf("delete of person " + id + " failed");
+        
+            if(tx !=null){
+                tx.rollback();      //Bei Fehlerfall => Rollback!
+            }
+        } finally {
+            s.close();              //Session schließen egal ob Erfolg oder Fehler
+        }
         return ret;
     }
 }

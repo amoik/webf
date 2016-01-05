@@ -35,8 +35,11 @@ public class Utils {
     
     public static String dateToStr(XMLGregorianCalendarImpl gcd)
     {
+        if(gcd == null)
+            return "00.00.00";
+        
         Date d = gcd.toGregorianCalendar().getTime();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.mm.yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         return sdf.format(d);
     }
     

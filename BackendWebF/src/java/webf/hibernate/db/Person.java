@@ -1,5 +1,5 @@
 package webf.hibernate.db;
-// Generated 01.12.2015 18:38:26 by Hibernate Tools 4.3.1
+// Generated 05.01.2016 15:15:31 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,9 +13,9 @@ public class Person  implements java.io.Serializable {
 
 
      private Integer personPk;
+     private Role role;
      private String username;
      private String password;
-     private String role;
      private String firstname;
      private String lastname;
      private Date birthday;
@@ -25,18 +25,14 @@ public class Person  implements java.io.Serializable {
     }
 
 	
-    public Person(String username, String password, String role, String firstname, String lastname, Date birthday) {
+    public Person(String username, String password) {
         this.username = username;
         this.password = password;
-        this.role = role;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.birthday = birthday;
     }
-    public Person(String username, String password, String role, String firstname, String lastname, Date birthday, Set personCourseMemberships) {
+    public Person(Role role, String username, String password, String firstname, String lastname, Date birthday, Set personCourseMemberships) {
+       this.role = role;
        this.username = username;
        this.password = password;
-       this.role = role;
        this.firstname = firstname;
        this.lastname = lastname;
        this.birthday = birthday;
@@ -49,6 +45,13 @@ public class Person  implements java.io.Serializable {
     
     public void setPersonPk(Integer personPk) {
         this.personPk = personPk;
+    }
+    public Role getRole() {
+        return this.role;
+    }
+    
+    public void setRole(Role role) {
+        this.role = role;
     }
     public String getUsername() {
         return this.username;
@@ -63,13 +66,6 @@ public class Person  implements java.io.Serializable {
     
     public void setPassword(String password) {
         this.password = password;
-    }
-    public String getRole() {
-        return this.role;
-    }
-    
-    public void setRole(String role) {
-        this.role = role;
     }
     public String getFirstname() {
         return this.firstname;

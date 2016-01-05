@@ -27,7 +27,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="personCourseMemberships" type="{http://www.w3.org/2001/XMLSchema}anyType" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="personPk" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
- *         &lt;element name="role" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="role" type="{http://webservice.webf/}role" minOccurs="0"/>
  *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -58,7 +58,7 @@ public class Person {
     @XmlElement(nillable = true)
     protected List<Object> personCourseMemberships;
     protected Integer personPk;
-    protected String role;
+    protected Role role;
     protected String username;
 
     /**
@@ -215,10 +215,10 @@ public class Person {
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link Role }
      *     
      */
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
@@ -227,10 +227,10 @@ public class Person {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link Role }
      *     
      */
-    public void setRole(String value) {
+    public void setRole(Role value) {
         this.role = value;
     }
 

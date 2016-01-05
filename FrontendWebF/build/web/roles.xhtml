@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+    xmlns="http://www.w3.org/1999/xhtml"   
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
+    
+    <h:head>
+        <title>Rollen</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p><p:commandButton value="Zurück" action="loggedin.xhtml?faces-redirect=true"/></p>
+        </h:form>
+        <h:form>
+            <p:remoteCommand name="onload" update=":rolesForm,:rolesNewForm" action="#{roles.onload}" autoRun="true" />
+        </h:form>
+        <h:form>
+            <p:messages id="messages" showDetail="true" autoUpdate="true" />
+        </h:form>
+        
+        
+        <h:form id="rolesForm">
+            <p:panelGrid columns="4">
+                <c:forEach  items="${roles.roles}" var="r">
+                    <p:outputLabel for="title" value="Titel: " />
+                    <p:inputText id="title" value="#{r.title}"/>
+                    <p:commandButton update=":rolesForm,:rolesNewForm" value="Löschen" actionListener="#{roles.deleteRole(r.roleId)}"/>
+                    <p:commandButton update=":rolesForm,:rolesNewForm" value="Speichern" actionListener="#{roles.saveRole(r.roleId)}"/>
+                </c:forEach>
+            </p:panelGrid>
+        </h:form>
+        
+        <h:form id="rolesNewForm" style="margin-top:15px;">
+            <p:panelGrid columns="4">
+                <p:outputLabel for="newTitle" value="Neu: " />
+                <p:inputText id="newTitle" value="#{roles.newTitle}" required="true"/>
+                <p:commandButton update=":rolesForm,:rolesNewForm" value="Anlegen" actionListener="#{roles.createRole(roles.newTitle)}"/>
+            </p:panelGrid>
+        </h:form>
+        
+    </h:body>
+</html>
+

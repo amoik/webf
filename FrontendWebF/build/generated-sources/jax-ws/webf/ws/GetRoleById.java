@@ -7,15 +7,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java-Klasse für getStudents complex type.
+ * <p>Java-Klasse für getRoleById complex type.
  * 
  * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * 
  * <pre>
- * &lt;complexType name="getStudents">
+ * &lt;complexType name="getRoleById">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="arg0" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -25,8 +26,27 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getStudents")
-public class GetStudents {
+@XmlType(name = "getRoleById", propOrder = {
+    "arg0"
+})
+public class GetRoleById {
 
+    protected int arg0;
+
+    /**
+     * Ruft den Wert der arg0-Eigenschaft ab.
+     * 
+     */
+    public int getArg0() {
+        return arg0;
+    }
+
+    /**
+     * Legt den Wert der arg0-Eigenschaft fest.
+     * 
+     */
+    public void setArg0(int value) {
+        this.arg0 = value;
+    }
 
 }

@@ -12,6 +12,7 @@ import javax.faces.context.FacesContext;
 import static webf.beans.Utils.tinf;
 import static webf.beans.Utils.addMessage;
 import webf.ws.Person;
+import webf.ws.Role;
 import webf.ws.WebServices;
 import webf.ws.WebServices_Service;
 
@@ -23,17 +24,19 @@ public class Persons
 {
     private String username;
     private String password;
-    private String role;
+    private int role = -1;
     private String firstname;
     private String lastname;
     private Date birthday;
     
     private List<Person> persons;
+    private List<Role> roles;
     
     
     public Persons()
     {
         persons = new ArrayList<Person>();
+        roles = new ArrayList<Role>();
     }
     
     public void onload()
@@ -48,7 +51,7 @@ public class Persons
     }
     
     public void createPerson()
-    {tinf("rolle: " + getRole());
+    {
         
         if(getFirstname().equals(""))
         {
@@ -67,7 +70,7 @@ public class Persons
         {
             return;
         }
-        if(getRole().equals(""))
+        if(getRole() == -1)
         {
             return;
         }
@@ -79,8 +82,8 @@ public class Persons
         tinf("creating user "+getUsername()+"...");
         
         WebServices_Service service = new WebServices_Service();
-        WebServices port = service.getWebServicesPort();      
-
+        WebServices port = service.getWebServicesPort();
+        
         Boolean ret = port.createPerson(getUsername(), getPassword(), getRole(), getFirstname(), getLastname(), getBirthday().toString());
 
         
@@ -93,6 +96,12 @@ public class Persons
     
     public void getAll()
     {
+        getAllPersons();
+        getAllRoles();
+    }
+    
+    public void getAllPersons()
+    {
         WebServices_Service service = new WebServices_Service();
         WebServices port = service.getWebServicesPort();  
 
@@ -100,8 +109,22 @@ public class Persons
         
         if( getPersons() != null)
         {
-            printAllPersons();
+            //printAllPersons();
         }
+    }
+    
+    public void getAllRoles()
+    {
+        WebServices_Service service = new WebServices_Service();
+        WebServices port = service.getWebServicesPort();  
+
+        setRoles(port.getAllRoles());
+        
+        if( getRoles() != null)
+        {
+            //printAllRoles();
+        }
+        
     }
   
     public void deletePerson(int id)
@@ -126,7 +149,15 @@ public class Persons
     {
         for (Person person : persons)
         {
-            tinf(person.getUsername() + " " + person.getRole() + " " + person.getBirthday().toString());
+            tinf(person.getUsername() + " " + person.getRole().getTitle() + " " + person.getBirthday().toString());
+        }
+    }
+
+    public void printAllRoles()
+    {
+        for (Role role : roles)
+        {
+            tinf("role: " + role.getRoleId()+ " " + role.getTitle());
         }
     }
     
@@ -134,7 +165,7 @@ public class Persons
     {
         setUsername("");
         setPassword("");
-        setRole("");
+        setRole(-1);
         setFirstname("");
         setLastname("");
         setBirthday(null);
@@ -167,11 +198,11 @@ public class Persons
         this.password = password;
     }
 
-    public String getRole() {
+    public int getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(int role) {
         this.role = role;
     }
 
@@ -195,7 +226,25 @@ public class Persons
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(Date birthday)
+    {
         this.birthday = birthday;
+    }
+
+    public List<Role> getRoles()
+    {
+        //remove the first role(ERROR)
+        List<Role> roles = new ArrayList<Role>();
+        
+        for(int i = 0; i < this.roles.size(); i ++)
+        {
+            if(i > 0)
+                roles.add(this.roles.get(i));
+        }
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }

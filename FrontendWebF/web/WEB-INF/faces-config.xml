@@ -59,4 +59,10 @@
             <managed-bean-class>webf.beans.Courses</managed-bean-class>
             <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+                                
+    <managed-bean>
+            <managed-bean-name>roles</managed-bean-name>
+            <managed-bean-class>webf.beans.Roles</managed-bean-class>
+            <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 </faces-config>

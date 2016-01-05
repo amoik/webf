@@ -3,6 +3,7 @@
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="web"/>
   <table-filter match-name="person_course_membership"/>
-  <table-filter match-name="course"/>
   <table-filter match-name="person"/>
+  <table-filter match-name="course"/>
+  <table-filter match-name="role"/>
 </hibernate-reverse-engineering>

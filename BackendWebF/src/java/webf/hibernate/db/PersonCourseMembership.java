@@ -1,5 +1,5 @@
 package webf.hibernate.db;
-// Generated 01.12.2015 18:38:26 by Hibernate Tools 4.3.1
+// Generated 05.01.2016 15:15:31 by Hibernate Tools 4.3.1
 
 
 

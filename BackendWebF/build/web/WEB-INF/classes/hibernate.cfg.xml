@@ -8,8 +8,10 @@
     <property name="hibernate.connection.username">webf</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.connection.username">webf</property>
-    <mapping resource="webf/hibernate/db/PersonCourseMembership.hbm.xml"/>
-    <mapping resource="webf/hibernate/db/Course.hbm.xml"/>
+    <property name="hibernate.enable_lazy_load_no_trans">true</property>
     <mapping resource="webf/hibernate/db/Person.hbm.xml"/>
+    <mapping resource="webf/hibernate/db/Course.hbm.xml"/>
+    <mapping resource="webf/hibernate/db/PersonCourseMembership.hbm.xml"/>
+    <mapping resource="webf/hibernate/db/Role.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
