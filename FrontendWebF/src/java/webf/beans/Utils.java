@@ -44,9 +44,29 @@ public class Utils {
     }
     
          
-    public static void addMessage(String summary, String detail)
+    public static void addMessage(int type, String summary, String detail)
     {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+        FacesMessage message;
+        
+        switch(type)
+        {
+            case 0:
+                message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+                break;
+            case 1:
+                message = new FacesMessage(FacesMessage.SEVERITY_WARN, summary, detail);
+                break;
+            case 2:
+                message = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail);
+                break;
+            case 3:
+                message = new FacesMessage(FacesMessage.SEVERITY_FATAL, summary, detail);
+                break;
+            default:
+                message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+                break;
+        }
+        
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
     

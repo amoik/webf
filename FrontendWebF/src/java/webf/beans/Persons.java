@@ -141,7 +141,7 @@ public class Persons
         }
         else
         {
-            addMessage("Fehler!", "Löschen fehlgeschlagen!");
+            addMessage(3, "Fehler!", "Löschen fehlgeschlagen!");
         }
     }
 

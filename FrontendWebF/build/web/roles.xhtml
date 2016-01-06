@@ -24,23 +24,32 @@
         
         
         <h:form id="rolesForm">
-            <p:panelGrid columns="4">
-                <c:forEach  items="${roles.roles}" var="r">
-                    <p:outputLabel for="title" value="Titel: " />
-                    <p:inputText id="title" value="#{r.title}"/>
-                    <p:commandButton update=":rolesForm,:rolesNewForm" value="Löschen" actionListener="#{roles.deleteRole(r.roleId)}"/>
-                    <p:commandButton update=":rolesForm,:rolesNewForm" value="Speichern" actionListener="#{roles.saveRole(r.roleId)}"/>
-                </c:forEach>
-            </p:panelGrid>
+            <p:dataTable var="r" value="#{roles.roles}" id="rolesTable">
+                <p:column>
+                    <p:outputLabel value="Titel:" />
+                </p:column>
+                <p:column>
+                    <p:inputText value="#{r.title}" required="true" style="width:95%;"/>
+                </p:column>
+                <p:column>
+                    <p:commandButton update=":rolesForm:rolesTable,:rolesNewForm" value="Löschen" actionListener="#{roles.deleteRole(r.roleId)}" style="width:95%;"/>
+                </p:column>
+                <p:column>
+                    <p:commandButton update=":rolesForm:rolesTable,:rolesNewForm" value="Speichern" actionListener="#{roles.saveRole(r.roleId)}" style="width:95%;"/>
+                </p:column> 
+            </p:dataTable>
         </h:form>
         
         <h:form id="rolesNewForm" style="margin-top:15px;">
             <p:panelGrid columns="4">
                 <p:outputLabel for="newTitle" value="Neu: " />
                 <p:inputText id="newTitle" value="#{roles.newTitle}" required="true"/>
-                <p:commandButton update=":rolesForm,:rolesNewForm" value="Anlegen" actionListener="#{roles.createRole(roles.newTitle)}"/>
+                <p:commandButton update=":rolesForm:rolesTable,:rolesNewForm" value="Anlegen" actionListener="#{roles.createRole(roles.newTitle)}"/>
             </p:panelGrid>
         </h:form>
+        
+        
+        
         
     </h:body>
 </html>

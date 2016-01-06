@@ -84,7 +84,7 @@ public class Login
             return "loggedin.xhtml?faces-redirect=true";
         }
         
-        addMessage("Fehler","Login Fehlgeschlagen");
+        addMessage(3, "Fehler","Login Fehlgeschlagen");
         return "index.xhtml";
     }
     
@@ -96,7 +96,7 @@ public class Login
             FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "failure.xhtml");
         }
         tinf("servas");
-        addMessage("Eingeloggt",getLoginName());
+        addMessage(0, "Eingeloggt",getLoginName());
     }
 
     public void resetVars()
