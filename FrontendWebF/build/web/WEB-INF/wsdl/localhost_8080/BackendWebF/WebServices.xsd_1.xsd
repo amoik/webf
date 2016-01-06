@@ -4,6 +4,10 @@
 
 <xs:element name="addResponse" type="tns:addResponse"/>
 
+<xs:element name="createCourse" type="tns:createCourse"/>
+
+<xs:element name="createCourseResponse" type="tns:createCourseResponse"/>
+
 <xs:element name="createPerson" type="tns:createPerson"/>
 
 <xs:element name="createPersonResponse" type="tns:createPersonResponse"/>
@@ -11,6 +15,10 @@
 <xs:element name="createRole" type="tns:createRole"/>
 
 <xs:element name="createRoleResponse" type="tns:createRoleResponse"/>
+
+<xs:element name="deleteCourse" type="tns:deleteCourse"/>
+
+<xs:element name="deleteCourseResponse" type="tns:deleteCourseResponse"/>
 
 <xs:element name="deletePerson" type="tns:deletePerson"/>
 
@@ -63,6 +71,10 @@
 <xs:element name="multiply" type="tns:multiply"/>
 
 <xs:element name="multiplyResponse" type="tns:multiplyResponse"/>
+
+<xs:element name="saveCourse" type="tns:saveCourse"/>
+
+<xs:element name="saveCourseResponse" type="tns:saveCourseResponse"/>
 
 <xs:element name="subtract" type="tns:subtract"/>
 
@@ -151,13 +163,15 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getAllStudents">
-<xs:sequence/>
+<xs:complexType name="deleteCourse">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int"/>
+</xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getAllStudentsResponse">
+<xs:complexType name="deleteCourseResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:person" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -171,6 +185,16 @@
 <xs:complexType name="subtractResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllStudents">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getAllStudentsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:person" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -219,6 +243,19 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="createCourse">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createCourseResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="deletePerson">
 <xs:sequence>
 <xs:element name="arg0" type="xs:int"/>
@@ -264,6 +301,20 @@
 </xs:complexType>
 
 <xs:complexType name="deleteRoleResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="saveCourse">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+<xs:element name="arg2" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="saveCourseResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:boolean" minOccurs="0"/>
 </xs:sequence>

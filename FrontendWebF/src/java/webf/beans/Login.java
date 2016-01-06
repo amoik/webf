@@ -93,7 +93,7 @@ public class Login
         if(Login.getLoginName().equals(""))
         {
             tinf("not logged in!");
-            FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "failure.xhtml");
+            FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "logout.xhtml");
         }
         tinf("servas");
         addMessage(0, "Eingeloggt",getLoginName());

@@ -14,107 +14,63 @@
         <h:form>
             <p><p:commandButton value="Zurück" action="loggedin.xhtml?faces-redirect=true"/></p>
         </h:form>
-        <h1>Kurse</h1>
         <h:form>
-            <p><h:commandButton value="Aktualisieren" action="#{courses.getAllCourses}"/></p>
+            <p:remoteCommand name="onload" update=":coursesForm,:coursesNewForm" action="#{courses.onload}" autoRun="true" />
         </h:form>
-        <p><h:outputLabel>#{courses.msg}</h:outputLabel></p>
-        <div>
-            <h2>PRIMEFACES TEST</h2>
-            <!---->
-                <!--outcome="/ui/menu/tabMenu"-->
-            <h:form>
-            <p:tabMenu activeIndex="1">
-                <p:menuitem value="Overview" icon="ui-icon-star" onclick="#{courses.setTab(0)}">
-                    <f:param name="i" value="0"/>
-                </p:menuitem>
-                <p:menuitem value="Demos" icon="ui-icon-search" onclick="#{courses.setTab(1)}">
-                    <f:param name="i" value="1" />
-                </p:menuitem>
-                <p:menuitem value="Documentation" icon="ui-icon-document" onclick="#{courses.setTab(2)}">
-                    <f:param name="i" value="2" />
-                </p:menuitem>
-                <p:menuitem value="Support" icon="ui-icon-wrench" onclick="#{courses.setTab(3)}">
-                    <f:param name="i" value="3" />
-                </p:menuitem>
-                <p:menuitem value="Social" icon="ui-icon-person" onclick="#{courses.setTab(4)}">
-                    <f:param name="i" value="4" />
-                </p:menuitem>
-            </p:tabMenu>
-            </h:form>
-            <h:form>
-    <p:growl id="msgs" showDetail="true" />
- 
-    <p:panel header="Select a Location" style="margin-bottom:10px;">
-        <h:panelGrid columns="2" cellpadding="5">
-            <p:outputLabel for="country" value="Country: " />
-            <p:selectOneMenu id="country" value="#{dropdownView.country}" style="width:150px">
-                <p:ajax listener="#{dropdownView.onCountryChange}" update="city" />
-                <f:selectItem itemLabel="Select Country" itemValue="" noSelectionOption="true" />
-                <f:selectItems value="#{dropdownView.countries}" />
-            </p:selectOneMenu>
- 
-            <p:outputLabel for="city" value="City: " />
-            <p:selectOneMenu id="city" value="#{dropdownView.city}" style="width:150px">
-                <f:selectItem itemLabel="Select City" itemValue="" noSelectionOption="true" />
-                <f:selectItems value="#{dropdownView.cities}" />
-            </p:selectOneMenu>
-        </h:panelGrid>
- 
-        <p:separator />
- 
-        <p:commandButton value="Submit" update="msgs" actionListener="#{dropdownView.displayLocation}" icon="ui-icon-check" />
-    </p:panel>
-</h:form>
-            <p:dataTable var="course" value="#{courses.courses}">
-                <p:column headerText="Titel">
-                    <h:outputText value="#{course.title}" />
+        <h:form>
+            <p:messages id="messages" showDetail="true" autoUpdate="true" />
+        </h:form>
+        
+        <h:form id="coursesForm">
+            <p:dataTable var="c" value="#{courses.courses}" id="coursesTable">
+                <p:column headerText="Titel" style="width:50px;">
+                    <p:inputText value="#{c.title}" style="width:95%"/>
                 </p:column>
 
                 <p:column headerText="Beschreibung">
-                    <h:outputText value="#{course.description}" />
+                    <p:inputTextarea value="#{c.description}" style="width:95%"/>
+                </p:column>
+                
+                <p:column style="width:40px;">
+                    <p:commandButton update=":coursesForm:coursesTable" title="#{c.title} löschen" actionListener="#{courses.deleteCourse(c.coursePk)}" styleClass="ui-icon ui-icon-trash" style="padding:8px;float:left;"/>
+                    <p:commandButton update=":coursesForm:coursesTable" title="#{c.title} speichern" actionListener="#{courses.saveCourse(c.coursePk, c.title, c.description)}" styleClass="ui-icon ui-icon-disk" style="padding:8px;float:right;"/>
                 </p:column>
             </p:dataTable>
-            <p:inputText />
-            <!--outcome="productDetail"-->
-            <p:button value="Bookmark" icon="ui-icon-star">
-                <f:param name="productId" value="10" />
-            </p:button>
-            <h:panelGrid columns="1" cellpadding="5">
-                <p:commandButton value="Basic" type="button" onclick="PF('dlg1').show();" />
-                <p:commandButton value="Modal" type="button" onclick="PF('dlg2').show();" />
-                <p:commandButton value="Effects" type="button" onclick="PF('dlg3').show();" /> 
-            </h:panelGrid>
-
-            <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
-                <h:outputText value="Resistance to PrimeFaces is futile!" />
-            </p:dialog>
-
-            <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
-                <h:outputText value="This is a Modal Dialog." />
-            </p:dialog>   
-
-            <p:dialog header="Effects" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">
-                <h:outputText value="This dialog has nice effects." />
-            </p:dialog>
-            
-            
-            
-        </div>
-        <table>
-            <tr>
-                <th>Username</th><th>Vorname</th><th>Nachname</th>
-            </tr>
-            <ui:repeat var="student" value="#{students.students}">
-                <tr>
-                    <h:form>
-                        <td><span style="margin-left:2%;">#{student.username}</span></td>
-                        <td><span style="margin-left:2%;">#{student.firstname}</span></td>
-                        <td><span style="margin-left:2%;">#{student.lastname}</span></td>
-                    </h:form>
-                </tr>
-            </ui:repeat>
-        </table>
+        </h:form>
+        
+        <h:form id="coursesNewForm" style="margin-top:15px;">
+            <p:panelGrid columns="4">
+                <p:inputText value="#{courses.newTitle}" placeholder="Titel" required="true"/>
+                <p:inputTextarea value="#{courses.newDescription}" placeholder="Beschreibung" required="true"/>
+                <p:commandButton update=":coursesForm:coursesTable,:coursesNewForm" value="Anlegen" actionListener="#{courses.createCourse(courses.newTitle, courses.newDescription)}"/>
+            </p:panelGrid>
+        </h:form>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     </h:body>
 </html>
 

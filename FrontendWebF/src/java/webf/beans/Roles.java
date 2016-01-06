@@ -34,7 +34,7 @@ public class Roles {
         if(Login.getLoginName().equals(""))
         {
             tinf("not logged in!");
-            FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "failure.xhtml");
+            FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "logout.xhtml");
         }
         getAll();
     }

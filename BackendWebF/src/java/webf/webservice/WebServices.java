@@ -413,6 +413,7 @@ public class WebServices
             for (Object result : results)
             {
                 Course c = new Course();
+                c.setCoursePk(((Course)result).getCoursePk());
                 c.setDescription(((Course)result).getDescription());
                 c.setTitle(((Course)result).getTitle());
                 ret.add(c);
@@ -520,6 +521,104 @@ public class WebServices
             ret = true;
         } catch (Exception e) {
             tinf("delete of person " + id + " failed");
+        
+            if(tx !=null){
+                tx.rollback();      //Bei Fehlerfall => Rollback!
+            }
+        } finally {
+            s.close();              //Session schließen egal ob Erfolg oder Fehler
+        }
+        return ret;
+    }
+    
+    @WebMethod
+    public Boolean deleteCourse(@WebParam int id)
+    {
+        SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
+        Session s = sf.openSession();                           //Öffne eine Session 
+        Transaction tx = null;
+        Boolean ret = false;
+        Course c = new Course();
+        c.setCoursePk(id);
+        
+        try
+        {
+            tx = s.beginTransaction();
+            
+            s.delete(c);
+            tx.commit();            //Transaktion durchführen
+
+            ret = true;
+        } catch (Exception e) {
+            tinf("delete of course " + id + " failed");
+        
+            if(tx !=null){
+                tx.rollback();      //Bei Fehlerfall => Rollback!
+            }
+        } finally {
+            s.close();              //Session schließen egal ob Erfolg oder Fehler
+        }
+        return ret;
+    }
+    
+    
+    @WebMethod
+    public Boolean createCourse(@WebParam String title, @WebParam String descrption)
+    {
+        SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
+        Session s = sf.openSession();                           //Öffne eine Session 
+        Transaction tx = null;
+        Boolean ret = false;
+        
+        try{
+
+            tx = s.beginTransaction();
+            
+            Course c = new Course();
+            c.setTitle(title);
+            c.setDescription(descrption);
+            
+            s.save(c);
+            
+            tx.commit();            //Transaktion durchführen
+            ret = true;
+        } catch (Exception e) {
+            //failed
+            System.out.println("EXCEPTION: " + e);
+        
+            if(tx !=null){
+                tx.rollback();      //Bei Fehlerfall => Rollback!
+            }
+        } finally {
+            s.close();              //Session schließen egal ob Erfolg oder Fehler
+        }
+        return ret;
+    }
+    
+    @WebMethod
+    public Boolean saveCourse(@WebParam int id, @WebParam String title, @WebParam String descrption)
+    {
+        SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
+        Session s = sf.openSession();                           //Öffne eine Session 
+        Transaction tx = null;
+        Boolean ret = false;
+        
+        try{
+
+            tx = s.beginTransaction();
+            
+            Course c = new Course();
+            c.setCoursePk(id);
+            c.setTitle(title);
+            c.setDescription(descrption);
+            
+            s.update(c);
+            
+            tx.commit();            //Transaktion durchführen
+            ret = true;
+        } catch (Exception e) {
+            //failed
+            System.out.println("EXCEPTION: " + e);
         
             if(tx !=null){
                 tx.rollback();      //Bei Fehlerfall => Rollback!
