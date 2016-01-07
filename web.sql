@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Erstellungszeit: 05. Jan 2016 um 19:06
+-- Erstellungszeit: 07. Jan 2016 um 16:20
 -- Server-Version: 10.0.21-MariaDB
 -- PHP-Version: 5.6.16
 
@@ -30,15 +30,19 @@ CREATE TABLE `course` (
   `course_pk` int(11) NOT NULL,
   `title` varchar(30) NOT NULL,
   `description` varchar(500) NOT NULL,
-  `person_fk` int(11) DEFAULT NULL
+  `lector_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `course`
 --
 
-INSERT INTO `course` (`course_pk`, `title`, `description`, `person_fk`) VALUES
-(1, 'WEBF', 'Gaengige Webframeworks aus der Java Welt', NULL);
+INSERT INTO `course` (`course_pk`, `title`, `description`, `lector_id`) VALUES
+(1, 'WEBF', 'Gängige Webframeworks aus der Java Welt', 169),
+(8, 'CBAS', 'Grundlegende Eigenschaften der Programmiersprache C', 170),
+(11, 'TestTitel', 'Nur ein Test', 170),
+(15, 'CROSS', 'Crossplatform heislbesn', 170),
+(16, 'test', 'test', NULL);
 
 -- --------------------------------------------------------
 
@@ -63,7 +67,10 @@ CREATE TABLE `person` (
 INSERT INTO `person` (`person_pk`, `username`, `password`, `firstname`, `lastname`, `birthday`, `role_id`) VALUES
 (1, 'anti88', 'am', 'Andreas', 'Moik', '1988-04-13', 1),
 (2, 'pa14l014', 'am', 'Andreas', 'Moik', '1988-04-13', 3),
-(3, 'pa14l013', 'sf', 'Stefan', 'Forster', '1987-01-31', 3);
+(3, 'pa14l013', 'sf', 'Stefan', 'Forster', '1987-01-31', 3),
+(169, 'moik', 'am', 'Andreas', 'Moik', '1988-04-13', 2),
+(170, 'TestLektor', 'tl', 'Test', 'Lektor', '2016-01-31', 2),
+(171, 'heislbesn', 'ah', 'heisl', 'besn', '2016-01-25', 2);
 
 -- --------------------------------------------------------
 
@@ -82,7 +89,10 @@ CREATE TABLE `person_course_membership` (
 --
 
 INSERT INTO `person_course_membership` (`person_fk`, `course_fk`, `note`) VALUES
-(24, 1, 0);
+(2, 1, 4),
+(2, 11, 3),
+(3, 1, 0),
+(3, 11, 0);
 
 -- --------------------------------------------------------
 
@@ -104,9 +114,7 @@ INSERT INTO `role` (`title`, `role_id`) VALUES
 ('ADMIN', 1),
 ('Lektor', 2),
 ('Student', 3),
-('b', 12),
-('d', 14),
-('f', 15);
+('Assistenz', 4);
 
 --
 -- Indizes der exportierten Tabellen
@@ -117,7 +125,7 @@ INSERT INTO `role` (`title`, `role_id`) VALUES
 --
 ALTER TABLE `course`
   ADD PRIMARY KEY (`course_pk`),
-  ADD KEY `person_fk` (`person_fk`);
+  ADD KEY `course_ibfk_1` (`lector_id`);
 
 --
 -- Indizes für die Tabelle `person`
@@ -148,17 +156,17 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT für Tabelle `course`
 --
 ALTER TABLE `course`
-  MODIFY `course_pk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `course_pk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT für Tabelle `person`
 --
 ALTER TABLE `person`
-  MODIFY `person_pk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
+  MODIFY `person_pk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=173;
 --
 -- AUTO_INCREMENT für Tabelle `role`
 --
 ALTER TABLE `role`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints der exportierten Tabellen
 --
@@ -167,14 +175,20 @@ ALTER TABLE `role`
 -- Constraints der Tabelle `course`
 --
 ALTER TABLE `course`
-  ADD CONSTRAINT `course_ibfk_1` FOREIGN KEY (`person_fk`) REFERENCES `person` (`role_id`),
-  ADD CONSTRAINT `course_ibfk_2` FOREIGN KEY (`person_fk`) REFERENCES `person` (`person_pk`);
+  ADD CONSTRAINT `course_ibfk_1` FOREIGN KEY (`lector_id`) REFERENCES `person` (`person_pk`);
+
+--
+-- Constraints der Tabelle `person`
+--
+ALTER TABLE `person`
+  ADD CONSTRAINT `person_role_fk` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`);
 
 --
 -- Constraints der Tabelle `person_course_membership`
 --
 ALTER TABLE `person_course_membership`
-  ADD CONSTRAINT `person_course_membership_ibfk_2` FOREIGN KEY (`course_fk`) REFERENCES `course` (`course_pk`);
+  ADD CONSTRAINT `person_course_membership_ibfk_1` FOREIGN KEY (`person_fk`) REFERENCES `person` (`person_pk`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `person_course_membership_ibfk_2` FOREIGN KEY (`course_fk`) REFERENCES `course` (`course_pk`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

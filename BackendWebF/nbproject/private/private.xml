@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/anti88/Schreibtisch/webf/BackendWebF/src/java/webf/hibernate/db/Course.java</file>
+            <file>file:/home/anti88/Schreibtisch/webf/BackendWebF/src/java/webf/hibernate/db/PersonCourseMembership.hbm.xml</file>
             <file>file:/home/anti88/Schreibtisch/webf/BackendWebF/src/java/webf/webservice/WebServices.java</file>
-            <file>file:/home/anti88/Schreibtisch/webf/BackendWebF/src/java/webf/hibernate/db/Person.java</file>
+            <file>file:/home/anti88/Schreibtisch/webf/BackendWebF/src/java/webf/hibernate/db/PersonCourseMembership.java</file>
         </group>
     </open-files>
 </project-private>

@@ -22,6 +22,7 @@ import webf.hibernate.HibernateUtil;
 import webf.hibernate.db.Course;
 import webf.hibernate.db.Person;
 import webf.hibernate.db.PersonCourseMembership;
+import webf.hibernate.db.PersonCourseMembershipId;
 import webf.hibernate.db.Role;
 
 /**
@@ -131,7 +132,7 @@ public class WebServices
             tx.commit();            //Transaktion durchführen
         } catch (Exception e)
         {
-            tinf("EXCEPTION: " + e);
+            tinf("getRoleById EXCEPTION: " + e);
             if(tx !=null){
                 tx.rollback();      //Bei Fehlerfall => Rollback!
             }
@@ -180,7 +181,7 @@ public class WebServices
             ret = true;
         } catch (Exception e) {
             //failed
-            System.out.println("EXCEPTION: " + e);
+            System.out.println("createPerson EXCEPTION: " + e);
         
             if(tx !=null){
                 tx.rollback();      //Bei Fehlerfall => Rollback!
@@ -234,7 +235,7 @@ public class WebServices
             
             tx.commit();            //Transaktion durchführen
         } catch (Exception e) {
-            tinf("EXCEPTION: " + e);
+            tinf("getAllStudents EXCEPTION: " + e);
             ret = null;
             if(tx !=null){
                 tx.rollback();      //Bei Fehlerfall => Rollback!
@@ -309,7 +310,7 @@ public class WebServices
             
             tx.commit();            //Transaktion durchführen
         } catch (Exception e) {
-            tinf("EXCEPTION: " + e);
+            tinf("getAllPersons EXCEPTION: " + e);
             ret = null;
             if(tx !=null){
                 tx.rollback();      //Bei Fehlerfall => Rollback!
@@ -348,7 +349,7 @@ public class WebServices
             
             tx.commit();            //Transaktion durchführen
         } catch (Exception e) {
-            tinf("EXCEPTION: " + e);
+            tinf("getAllRoles EXCEPTION: " + e);
             ret = null;
             if(tx !=null){
                 tx.rollback();      //Bei Fehlerfall => Rollback!
@@ -384,6 +385,7 @@ public class WebServices
             
             tx.commit();            //Transaktion durchführen
         } catch (Exception e) {
+            tinf("person not found!");
             ret = null;
             if(tx !=null){
                 tx.rollback();      //Bei Fehlerfall => Rollback!
@@ -394,6 +396,8 @@ public class WebServices
         
         return ret;
     }
+    
+    
     
     
     @WebMethod
@@ -500,7 +504,22 @@ public class WebServices
             
             for (Object result : results)
             {
-                ret.add((PersonCourseMembership)result);
+                Person p = new Person();
+                Course c = new Course();
+                
+                c.setCoursePk(((PersonCourseMembership)result).getCourse().getCoursePk());
+                c.setTitle(((PersonCourseMembership)result).getCourse().getTitle());
+                
+                p.setUsername(((PersonCourseMembership)result).getPerson().getUsername());
+                p.setPersonPk(((PersonCourseMembership)result).getPerson().getPersonPk());
+                
+                PersonCourseMembership m = new PersonCourseMembership();
+                
+                m.setNote(((PersonCourseMembership)result).getNote());
+                m.setPerson(p);
+                m.setCourse(c);
+                
+                ret.add(m);
             }
             
             
@@ -539,7 +558,7 @@ public class WebServices
             ret = true;
         } catch (Exception e) {
             //failed
-            System.out.println("EXCEPTION: " + e);
+            System.out.println("createRole EXCEPTION: " + e);
         
             if(tx !=null){
                 tx.rollback();      //Bei Fehlerfall => Rollback!
@@ -635,7 +654,7 @@ public class WebServices
             ret = true;
         } catch (Exception e) {
             //failed
-            System.out.println("EXCEPTION: " + e);
+            System.out.println("createCourse EXCEPTION: " + e);
         
             if(tx !=null){
                 tx.rollback();      //Bei Fehlerfall => Rollback!
@@ -670,7 +689,7 @@ public class WebServices
             ret = true;
         } catch (Exception e) {
             //failed
-            System.out.println("EXCEPTION: " + e);
+            System.out.println("saveCourse EXCEPTION: " + e);
         
             if(tx !=null){
                 tx.rollback();      //Bei Fehlerfall => Rollback!
@@ -727,7 +746,7 @@ public class WebServices
             
             tx.commit();            //Transaktion durchführen
         } catch (Exception e) {
-            tinf("EXCEPTION: " + e);
+            tinf("getAllLectors EXCEPTION: " + e);
             ret = null;
             if(tx !=null){
                 tx.rollback();      //Bei Fehlerfall => Rollback!
@@ -738,4 +757,159 @@ public class WebServices
         
         return ret;
     }
+    
+    
+    @WebMethod
+    public Boolean createMembership(@WebParam Course c, @WebParam Person p)
+    {
+        SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
+        Session s = sf.openSession();                           //Öffne eine Session 
+        Transaction tx = null;
+        Boolean ret = false;
+        
+        try
+        {
+            tx = s.beginTransaction();
+            
+            PersonCourseMembership pcm = new PersonCourseMembership();
+            pcm.setCourse(c);
+            pcm.setPerson(p);
+            
+            PersonCourseMembershipId pid = new PersonCourseMembershipId();
+            pid.setCourseFk(c.getCoursePk());
+            pid.setPersonFk(p.getPersonPk());
+            pcm.setId(pid);
+            pcm.setNote(0);
+            
+            tinf("erstelle: " + pcm.getCourse().getCoursePk() + " " + pcm.getPerson().getPersonPk() + " " + pcm.getNote());
+            
+            s.save(pcm);
+            
+            tx.commit();            //Transaktion durchführen
+            ret = true;
+        } catch (Exception e) {
+            //failed
+            System.out.println("createMembership EXCEPTION: " + e);
+            
+            if(tx !=null){
+                tx.rollback();      //Bei Fehlerfall => Rollback!
+            }
+        } finally {
+            s.close();              //Session schließen egal ob Erfolg oder Fehler
+        }
+        return ret;
+    }
+    
+    @WebMethod
+    public Boolean deleteMembership(@WebParam int course_id, @WebParam int person_id)
+    {
+        SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
+        Session s = sf.openSession();                           //Öffne eine Session 
+        Transaction tx = null;
+        Boolean ret = false;
+        PersonCourseMembershipId pid = new PersonCourseMembershipId();
+        pid.setCourseFk(course_id);
+        pid.setPersonFk(person_id);
+        PersonCourseMembership pcm = new PersonCourseMembership();
+        pcm.setId(pid);
+        
+        
+        try
+        {
+            tx = s.beginTransaction();
+            
+            s.delete(pcm);
+            tx.commit();            //Transaktion durchführen
+            
+            ret = true;
+        } catch (Exception e) {
+            tinf("deleteMembership EXCEPTION: " + e);
+        
+            if(tx !=null){
+                tx.rollback();      //Bei Fehlerfall => Rollback!
+            }
+        } finally {
+            s.close();              //Session schließen egal ob Erfolg oder Fehler
+        }
+        return ret;
+    }
+    
+    
+    @WebMethod
+    public Course getCourse(@WebParam int id)
+    {
+        SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
+        Session s = sf.openSession();                           //Öffne eine Session 
+        Transaction tx = null;
+        
+        Course ret = new Course();
+        tinf("searching for course " + id);
+        
+        try{
+            tx = s.beginTransaction();
+            String hql = "FROM Course C WHERE C.coursePk = :id";
+            Query query = s.createQuery(hql);
+            query.setParameter("id",id);
+            List results = query.list();
+
+            ret.setTitle(((Course) results.get(0)).getTitle());
+            ret.setDescription(((Course) results.get(0)).getDescription());
+            ret.setCoursePk(((Course) results.get(0)).getCoursePk());
+            ret.setPerson(((Course) results.get(0)).getPerson());
+            
+            
+            tx.commit();            //Transaktion durchführen
+        } catch (Exception e) {
+            tinf("course not found!");
+            ret = null;
+            if(tx !=null){
+                tx.rollback();      //Bei Fehlerfall => Rollback!
+            }
+        } finally {
+            s.close();              //Session schließen egal ob Erfolg oder Fehler
+        }
+        
+        return ret;
+    }
+    
+    
+    @WebMethod
+    public Boolean saveMembership(@WebParam Course c, @WebParam Person p, @WebParam int note)
+    {
+        SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
+        Session s = sf.openSession();                           //Öffne eine Session 
+        Transaction tx = null;
+        Boolean ret = false;
+        
+        try{
+
+            tx = s.beginTransaction();
+            
+            PersonCourseMembership pcm = new PersonCourseMembership();
+            pcm.setCourse(c);
+            pcm.setPerson(p);
+            
+            PersonCourseMembershipId pid = new PersonCourseMembershipId();
+            pid.setCourseFk(c.getCoursePk());
+            pid.setPersonFk(p.getPersonPk());
+            pcm.setId(pid);
+            pcm.setNote(note);
+            
+            s.update(pcm);
+            
+            tx.commit();            //Transaktion durchführen
+            ret = true;
+        } catch (Exception e) {
+            //failed
+            System.out.println("saveMembership EXCEPTION: " + e);
+        
+            if(tx !=null){
+                tx.rollback();      //Bei Fehlerfall => Rollback!
+            }
+        } finally {
+            s.close();              //Session schließen egal ob Erfolg oder Fehler
+        }
+        return ret;
+    }
+    
 }

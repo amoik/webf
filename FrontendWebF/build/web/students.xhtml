@@ -16,15 +16,31 @@
         <h:form>
             <p:remoteCommand name="onload" update=":studentForm:studentList" action="#{students.onload}" autoRun="true" />
         </h:form>
+        <h:form>
+            <p:messages id="messages" showDetail="true" autoUpdate="true" />
+        </h:form>
+        
         
         
         
         <h:form id="studentForm">
+            <p:selectOneMenu id="newMembership" value="#{students.newMembership_cid}" effect="fade">
+                <f:selectItems value="#{students.courses.courses}" var="c"  itemValue="#{c.coursePk}" itemLabel="#{c.title}"/>
+            </p:selectOneMenu>
             <p:dataList id="studentList" value="#{students.students}" widgetVar="studentTable" var="student" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated">
                 <f:facet name="header">Studenten</f:facet>
                 <p:panel>
-                    <h3>#{student.firstname} #{student.lastname} <span style="color:grey">#{student.username}</span></h3>
-                    <p>#{utils.dateToStr(student.birthday)}</p>
+                    <div>
+                        <h3>#{student.firstname} #{student.lastname} <span style="color:grey">#{student.username}</span></h3>
+                        <p>#{utils.dateToStr(student.birthday)}</p>
+                    </div>
+                    <p:dataList id="courseList" value="#{students.getAllMembershipsForUsername(student.username)}" var="m" rows="10">
+                        <p>#{m.course.title}: <p:inputText title="Note" value="#{m.note}"/></p>
+                        <p:commandButton update=":studentForm" value="Speichern" title="Speichern" actionListener="#{students.saveMembership(m.course.coursePk, m.person.personPk, m.note)}"/>
+                        <p:commandButton update=":studentForm" value="Löschen" title="Löschen" actionListener="#{students.deleteMembership(m.course.coursePk, m.person.personPk)}"/>
+                    </p:dataList>
+                    
+                    <p:commandButton update=":studentForm" value="Hinzufügen" title="Hinzufügen" actionListener="#{students.createMembership(students.newMembership_cid, student.personPk)}"/>
                 </p:panel>
             </p:dataList>
         </h:form>

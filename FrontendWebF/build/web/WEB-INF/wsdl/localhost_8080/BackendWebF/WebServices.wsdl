@@ -10,17 +10,65 @@
 <message name="loginResponse">
 <part name="parameters" element="tns:loginResponse"/>
 </message>
+<message name="saveMembership">
+<part name="parameters" element="tns:saveMembership"/>
+</message>
+<message name="saveMembershipResponse">
+<part name="parameters" element="tns:saveMembershipResponse"/>
+</message>
 <message name="getAllRoles">
 <part name="parameters" element="tns:getAllRoles"/>
 </message>
 <message name="getAllRolesResponse">
 <part name="parameters" element="tns:getAllRolesResponse"/>
 </message>
+<message name="getAllStudents">
+<part name="parameters" element="tns:getAllStudents"/>
+</message>
+<message name="getAllStudentsResponse">
+<part name="parameters" element="tns:getAllStudentsResponse"/>
+</message>
+<message name="hello">
+<part name="parameters" element="tns:hello"/>
+</message>
+<message name="helloResponse">
+<part name="parameters" element="tns:helloResponse"/>
+</message>
+<message name="deletePerson">
+<part name="parameters" element="tns:deletePerson"/>
+</message>
+<message name="deletePersonResponse">
+<part name="parameters" element="tns:deletePersonResponse"/>
+</message>
+<message name="getRoleById">
+<part name="parameters" element="tns:getRoleById"/>
+</message>
+<message name="getRoleByIdResponse">
+<part name="parameters" element="tns:getRoleByIdResponse"/>
+</message>
+<message name="createPerson">
+<part name="parameters" element="tns:createPerson"/>
+</message>
+<message name="createPersonResponse">
+<part name="parameters" element="tns:createPersonResponse"/>
+</message>
+<message name="getAllPersons">
+<part name="parameters" element="tns:getAllPersons"/>
+</message>
+<message name="getAllPersonsResponse">
+<part name="parameters" element="tns:getAllPersonsResponse"/>
+</message>
 <message name="getPerson">
 <part name="parameters" element="tns:getPerson"/>
 </message>
 <message name="getPersonResponse">
 <part name="parameters" element="tns:getPersonResponse"/>
+</message>
+<message name="getPersonByUsername">
+<part name="parameters" element="tns:getPersonByUsername"/>
+</message>
+<message name="getPersonByUsernameResponse">
+<part name="parameters" element="tns:getPersonByUsernameResponse"/>
 </message>
 <message name="getAllCourses">
 <part name="parameters" element="tns:getAllCourses"/>
@@ -70,59 +118,35 @@
 <message name="getAllLectorsResponse">
 <part name="parameters" element="tns:getAllLectorsResponse"/>
 </message>
-<message name="deletePerson">
-<part name="parameters" element="tns:deletePerson"/>
+<message name="createMembership">
+<part name="parameters" element="tns:createMembership"/>
 </message>
-<message name="deletePersonResponse">
-<part name="parameters" element="tns:deletePersonResponse"/>
+<message name="createMembershipResponse">
+<part name="parameters" element="tns:createMembershipResponse"/>
 </message>
-<message name="hello">
-<part name="parameters" element="tns:hello"/>
+<message name="deleteMembership">
+<part name="parameters" element="tns:deleteMembership"/>
 </message>
-<message name="helloResponse">
-<part name="parameters" element="tns:helloResponse"/>
+<message name="deleteMembershipResponse">
+<part name="parameters" element="tns:deleteMembershipResponse"/>
 </message>
-<message name="getRoleById">
-<part name="parameters" element="tns:getRoleById"/>
+<message name="getCourse">
+<part name="parameters" element="tns:getCourse"/>
 </message>
-<message name="getRoleByIdResponse">
-<part name="parameters" element="tns:getRoleByIdResponse"/>
-</message>
-<message name="createPerson">
-<part name="parameters" element="tns:createPerson"/>
-</message>
-<message name="createPersonResponse">
-<part name="parameters" element="tns:createPersonResponse"/>
-</message>
-<message name="getAllStudents">
-<part name="parameters" element="tns:getAllStudents"/>
-</message>
-<message name="getAllStudentsResponse">
-<part name="parameters" element="tns:getAllStudentsResponse"/>
-</message>
-<message name="getAllPersons">
-<part name="parameters" element="tns:getAllPersons"/>
-</message>
-<message name="getAllPersonsResponse">
-<part name="parameters" element="tns:getAllPersonsResponse"/>
-</message>
-<message name="getPersonByUsername">
-<part name="parameters" element="tns:getPersonByUsername"/>
-</message>
-<message name="getPersonByUsernameResponse">
-<part name="parameters" element="tns:getPersonByUsernameResponse"/>
-</message>
-<message name="subtract">
-<part name="parameters" element="tns:subtract"/>
-</message>
-<message name="subtractResponse">
-<part name="parameters" element="tns:subtractResponse"/>
+<message name="getCourseResponse">
+<part name="parameters" element="tns:getCourseResponse"/>
 </message>
 <message name="multiply">
 <part name="parameters" element="tns:multiply"/>
 </message>
 <message name="multiplyResponse">
 <part name="parameters" element="tns:multiplyResponse"/>
+</message>
+<message name="subtract">
+<part name="parameters" element="tns:subtract"/>
+</message>
+<message name="subtractResponse">
+<part name="parameters" element="tns:subtractResponse"/>
 </message>
 <message name="add">
 <part name="parameters" element="tns:add"/>
@@ -141,13 +165,45 @@
 <input wsam:Action="http://webservice.webf/WebServices/loginRequest" message="tns:login"/>
 <output wsam:Action="http://webservice.webf/WebServices/loginResponse" message="tns:loginResponse"/>
 </operation>
+<operation name="saveMembership">
+<input wsam:Action="http://webservice.webf/WebServices/saveMembershipRequest" message="tns:saveMembership"/>
+<output wsam:Action="http://webservice.webf/WebServices/saveMembershipResponse" message="tns:saveMembershipResponse"/>
+</operation>
 <operation name="getAllRoles">
 <input wsam:Action="http://webservice.webf/WebServices/getAllRolesRequest" message="tns:getAllRoles"/>
 <output wsam:Action="http://webservice.webf/WebServices/getAllRolesResponse" message="tns:getAllRolesResponse"/>
 </operation>
+<operation name="getAllStudents">
+<input wsam:Action="http://webservice.webf/WebServices/getAllStudentsRequest" message="tns:getAllStudents"/>
+<output wsam:Action="http://webservice.webf/WebServices/getAllStudentsResponse" message="tns:getAllStudentsResponse"/>
+</operation>
+<operation name="hello">
+<input wsam:Action="http://webservice.webf/WebServices/helloRequest" message="tns:hello"/>
+<output wsam:Action="http://webservice.webf/WebServices/helloResponse" message="tns:helloResponse"/>
+</operation>
+<operation name="deletePerson">
+<input wsam:Action="http://webservice.webf/WebServices/deletePersonRequest" message="tns:deletePerson"/>
+<output wsam:Action="http://webservice.webf/WebServices/deletePersonResponse" message="tns:deletePersonResponse"/>
+</operation>
+<operation name="getRoleById">
+<input wsam:Action="http://webservice.webf/WebServices/getRoleByIdRequest" message="tns:getRoleById"/>
+<output wsam:Action="http://webservice.webf/WebServices/getRoleByIdResponse" message="tns:getRoleByIdResponse"/>
+</operation>
+<operation name="createPerson">
+<input wsam:Action="http://webservice.webf/WebServices/createPersonRequest" message="tns:createPerson"/>
+<output wsam:Action="http://webservice.webf/WebServices/createPersonResponse" message="tns:createPersonResponse"/>
+</operation>
+<operation name="getAllPersons">
+<input wsam:Action="http://webservice.webf/WebServices/getAllPersonsRequest" message="tns:getAllPersons"/>
+<output wsam:Action="http://webservice.webf/WebServices/getAllPersonsResponse" message="tns:getAllPersonsResponse"/>
+</operation>
 <operation name="getPerson">
 <input wsam:Action="http://webservice.webf/WebServices/getPersonRequest" message="tns:getPerson"/>
 <output wsam:Action="http://webservice.webf/WebServices/getPersonResponse" message="tns:getPersonResponse"/>
+</operation>
+<operation name="getPersonByUsername">
+<input wsam:Action="http://webservice.webf/WebServices/getPersonByUsernameRequest" message="tns:getPersonByUsername"/>
+<output wsam:Action="http://webservice.webf/WebServices/getPersonByUsernameResponse" message="tns:getPersonByUsernameResponse"/>
 </operation>
 <operation name="getAllCourses">
 <input wsam:Action="http://webservice.webf/WebServices/getAllCoursesRequest" message="tns:getAllCourses"/>
@@ -181,41 +237,25 @@
 <input wsam:Action="http://webservice.webf/WebServices/getAllLectorsRequest" message="tns:getAllLectors"/>
 <output wsam:Action="http://webservice.webf/WebServices/getAllLectorsResponse" message="tns:getAllLectorsResponse"/>
 </operation>
-<operation name="deletePerson">
-<input wsam:Action="http://webservice.webf/WebServices/deletePersonRequest" message="tns:deletePerson"/>
-<output wsam:Action="http://webservice.webf/WebServices/deletePersonResponse" message="tns:deletePersonResponse"/>
+<operation name="createMembership">
+<input wsam:Action="http://webservice.webf/WebServices/createMembershipRequest" message="tns:createMembership"/>
+<output wsam:Action="http://webservice.webf/WebServices/createMembershipResponse" message="tns:createMembershipResponse"/>
 </operation>
-<operation name="hello">
-<input wsam:Action="http://webservice.webf/WebServices/helloRequest" message="tns:hello"/>
-<output wsam:Action="http://webservice.webf/WebServices/helloResponse" message="tns:helloResponse"/>
+<operation name="deleteMembership">
+<input wsam:Action="http://webservice.webf/WebServices/deleteMembershipRequest" message="tns:deleteMembership"/>
+<output wsam:Action="http://webservice.webf/WebServices/deleteMembershipResponse" message="tns:deleteMembershipResponse"/>
 </operation>
-<operation name="getRoleById">
-<input wsam:Action="http://webservice.webf/WebServices/getRoleByIdRequest" message="tns:getRoleById"/>
-<output wsam:Action="http://webservice.webf/WebServices/getRoleByIdResponse" message="tns:getRoleByIdResponse"/>
-</operation>
-<operation name="createPerson">
-<input wsam:Action="http://webservice.webf/WebServices/createPersonRequest" message="tns:createPerson"/>
-<output wsam:Action="http://webservice.webf/WebServices/createPersonResponse" message="tns:createPersonResponse"/>
-</operation>
-<operation name="getAllStudents">
-<input wsam:Action="http://webservice.webf/WebServices/getAllStudentsRequest" message="tns:getAllStudents"/>
-<output wsam:Action="http://webservice.webf/WebServices/getAllStudentsResponse" message="tns:getAllStudentsResponse"/>
-</operation>
-<operation name="getAllPersons">
-<input wsam:Action="http://webservice.webf/WebServices/getAllPersonsRequest" message="tns:getAllPersons"/>
-<output wsam:Action="http://webservice.webf/WebServices/getAllPersonsResponse" message="tns:getAllPersonsResponse"/>
-</operation>
-<operation name="getPersonByUsername">
-<input wsam:Action="http://webservice.webf/WebServices/getPersonByUsernameRequest" message="tns:getPersonByUsername"/>
-<output wsam:Action="http://webservice.webf/WebServices/getPersonByUsernameResponse" message="tns:getPersonByUsernameResponse"/>
-</operation>
-<operation name="subtract">
-<input wsam:Action="http://webservice.webf/WebServices/subtractRequest" message="tns:subtract"/>
-<output wsam:Action="http://webservice.webf/WebServices/subtractResponse" message="tns:subtractResponse"/>
+<operation name="getCourse">
+<input wsam:Action="http://webservice.webf/WebServices/getCourseRequest" message="tns:getCourse"/>
+<output wsam:Action="http://webservice.webf/WebServices/getCourseResponse" message="tns:getCourseResponse"/>
 </operation>
 <operation name="multiply">
 <input wsam:Action="http://webservice.webf/WebServices/multiplyRequest" message="tns:multiply"/>
 <output wsam:Action="http://webservice.webf/WebServices/multiplyResponse" message="tns:multiplyResponse"/>
+</operation>
+<operation name="subtract">
+<input wsam:Action="http://webservice.webf/WebServices/subtractRequest" message="tns:subtract"/>
+<output wsam:Action="http://webservice.webf/WebServices/subtractResponse" message="tns:subtractResponse"/>
 </operation>
 <operation name="add">
 <input wsam:Action="http://webservice.webf/WebServices/addRequest" message="tns:add"/>
@@ -237,6 +277,15 @@
 <soap:body use="literal"/>
 </output>
 </operation>
+<operation name="saveMembership">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="getAllRoles">
 <soap:operation soapAction=""/>
 <input>
@@ -246,7 +295,70 @@
 <soap:body use="literal"/>
 </output>
 </operation>
+<operation name="getAllStudents">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="hello">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="deletePerson">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getRoleById">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="createPerson">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getAllPersons">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="getPerson">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getPersonByUsername">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -327,7 +439,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="deletePerson">
+<operation name="createMembership">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -336,7 +448,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="hello">
+<operation name="deleteMembership">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -345,52 +457,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="getRoleById">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="createPerson">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getAllStudents">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getAllPersons">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getPersonByUsername">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="subtract">
+<operation name="getCourse">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -400,6 +467,15 @@
 </output>
 </operation>
 <operation name="multiply">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="subtract">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
