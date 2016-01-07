@@ -1,4 +1,4 @@
-package webf.beans;
+package utils;
 
 import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 import java.text.SimpleDateFormat;

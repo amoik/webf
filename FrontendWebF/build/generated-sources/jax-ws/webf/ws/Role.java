@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="persons" type="{http://www.w3.org/2001/XMLSchema}anyType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="roleId" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="roleId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -40,7 +40,7 @@ public class Role {
 
     @XmlElement(nillable = true)
     protected List<Object> persons;
-    protected int roleId;
+    protected Integer roleId;
     protected String title;
 
     /**
@@ -75,16 +75,24 @@ public class Role {
     /**
      * Ruft den Wert der roleId-Eigenschaft ab.
      * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
      */
-    public int getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
     /**
      * Legt den Wert der roleId-Eigenschaft fest.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
      */
-    public void setRoleId(int value) {
+    public void setRoleId(Integer value) {
         this.roleId = value;
     }
 

@@ -26,6 +26,7 @@ public class ObjectFactory {
 
     private final static QName _GetAllStudentsResponse_QNAME = new QName("http://webservice.webf/", "getAllStudentsResponse");
     private final static QName _DeleteRole_QNAME = new QName("http://webservice.webf/", "deleteRole");
+    private final static QName _GetAllLectorsResponse_QNAME = new QName("http://webservice.webf/", "getAllLectorsResponse");
     private final static QName _CreatePerson_QNAME = new QName("http://webservice.webf/", "createPerson");
     private final static QName _GetAllPersons_QNAME = new QName("http://webservice.webf/", "getAllPersons");
     private final static QName _GetRoleByIdResponse_QNAME = new QName("http://webservice.webf/", "getRoleByIdResponse");
@@ -52,6 +53,7 @@ public class ObjectFactory {
     private final static QName _CreateRole_QNAME = new QName("http://webservice.webf/", "createRole");
     private final static QName _GetAllCourses_QNAME = new QName("http://webservice.webf/", "getAllCourses");
     private final static QName _GetAllMembershipsResponse_QNAME = new QName("http://webservice.webf/", "getAllMembershipsResponse");
+    private final static QName _GetPersonByUsername_QNAME = new QName("http://webservice.webf/", "getPersonByUsername");
     private final static QName _DeleteRoleResponse_QNAME = new QName("http://webservice.webf/", "deleteRoleResponse");
     private final static QName _DivideResponse_QNAME = new QName("http://webservice.webf/", "divideResponse");
     private final static QName _SaveCourse_QNAME = new QName("http://webservice.webf/", "saveCourse");
@@ -59,9 +61,11 @@ public class ObjectFactory {
     private final static QName _CreateCourse_QNAME = new QName("http://webservice.webf/", "createCourse");
     private final static QName _GetAllRoles_QNAME = new QName("http://webservice.webf/", "getAllRoles");
     private final static QName _Multiply_QNAME = new QName("http://webservice.webf/", "multiply");
+    private final static QName _GetPersonByUsernameResponse_QNAME = new QName("http://webservice.webf/", "getPersonByUsernameResponse");
     private final static QName _GetAllCoursesResponse_QNAME = new QName("http://webservice.webf/", "getAllCoursesResponse");
     private final static QName _Divide_QNAME = new QName("http://webservice.webf/", "divide");
     private final static QName _DeleteCourseResponse_QNAME = new QName("http://webservice.webf/", "deleteCourseResponse");
+    private final static QName _GetAllLectors_QNAME = new QName("http://webservice.webf/", "getAllLectors");
     private final static QName _GetPersonResponse_QNAME = new QName("http://webservice.webf/", "getPersonResponse");
     private final static QName _DeletePersonResponse_QNAME = new QName("http://webservice.webf/", "deletePersonResponse");
 
@@ -121,6 +125,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetPersonByUsername }
+     * 
+     */
+    public GetPersonByUsername createGetPersonByUsername() {
+        return new GetPersonByUsername();
+    }
+
+    /**
      * Create an instance of {@link DeleteRoleResponse }
      * 
      */
@@ -161,6 +173,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetAllLectors }
+     * 
+     */
+    public GetAllLectors createGetAllLectors() {
+        return new GetAllLectors();
+    }
+
+    /**
      * Create an instance of {@link GetPersonResponse }
      * 
      */
@@ -190,6 +210,14 @@ public class ObjectFactory {
      */
     public Multiply createMultiply() {
         return new Multiply();
+    }
+
+    /**
+     * Create an instance of {@link GetPersonByUsernameResponse }
+     * 
+     */
+    public GetPersonByUsernameResponse createGetPersonByUsernameResponse() {
+        return new GetPersonByUsernameResponse();
     }
 
     /**
@@ -337,6 +365,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetAllLectorsResponse }
+     * 
+     */
+    public GetAllLectorsResponse createGetAllLectorsResponse() {
+        return new GetAllLectorsResponse();
+    }
+
+    /**
      * Create an instance of {@link GetRoleById }
      * 
      */
@@ -393,14 +429,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Role }
-     * 
-     */
-    public Role createRole() {
-        return new Role();
-    }
-
-    /**
      * Create an instance of {@link PersonCourseMembershipId }
      * 
      */
@@ -409,19 +437,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Course }
-     * 
-     */
-    public Course createCourse() {
-        return new Course();
-    }
-
-    /**
      * Create an instance of {@link Person }
      * 
      */
     public Person createPerson() {
         return new Person();
+    }
+
+    /**
+     * Create an instance of {@link Role }
+     * 
+     */
+    public Role createRole() {
+        return new Role();
+    }
+
+    /**
+     * Create an instance of {@link Course }
+     * 
+     */
+    public Course createCourse() {
+        return new Course();
     }
 
     /**
@@ -448,6 +484,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservice.webf/", name = "deleteRole")
     public JAXBElement<DeleteRole> createDeleteRole(DeleteRole value) {
         return new JAXBElement<DeleteRole>(_DeleteRole_QNAME, DeleteRole.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAllLectorsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.webf/", name = "getAllLectorsResponse")
+    public JAXBElement<GetAllLectorsResponse> createGetAllLectorsResponse(GetAllLectorsResponse value) {
+        return new JAXBElement<GetAllLectorsResponse>(_GetAllLectorsResponse_QNAME, GetAllLectorsResponse.class, null, value);
     }
 
     /**
@@ -685,6 +730,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetPersonByUsername }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.webf/", name = "getPersonByUsername")
+    public JAXBElement<GetPersonByUsername> createGetPersonByUsername(GetPersonByUsername value) {
+        return new JAXBElement<GetPersonByUsername>(_GetPersonByUsername_QNAME, GetPersonByUsername.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link DeleteRoleResponse }{@code >}}
      * 
      */
@@ -748,6 +802,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetPersonByUsernameResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.webf/", name = "getPersonByUsernameResponse")
+    public JAXBElement<GetPersonByUsernameResponse> createGetPersonByUsernameResponse(GetPersonByUsernameResponse value) {
+        return new JAXBElement<GetPersonByUsernameResponse>(_GetPersonByUsernameResponse_QNAME, GetPersonByUsernameResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetAllCoursesResponse }{@code >}}
      * 
      */
@@ -772,6 +835,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservice.webf/", name = "deleteCourseResponse")
     public JAXBElement<DeleteCourseResponse> createDeleteCourseResponse(DeleteCourseResponse value) {
         return new JAXBElement<DeleteCourseResponse>(_DeleteCourseResponse_QNAME, DeleteCourseResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAllLectors }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.webf/", name = "getAllLectors")
+    public JAXBElement<GetAllLectors> createGetAllLectors(GetAllLectors value) {
+        return new JAXBElement<GetAllLectors>(_GetAllLectors_QNAME, GetAllLectors.class, null, value);
     }
 
     /**

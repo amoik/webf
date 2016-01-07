@@ -1,5 +1,5 @@
 package webf.hibernate.db;
-// Generated 05.01.2016 15:15:31 by Hibernate Tools 4.3.1
+// Generated 06.01.2016 15:44:32 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -11,28 +11,23 @@ import java.util.Set;
 public class Role  implements java.io.Serializable {
 
 
-     private int roleId;
+     private Integer roleId;
      private String title;
      private Set persons = new HashSet(0);
 
     public Role() {
     }
 
-	
-    public Role(int roleId) {
-        this.roleId = roleId;
-    }
-    public Role(int roleId, String title, Set persons) {
-       this.roleId = roleId;
+    public Role(String title, Set persons) {
        this.title = title;
        this.persons = persons;
     }
    
-    public int getRoleId() {
+    public Integer getRoleId() {
         return this.roleId;
     }
     
-    public void setRoleId(int roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
     public String getTitle() {

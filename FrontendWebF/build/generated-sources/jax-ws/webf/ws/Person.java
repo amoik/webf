@@ -22,6 +22,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="birthday" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
+ *         &lt;element name="courses" type="{http://www.w3.org/2001/XMLSchema}anyType" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="firstname" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="lastname" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -40,6 +41,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "person", propOrder = {
     "birthday",
+    "courses",
     "firstname",
     "lastname",
     "password",
@@ -52,6 +54,8 @@ public class Person {
 
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar birthday;
+    @XmlElement(nillable = true)
+    protected List<Object> courses;
     protected String firstname;
     protected String lastname;
     protected String password;
@@ -83,6 +87,35 @@ public class Person {
      */
     public void setBirthday(XMLGregorianCalendar value) {
         this.birthday = value;
+    }
+
+    /**
+     * Gets the value of the courses property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the courses property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getCourses().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Object }
+     * 
+     * 
+     */
+    public List<Object> getCourses() {
+        if (courses == null) {
+            courses = new ArrayList<Object>();
+        }
+        return this.courses;
     }
 
     /**

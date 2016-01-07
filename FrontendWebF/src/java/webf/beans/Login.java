@@ -7,8 +7,8 @@ package webf.beans;
 
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import static webf.beans.Utils.addMessage;
-import static webf.beans.Utils.tinf;
+import static utils.Utils.addMessage;
+import static utils.Utils.tinf;
 import webf.ws.WebServices;
 import webf.ws.WebServices_Service;
 

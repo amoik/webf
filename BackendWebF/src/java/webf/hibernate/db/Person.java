@@ -1,5 +1,5 @@
 package webf.hibernate.db;
-// Generated 05.01.2016 15:15:31 by Hibernate Tools 4.3.1
+// Generated 06.01.2016 15:44:32 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -19,6 +19,7 @@ public class Person  implements java.io.Serializable {
      private String firstname;
      private String lastname;
      private Date birthday;
+     private Set courses = new HashSet(0);
      private Set personCourseMemberships = new HashSet(0);
 
     public Person() {
@@ -29,13 +30,14 @@ public class Person  implements java.io.Serializable {
         this.username = username;
         this.password = password;
     }
-    public Person(Role role, String username, String password, String firstname, String lastname, Date birthday, Set personCourseMemberships) {
+    public Person(Role role, String username, String password, String firstname, String lastname, Date birthday, Set courses, Set personCourseMemberships) {
        this.role = role;
        this.username = username;
        this.password = password;
        this.firstname = firstname;
        this.lastname = lastname;
        this.birthday = birthday;
+       this.courses = courses;
        this.personCourseMemberships = personCourseMemberships;
     }
    
@@ -87,6 +89,13 @@ public class Person  implements java.io.Serializable {
     
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+    public Set getCourses() {
+        return this.courses;
+    }
+    
+    public void setCourses(Set courses) {
+        this.courses = courses;
     }
     public Set getPersonCourseMemberships() {
         return this.personCourseMemberships;

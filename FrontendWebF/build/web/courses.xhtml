@@ -23,54 +23,42 @@
         
         <h:form id="coursesForm">
             <p:dataTable var="c" value="#{courses.courses}" id="coursesTable">
-                <p:column headerText="Titel" style="width:50px;">
+                <p:column headerText="Titel" style="width:70px;">
                     <p:inputText value="#{c.title}" style="width:95%"/>
                 </p:column>
 
                 <p:column headerText="Beschreibung">
-                    <p:inputTextarea value="#{c.description}" style="width:95%"/>
+                    <p:inputTextarea value="#{c.description}" style="width:98%"/>
+                </p:column>
+                <p:column headerText="Lektor" style="width:130px">
+                    
+                    <p:selectOneMenu id="lector" value="#{c.person.username}" effect="fade">
+                        <f:selectItems value="#{courses.lectors}" var="l"  itemValue="#{l.username}" itemLabel="#{l.username}" />
+                    </p:selectOneMenu>
                 </p:column>
                 
                 <p:column style="width:40px;">
                     <p:commandButton update=":coursesForm:coursesTable" title="#{c.title} löschen" actionListener="#{courses.deleteCourse(c.coursePk)}" styleClass="ui-icon ui-icon-trash" style="padding:8px;float:left;"/>
-                    <p:commandButton update=":coursesForm:coursesTable" title="#{c.title} speichern" actionListener="#{courses.saveCourse(c.coursePk, c.title, c.description)}" styleClass="ui-icon ui-icon-disk" style="padding:8px;float:right;"/>
+                    <p:commandButton update=":coursesForm:coursesTable" title="#{c.title} speichern" actionListener="#{courses.saveCourse(c.coursePk, c.title, c.description, c.person.username)}" styleClass="ui-icon ui-icon-disk" style="padding:8px;float:right;"/>
                 </p:column>
             </p:dataTable>
         </h:form>
         
         <h:form id="coursesNewForm" style="margin-top:15px;">
-            <p:panelGrid columns="4">
-                <p:inputText value="#{courses.newTitle}" placeholder="Titel" required="true"/>
-                <p:inputTextarea value="#{courses.newDescription}" placeholder="Beschreibung" required="true"/>
-                <p:commandButton update=":coursesForm:coursesTable,:coursesNewForm" value="Anlegen" actionListener="#{courses.createCourse(courses.newTitle, courses.newDescription)}"/>
+            <p:panelGrid columns="4" style="width:100%;">
+                <p:inputText value="#{courses.newTitle}" placeholder="Titel" required="true" style="width:95%;"/>
+                <p:inputTextarea value="#{courses.newDescription}" placeholder="Beschreibung" required="true" style="width:95%;"/>
+           
+                
+                
+                
+                <p:selectOneMenu id="newLector" value="#{courses.newLector}" effect="fade">
+                    <f:selectItems value="#{courses.lectors}" var="l"  itemValue="#{l.username}" itemLabel="#{l.username}" />
+                </p:selectOneMenu>
+                
+                <p:commandButton update=":coursesForm:coursesTable" title="Speichern" actionListener="#{courses.createCourse(courses.newTitle, courses.newDescription, courses.newLector)}" styleClass="ui-icon ui-icon-disk" style="padding:8px;float:right;"/>
             </p:panelGrid>
         </h:form>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     </h:body>
 </html>
 

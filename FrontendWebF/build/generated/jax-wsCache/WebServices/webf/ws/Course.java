@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="coursePk" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="person" type="{http://webservice.webf/}person" minOccurs="0"/>
  *         &lt;element name="personCourseMemberships" type="{http://www.w3.org/2001/XMLSchema}anyType" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
@@ -35,6 +36,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "course", propOrder = {
     "coursePk",
     "description",
+    "person",
     "personCourseMemberships",
     "title"
 })
@@ -42,6 +44,7 @@ public class Course {
 
     protected Integer coursePk;
     protected String description;
+    protected Person person;
     @XmlElement(nillable = true)
     protected List<Object> personCourseMemberships;
     protected String title;
@@ -92,6 +95,30 @@ public class Course {
      */
     public void setDescription(String value) {
         this.description = value;
+    }
+
+    /**
+     * Ruft den Wert der person-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Person }
+     *     
+     */
+    public Person getPerson() {
+        return person;
+    }
+
+    /**
+     * Legt den Wert der person-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Person }
+     *     
+     */
+    public void setPerson(Person value) {
+        this.person = value;
     }
 
     /**

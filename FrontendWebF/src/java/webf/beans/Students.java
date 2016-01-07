@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.faces.context.FacesContext;
-import static webf.beans.Utils.tinf;
+import static utils.Utils.tinf;
 import webf.ws.Person;
 import webf.ws.WebServices;
 import webf.ws.WebServices_Service;

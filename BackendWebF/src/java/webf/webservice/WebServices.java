@@ -8,6 +8,7 @@ package webf.webservice;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -394,6 +395,42 @@ public class WebServices
         return ret;
     }
     
+    
+    @WebMethod
+    public Person getPersonByUsername(@WebParam String username)
+    {
+        SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
+        Session s = sf.openSession();                           //Öffne eine Session 
+        Transaction tx = null;
+        
+        Person ret = new Person();
+        tinf("searching for person " + username);
+        
+        try{
+            tx = s.beginTransaction();
+            String hql = "FROM Person P WHERE P.username = :username";
+            Query query = s.createQuery(hql);
+            query.setParameter("username",username);
+            List results = query.list();
+
+            ret.setUsername(((Person) results.get(0)).getUsername());
+            ret.setRole(((Person) results.get(0)).getRole());
+            ret.setPersonPk(((Person) results.get(0)).getPersonPk());
+            
+            
+            tx.commit();            //Transaktion durchführen
+        } catch (Exception e) {
+            ret = null;
+            if(tx !=null){
+                tx.rollback();      //Bei Fehlerfall => Rollback!
+            }
+        } finally {
+            s.close();              //Session schließen egal ob Erfolg oder Fehler
+        }
+        
+        return ret;
+    }
+    
     @WebMethod
     public ArrayList<Course> getAllCourses()
     {
@@ -412,10 +449,23 @@ public class WebServices
             
             for (Object result : results)
             {
+                Person p = new Person();
+                
                 Course c = new Course();
                 c.setCoursePk(((Course)result).getCoursePk());
                 c.setDescription(((Course)result).getDescription());
                 c.setTitle(((Course)result).getTitle());
+                
+                if(((Course)result).getPerson() != null)
+                { 
+                    p.setUsername(((Course)result).getPerson().getUsername());
+                    p.setPersonPk(((Course)result).getPerson().getPersonPk());
+                    p.setFirstname(((Course)result).getPerson().getFirstname());
+                    p.setLastname(((Course)result).getPerson().getLastname());
+                    p.setBirthday(((Course)result).getPerson().getBirthday());
+                    c.setPerson(p);
+                }
+                
                 ret.add(c);
             }
             
@@ -563,7 +613,7 @@ public class WebServices
     
     
     @WebMethod
-    public Boolean createCourse(@WebParam String title, @WebParam String descrption)
+    public Boolean createCourse(@WebParam String title, @WebParam String descrption, @WebParam String lector)
     {
         SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
         Session s = sf.openSession();                           //Öffne eine Session 
@@ -577,6 +627,7 @@ public class WebServices
             Course c = new Course();
             c.setTitle(title);
             c.setDescription(descrption);
+            c.setPerson(getPersonByUsername(lector));
             
             s.save(c);
             
@@ -596,7 +647,7 @@ public class WebServices
     }
     
     @WebMethod
-    public Boolean saveCourse(@WebParam int id, @WebParam String title, @WebParam String descrption)
+    public Boolean saveCourse(@WebParam int id, @WebParam String title, @WebParam String descrption, @WebParam String lector)
     {
         SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
         Session s = sf.openSession();                           //Öffne eine Session 
@@ -611,6 +662,7 @@ public class WebServices
             c.setCoursePk(id);
             c.setTitle(title);
             c.setDescription(descrption);
+            c.setPerson(getPersonByUsername(lector));
             
             s.update(c);
             
@@ -626,6 +678,64 @@ public class WebServices
         } finally {
             s.close();              //Session schließen egal ob Erfolg oder Fehler
         }
+        return ret;
+    }
+    
+    
+    
+    
+    @WebMethod
+    public ArrayList<Person> getAllLectors()
+    {
+        SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
+        Session s = sf.openSession();                           //Öffne eine Session 
+        Transaction tx = null;
+        
+        ArrayList<Person> ret = new ArrayList<Person>();
+        
+        try{
+            tx = s.beginTransaction();
+            String hql = "FROM Person P";
+            Query query = s.createQuery(hql);
+            List results = query.list();
+
+            
+            for (Object result : results)
+            {
+                
+                if(((Person) result).getRole().getTitle().equals("Lektor"))
+                {
+                    Person p = new Person();
+
+                    Role r = new Role();
+                    r.setRoleId(((Person) result).getRole().getRoleId());
+                    r.setTitle(((Person) result).getRole().getTitle());
+
+
+                    p.setUsername(((Person) result).getUsername());
+                    p.setRole(r);
+                    p.setPersonPk(((Person) result).getPersonPk());
+                    p.setFirstname(((Person) result).getFirstname());
+                    p.setLastname(((Person) result).getLastname());
+                    p.setBirthday(((Person)result).getBirthday());
+
+
+                    ret.add(p);
+                }
+            }
+            
+            
+            tx.commit();            //Transaktion durchführen
+        } catch (Exception e) {
+            tinf("EXCEPTION: " + e);
+            ret = null;
+            if(tx !=null){
+                tx.rollback();      //Bei Fehlerfall => Rollback!
+            }
+        } finally {
+            s.close();              //Session schließen egal ob Erfolg oder Fehler
+        }
+        
         return ret;
     }
 }

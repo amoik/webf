@@ -1,5 +1,5 @@
 package webf.hibernate.db;
-// Generated 05.01.2016 15:15:31 by Hibernate Tools 4.3.1
+// Generated 06.01.2016 15:44:32 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -12,6 +12,7 @@ public class Course  implements java.io.Serializable {
 
 
      private Integer coursePk;
+     private Person person;
      private String title;
      private String description;
      private Set personCourseMemberships = new HashSet(0);
@@ -24,7 +25,8 @@ public class Course  implements java.io.Serializable {
         this.title = title;
         this.description = description;
     }
-    public Course(String title, String description, Set personCourseMemberships) {
+    public Course(Person person, String title, String description, Set personCourseMemberships) {
+       this.person = person;
        this.title = title;
        this.description = description;
        this.personCourseMemberships = personCourseMemberships;
@@ -36,6 +38,13 @@ public class Course  implements java.io.Serializable {
     
     public void setCoursePk(Integer coursePk) {
         this.coursePk = coursePk;
+    }
+    public Person getPerson() {
+        return this.person;
+    }
+    
+    public void setPerson(Person person) {
+        this.person = person;
     }
     public String getTitle() {
         return this.title;
