@@ -7,6 +7,7 @@ package webf.beans;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.el.ELContext;
 import javax.faces.context.FacesContext;
 import static utils.Utils.addMessage;
 import static utils.Utils.tinf;
@@ -22,6 +23,8 @@ public class Roles {
     private List<Role> roles;
     private String newTitle;
     
+    private Login login;
+    
     public Roles()
     {
         roles = new ArrayList<Role>();
@@ -31,10 +34,14 @@ public class Roles {
     public void onload()
     {
         
-        if(Login.getLoginName().equals(""))
+        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+        login = (Login) FacesContext.getCurrentInstance().getApplication().getELResolver().getValue(elContext, null, "login");
+
+        if(login.getAccount() == null)
         {
             tinf("not logged in!");
             FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "logout.xhtml");
+            return;
         }
         getAll();
     }

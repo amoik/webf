@@ -106,7 +106,7 @@
                     <f:selectItems value="#{courses.lectors}" var="l"  itemValue="#{l.username}" itemLabel="#{l.username}" />
                 </p:selectOneMenu>
                 
-                <p:commandButton update=":coursesForm:coursesTable" title="Speichern" actionListener="#{courses.createCourse(courses.newTitle, courses.newDescription, courses.newDescription_en, courses.newRequirements, courses.newBegin, courses.newEnd, courses.newLector)}" styleClass="ui-icon ui-icon-disk" style="padding:8px;float:right;"/>
+                <p:commandButton update=":coursesForm:coursesTable,:coursesNewForm" title="Speichern" actionListener="#{courses.createCourse(courses.newTitle, courses.newDescription, courses.newDescription_en, courses.newRequirements, courses.newBegin, courses.newEnd, courses.newLector)}" styleClass="ui-icon ui-icon-disk" style="padding:8px;float:right;"/>
             </p:panelGrid>
         </h:form>
     </h:body>

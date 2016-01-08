@@ -7,6 +7,7 @@ package webf.beans;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.el.ELContext;
 import javax.faces.context.FacesContext;
 import static utils.Utils.addMessage;
 import static utils.Utils.fDateStr;
@@ -32,6 +33,7 @@ public class Courses {
     private String newLector;
     private List<Course> courses;
     private List<Person> lectors;
+    private Login login;
     
     
     public Courses()
@@ -43,10 +45,15 @@ public class Courses {
     public void onload()
     {
         tinf("loading courses");
-        if(Login.getLoginName().equals(""))
+        
+        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+        login = (Login) FacesContext.getCurrentInstance().getApplication().getELResolver().getValue(elContext, null, "login");
+
+        if(login.getAccount() == null)
         {
             tinf("not logged in!");
             FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "logout.xhtml");
+            return;
         }
         resetVars();
         getAll();
@@ -79,7 +86,7 @@ public class Courses {
         ArrayList<Course> added =  new ArrayList<Course>();
         
 
-        switch (Login.getLoginPerson().getRole().getTitle())
+        switch (login.getAccount().getRole().getTitle())
         {
             case "Student":
                 WebServices_Service pcmService = new WebServices_Service();
@@ -88,7 +95,7 @@ public class Courses {
                 List<PersonCourseMembership> allPcms = pcmPort.getAllMemberships();
                 for(PersonCourseMembership pcm : allPcms)
                 {
-                    if(pcm.getPerson().getUsername().equals(Login.getLoginPerson().getUsername()))
+                    if(pcm.getPerson().getUsername().equals(login.getAccount().getUsername()))
                     {
                         added.add(pcm.getCourse());
                     }
@@ -97,7 +104,7 @@ public class Courses {
             case "Lektor":
                 for(Course c : all)
                 {
-                    if(c.getPerson() != null && c.getPerson().getUsername().equals(Login.getLoginPerson().getUsername()))
+                    if(c.getPerson() != null && c.getPerson().getUsername().equals(login.getAccount().getUsername()))
                         added.add(c);
                 }
                 

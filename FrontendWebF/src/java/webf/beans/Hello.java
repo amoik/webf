@@ -1,9 +1,7 @@
 package webf.beans;
 
-import static utils.Utils.tinf;
 import webf.ws.WebServices;
 import webf.ws.WebServices_Service;
-import webf.ws.HelloResponse;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

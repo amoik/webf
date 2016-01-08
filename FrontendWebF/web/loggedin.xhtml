@@ -19,14 +19,16 @@
             <h:form>
                 <p:remoteCommand name="onload" actionListener="#{login.onload}" autoRun="true" />
             </h:form>
-            <h:form>
-                <p:layout fullPage="true">
-                    <p:layoutUnit position="north" size="80">
+            <p:layout fullPage="true">
+                <p:layoutUnit position="north" size="80">
+                    <h:form>
                         <p:messages style="float:left" id="messages" showDetail="true" autoUpdate="true" />
                         <p:commandButton style="float:right" value="Logout" icon="ui-icon-logout" actionListener='#{login.logout()}' action="index.xhtml?faces-redirect=true" />
-                    </p:layoutUnit>
-                    
-                    <p:layoutUnit position="west" size="250" header="Verwaltung" collapsible="true">
+                    </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="250" header="Verwaltung" collapsible="true">
+                    <h:form>
                         <p:menu>
                             <p:menuitem value="Personen" icon="ui-icon-person" url="persons.xhtml" rendered='#{login.accountType == "ADMIN"}'/>
                             <p:menuitem value="Studenten" icon="ui-icon-check" url="students.xhtml"/>
@@ -35,13 +37,15 @@
                             <p:menuitem value="Einstellungen" icon="ui-icon-wrench" url="settings.xhtml" rendered='#{login.accountType == "ADMIN"}'/>
 
                         </p:menu>
-                    </p:layoutUnit>
+                    </h:form>
+                </p:layoutUnit>
 
-                    <p:layoutUnit position="center">
+                <p:layoutUnit position="center">
+                    <p:panel id="includeForm">
                         <ui:include src='#{login.includedPage}' />
-                    </p:layoutUnit>
-                </p:layout>
-            </h:form>
+                    </p:panel>
+                </p:layoutUnit>
+            </p:layout>
         </h:body>
     </f:view>
 </html>

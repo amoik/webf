@@ -8,9 +8,11 @@ package webf.beans;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.el.ELContext;
 import javax.faces.context.FacesContext;
 import static utils.Utils.tinf;
 import static utils.Utils.addMessage;
+import static utils.Utils.tinf;
 import webf.ws.Person;
 import webf.ws.Role;
 import webf.ws.WebServices;
@@ -32,6 +34,7 @@ public class Persons
     private List<Person> persons;
     private List<Role> roles;
     
+    private Login login;
     
     public Persons()
     {
@@ -41,10 +44,15 @@ public class Persons
     
     public void onload()
     {
-        if(Login.getLoginName().equals(""))
+        
+        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+        login = (Login) FacesContext.getCurrentInstance().getApplication().getELResolver().getValue(elContext, null, "login");
+
+        if(login.getAccount() == null)
         {
             tinf("not logged in!");
             FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "logout.xhtml");
+            return;
         }
         resetVars();
         getAll();

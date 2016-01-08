@@ -5,11 +5,9 @@
  */
 package webf.webservice;
 
-import com.sun.xml.wss.util.DateUtils;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -36,7 +34,7 @@ public class WebServices
     @WebMethod
     public String hello(@WebParam(name = "name") String txt)
     {
-        return "Diese Info kommt vom WS! Du hast '" + txt + "' geschickt!";
+        return "Diese Info kommt per WS! Du hast '" + txt + "' geschickt!";
     }
     
     @WebMethod

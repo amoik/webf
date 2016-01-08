@@ -26,8 +26,7 @@ public class Login
     private String errStr;
     private int id = -1;
     private String includedPage = "welcome.xhtml";
-    private static String loginName = "";
-    private static Person loginPerson;
+    private Person account;
     private Boolean write;
     private String accountType;
     
@@ -61,7 +60,7 @@ public class Login
     {
         
         tinf("logging out...");
-        Login.setLoginName("");
+        this.setAccount(null);
         setErrStr("");
         setId(-1);
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
@@ -83,8 +82,7 @@ public class Login
         if(ret != null)
         {
             setId(ret.getPersonPk());
-            Login.setLoginPerson(ret);
-            Login.setLoginName(getUsername());
+            this.setAccount(ret);
             
             setAccountType(ret.getRole().getTitle());
             
@@ -102,13 +100,14 @@ public class Login
     
     public void onload()
     {
-        if(Login.getLoginName().equals(""))
+        if(this.getAccount() == null)
         {
             tinf("not logged in!");
             FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "logout.xhtml");
+            return;
         }
         tinf("servas");
-        addMessage(0, "Eingeloggt",getLoginName() + " " + Login.getLoginPerson().getRole().getTitle());
+        addMessage(0, "Eingeloggt",getAccount().getUsername()+ " " + getAccount().getRole().getTitle());
     }
 
     public void resetVars()
@@ -149,22 +148,6 @@ public class Login
         this.includedPage = includedPage;
     }
 
-    public static String getLoginName() {
-        return loginName;
-    }
-
-    public static void setLoginName(String loginName) {
-        Login.loginName = loginName;
-    }
-
-    public static Person getLoginPerson() {
-        return loginPerson;
-    }
-
-    public static void setLoginPerson(Person loginPerson) {
-        Login.loginPerson = loginPerson;
-    }
-
     public Boolean getWrite() {
         return write;
     }
@@ -179,6 +162,14 @@ public class Login
 
     public void setAccountType(String accountType) {
         this.accountType = accountType;
+    }
+
+    public Person getAccount() {
+        return account;
+    }
+
+    public void setAccount(Person account) {
+        this.account = account;
     }
     
 }

@@ -8,6 +8,7 @@ package webf.beans;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.el.ELContext;
 import javax.faces.context.FacesContext;
 import static utils.Utils.addMessage;
 import static utils.Utils.tinf;
@@ -36,6 +37,7 @@ public class Students
     private List<Person> students;
     private List<PersonCourseMembership> memberships;
     private Courses courses;
+    private Login login;
     
     
     
@@ -44,9 +46,6 @@ public class Students
         this.students = new ArrayList<Person>();
         this.memberships = new ArrayList<PersonCourseMembership>();
         this.courses = new Courses();
-        this.loginPerson = Login.getLoginPerson();
-        
-        
     }
     
     public void onload()
@@ -55,10 +54,14 @@ public class Students
         
         resetVars();
         
-        if(Login.getLoginName().equals(""))
+        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+        login = (Login) FacesContext.getCurrentInstance().getApplication().getELResolver().getValue(elContext, null, "login");
+
+        if(login.getAccount() == null)
         {
             tinf("not logged in!");
             FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "logout.xhtml");
+            return;
         }
         
         courses.onload();
@@ -169,15 +172,15 @@ public class Students
         List<Person> s = port.getAllStudents();
         ArrayList<Person> used = new ArrayList<Person>();
 
-        if(Login.getLoginPerson() == null)
+        if(login.getAccount() == null)
             return;
 
-        switch (Login.getLoginPerson().getRole().getTitle())
+        switch (login.getAccount().getRole().getTitle())
         {
             case "Student":
                 for(Person p : s)
                 {
-                    if(p.getUsername().equals(Login.getLoginPerson().getUsername()))
+                    if(p.getUsername().equals(login.getAccount().getUsername()))
                         used.add(p);
                 }   setStudents(used);
                 break;
@@ -187,7 +190,7 @@ public class Students
                     Boolean add = false;
                     for(PersonCourseMembership m : memberships)
                     {
-                        if(m.getCourse().getPerson() != null && Login.getLoginPerson().getUsername().equals(m.getCourse().getPerson().getUsername()) && p.getUsername().equals(m.getPerson().getUsername()))
+                        if(m.getCourse().getPerson() != null && login.getAccount().getUsername().equals(m.getCourse().getPerson().getUsername()) && p.getUsername().equals(m.getPerson().getUsername()))
                         {
                             add = true;
                             break;
@@ -216,15 +219,15 @@ public class Students
         List<PersonCourseMembership> all = port.getAllMemberships();
         ArrayList<PersonCourseMembership> used = new ArrayList<PersonCourseMembership>();
         
-        if(Login.getLoginPerson() == null)
-            return;
+        if(login.getAccount() == null)
+            login.logout();
         
-        switch (Login.getLoginPerson().getRole().getTitle())
+        switch (login.getAccount().getRole().getTitle())
         {
             case "Student":
                 for(PersonCourseMembership pcm : all)
                 {
-                    if(pcm.getPerson().getUsername().equals(Login.getLoginPerson().getUsername()))
+                    if(pcm.getPerson().getUsername().equals(login.getAccount().getUsername()))
                         used.add(pcm);
                 }   
                 setMemberships(used);
@@ -232,7 +235,7 @@ public class Students
             case "Lektor":
                 for(PersonCourseMembership pcm : all)
                 {
-                    if(pcm.getCourse().getPerson() != null && pcm.getCourse().getPerson().getUsername().equals(Login.getLoginPerson().getUsername()))
+                    if(pcm.getCourse().getPerson() != null && pcm.getCourse().getPerson().getUsername().equals(login.getAccount().getUsername()))
                         used.add(pcm);
                 }  
                 setMemberships(used);
