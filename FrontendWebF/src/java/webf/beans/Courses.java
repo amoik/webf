@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.context.FacesContext;
 import static utils.Utils.addMessage;
+import static utils.Utils.fDateStr;
 import static utils.Utils.tinf;
 import webf.ws.Course;
 import webf.ws.Person;
+import webf.ws.PersonCourseMembership;
 import webf.ws.WebServices;
 import webf.ws.WebServices_Service;
 
@@ -23,6 +25,10 @@ public class Courses {
     
     private String newTitle;
     private String newDescription;
+    private String newDescription_en;
+    private String newRequirements;
+    private String newBegin;
+    private String newEnd;
     private String newLector;
     private List<Course> courses;
     private List<Person> lectors;
@@ -32,11 +38,11 @@ public class Courses {
     {
         courses = new ArrayList<Course>();
         lectors = new ArrayList<Person>();
-        
     }
     
     public void onload()
     {
+        tinf("loading courses");
         if(Login.getLoginName().equals(""))
         {
             tinf("not logged in!");
@@ -50,6 +56,10 @@ public class Courses {
     {
         this.setNewTitle("");
         this.setNewDescription("");
+        this.setNewDescription_en("");
+        this.setNewRequirements("");
+        this.setNewBegin("");
+        this.setNewEnd("");
         this.setNewLector("");
     }
     
@@ -65,8 +75,41 @@ public class Courses {
         WebServices port = service.getWebServicesPort();      
         
           
+        List<Course> all =  port.getAllCourses();
+        ArrayList<Course> added =  new ArrayList<Course>();
+        
+
+        switch (Login.getLoginPerson().getRole().getTitle())
+        {
+            case "Student":
+                WebServices_Service pcmService = new WebServices_Service();
+                WebServices pcmPort = pcmService.getWebServicesPort();  
+
+                List<PersonCourseMembership> allPcms = pcmPort.getAllMemberships();
+                for(PersonCourseMembership pcm : allPcms)
+                {
+                    if(pcm.getPerson().getUsername().equals(Login.getLoginPerson().getUsername()))
+                    {
+                        added.add(pcm.getCourse());
+                    }
+                }
+                break;
+            case "Lektor":
+                for(Course c : all)
+                {
+                    if(c.getPerson() != null && c.getPerson().getUsername().equals(Login.getLoginPerson().getUsername()))
+                        added.add(c);
+                }
+                
+            break;
+            case "ADMIN":
+                for(Course c : all)
+                    added.add(c);
+                break;
+        }
+        
         courses.clear();
-        courses =  port.getAllCourses();
+        courses = added;
         
         for(Course c : courses)
         {
@@ -78,7 +121,7 @@ public class Courses {
         }
         
         
-        //printAllCourses();
+        printAllCourses();
     }
         
     public void getAllLectors()
@@ -95,8 +138,9 @@ public class Courses {
         //printAllLectors();
     }
     
-    public void createCourse(String title, String description, String lector)
+    public void createCourse(String title, String description, String description_en, String requirements, String begin, String end, String lector)
     {
+        
         if(lector.equals(""))
             return;
         if(title.equals(""))
@@ -108,7 +152,7 @@ public class Courses {
         WebServices_Service service = new WebServices_Service();
         WebServices port = service.getWebServicesPort();
         
-        Boolean ret = port.createCourse(title, description, lector);
+        Boolean ret = port.createCourse(title, description, description_en, requirements, fDateStr(begin), fDateStr(end), lector);
 
         if(ret)
         {
@@ -126,7 +170,7 @@ public class Courses {
     {
         for (Course course : courses)
         {
-            tinf(course.getCoursePk() + ": " + course.getTitle()+ " " + course.getDescription() + " Lector: " + course.getPerson().getUsername());
+            tinf(course.getCoursePk() + ": " + course.getTitle()+ " " + course.getDescription()+ " " + course.getDescriptionEn() + " Lector: " + course.getPerson().getUsername());
         }
     }
 
@@ -138,7 +182,7 @@ public class Courses {
         }
     }
     
-    public void saveCourse(int id, String title, String description, String lector)
+    public void saveCourse(int id, String title, String description, String description_en, String requirements, String begin, String end, String lector)
     {
         if(!(id >= 0))
             return;
@@ -146,16 +190,21 @@ public class Courses {
             return;
         if(description.equals(""))
             return;
+        if(description_en.equals(""))
+            return;
         if(lector.equals(""))
             return;
         if(lector.equals("keiner"))
             lector = null;
+        if(begin.equals(""))
+            return;
+        if(end.equals(""))
+            return;
         
-        tinf("LEKTOR: " + lector);
         WebServices_Service service = new WebServices_Service();
         WebServices port = service.getWebServicesPort();
 
-        Boolean ret = port.saveCourse(id, title, description, lector);
+        Boolean ret = port.saveCourse(id, title, description, description_en, requirements, fDateStr(begin), fDateStr(end), lector);
 
         if(ret)
         {
@@ -230,5 +279,38 @@ public class Courses {
     public void setLectors(List<Person> lectors) {
         this.lectors = lectors;
     }
+
+    public String getNewDescription_en() {
+        return newDescription_en;
+    }
+
+    public void setNewDescription_en(String newDescription_en) {
+        this.newDescription_en = newDescription_en;
+    }
+
+    public String getNewRequirements() {
+        return newRequirements;
+    }
+
+    public void setNewRequirements(String newRequirements) {
+        this.newRequirements = newRequirements;
+    }
+
+    public String getNewBegin() {
+        return newBegin;
+    }
+
+    public void setNewBegin(String newBegin) {
+        this.newBegin = newBegin;
+    }
+
+    public String getNewEnd() {
+        return newEnd;
+    }
+
+    public void setNewEnd(String newEnd) {
+        this.newEnd = newEnd;
+    }
+    
     
 }

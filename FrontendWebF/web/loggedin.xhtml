@@ -28,11 +28,11 @@
                     
                     <p:layoutUnit position="west" size="250" header="Verwaltung" collapsible="true">
                         <p:menu>
-                            <p:menuitem value="Personen" icon="ui-icon-person" url="persons.xhtml"/>
+                            <p:menuitem value="Personen" icon="ui-icon-person" url="persons.xhtml" rendered='#{login.accountType == "ADMIN"}'/>
                             <p:menuitem value="Studenten" icon="ui-icon-check" url="students.xhtml"/>
-                            <p:menuitem value="Rollen" icon="ui-icon-document" url="roles.xhtml"/>
+                            <p:menuitem value="Rollen" icon="ui-icon-document" url="roles.xhtml" rendered='#{login.accountType == "ADMIN"}'/>
                             <p:menuitem value="Kurse" icon="ui-icon-search" url="courses.xhtml"/>
-                            <p:menuitem value="Einstellungen" icon="ui-icon-wrench" url="settings.xhtml"/>
+                            <p:menuitem value="Einstellungen" icon="ui-icon-wrench" url="settings.xhtml" rendered='#{login.accountType == "ADMIN"}'/>
 
                         </p:menu>
                     </p:layoutUnit>

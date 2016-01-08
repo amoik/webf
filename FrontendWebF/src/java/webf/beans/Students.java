@@ -23,6 +23,8 @@ import webf.ws.WebServices_Service;
  */
 public class Students
 {
+    private Person loginPerson;
+    
     private String username;
     private String password;
     private String firstname;
@@ -39,22 +41,27 @@ public class Students
     
     public Students()
     {
-        students = new ArrayList<Person>();
-        memberships = new ArrayList<PersonCourseMembership>();
-        courses = new Courses();
+        this.students = new ArrayList<Person>();
+        this.memberships = new ArrayList<PersonCourseMembership>();
+        this.courses = new Courses();
+        this.loginPerson = Login.getLoginPerson();
+        
         
     }
     
     public void onload()
     {
+        tinf("loading students");
+        
+        resetVars();
+        
         if(Login.getLoginName().equals(""))
         {
             tinf("not logged in!");
             FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "logout.xhtml");
         }
-        courses.onload();
         
-        resetVars();
+        courses.onload();
         getAll();
     }
     
@@ -159,7 +166,41 @@ public class Students
         WebServices_Service service = new WebServices_Service();
         WebServices port = service.getWebServicesPort();  
 
-        setStudents(port.getAllStudents());
+        List<Person> s = port.getAllStudents();
+        ArrayList<Person> used = new ArrayList<Person>();
+
+        if(Login.getLoginPerson() == null)
+            return;
+
+        switch (Login.getLoginPerson().getRole().getTitle())
+        {
+            case "Student":
+                for(Person p : s)
+                {
+                    if(p.getUsername().equals(Login.getLoginPerson().getUsername()))
+                        used.add(p);
+                }   setStudents(used);
+                break;
+            case "Lektor":
+                for(Person p : s)
+                {
+                    Boolean add = false;
+                    for(PersonCourseMembership m : memberships)
+                    {
+                        if(m.getCourse().getPerson() != null && Login.getLoginPerson().getUsername().equals(m.getCourse().getPerson().getUsername()) && p.getUsername().equals(m.getPerson().getUsername()))
+                        {
+                            add = true;
+                            break;
+                        }
+                    }
+                    if(add)
+                        used.add(p);
+            }   setStudents(used);
+            break;
+            case "ADMIN":
+                setStudents(s);
+                break;
+        }
         
         if( getStudents() != null)
         {
@@ -172,7 +213,34 @@ public class Students
         WebServices_Service service = new WebServices_Service();
         WebServices port = service.getWebServicesPort();  
 
-        setMemberships(port.getAllMemberships());
+        List<PersonCourseMembership> all = port.getAllMemberships();
+        ArrayList<PersonCourseMembership> used = new ArrayList<PersonCourseMembership>();
+        
+        if(Login.getLoginPerson() == null)
+            return;
+        
+        switch (Login.getLoginPerson().getRole().getTitle())
+        {
+            case "Student":
+                for(PersonCourseMembership pcm : all)
+                {
+                    if(pcm.getPerson().getUsername().equals(Login.getLoginPerson().getUsername()))
+                        used.add(pcm);
+                }   
+                setMemberships(used);
+                break;
+            case "Lektor":
+                for(PersonCourseMembership pcm : all)
+                {
+                    if(pcm.getCourse().getPerson() != null && pcm.getCourse().getPerson().getUsername().equals(Login.getLoginPerson().getUsername()))
+                        used.add(pcm);
+                }  
+                setMemberships(used);
+                break;
+            case "ADMIN":
+                setMemberships(all);
+                break;
+        }
         
         if( getMemberships() != null)
         {
@@ -267,6 +335,27 @@ public class Students
         setLastname("");
       
         students.clear();
+    }
+    
+    public String getNoteString(int n)
+    {
+        switch(n)
+        {
+            default:
+            case 0:
+                return "noch keine Angabe";
+            case 1:
+                return "Sehr gut";
+            case 2:
+                return "Gut";
+            case 3:
+                return "Befriedigend";
+            case 4:
+                return "Genügend";
+            case 5:
+                return "Nicht Genügend";
+            
+        }
     }
 
     public String getUsername() {

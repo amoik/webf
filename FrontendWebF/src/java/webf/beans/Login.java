@@ -9,6 +9,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import static utils.Utils.addMessage;
 import static utils.Utils.tinf;
+import webf.ws.Person;
 import webf.ws.WebServices;
 import webf.ws.WebServices_Service;
 
@@ -26,6 +27,9 @@ public class Login
     private int id = -1;
     private String includedPage = "welcome.xhtml";
     private static String loginName = "";
+    private static Person loginPerson;
+    private Boolean write;
+    private String accountType;
     
     public void Login()
     {
@@ -55,6 +59,7 @@ public class Login
     
     public void logout()
     {
+        
         tinf("logging out...");
         Login.setLoginName("");
         setErrStr("");
@@ -73,13 +78,20 @@ public class Login
         WebServices port = service.getWebServicesPort();      
         
           
-        int ret =  port.login(username, password);
-        setId(ret);
+        Person ret =  port.login(username, password);
         
-        
-        if(ret != -1)
+        if(ret != null)
         {
+            setId(ret.getPersonPk());
+            Login.setLoginPerson(ret);
             Login.setLoginName(getUsername());
+            
+            setAccountType(ret.getRole().getTitle());
+            
+            if(ret.getRole().getTitle().equals("Lektor") || ret.getRole().getTitle().equals("ADMIN"))
+                this.setWrite(true);
+            else
+                this.setWrite(false);
             resetVars();
             return "loggedin.xhtml?faces-redirect=true";
         }
@@ -96,7 +108,7 @@ public class Login
             FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "logout.xhtml");
         }
         tinf("servas");
-        addMessage(0, "Eingeloggt",getLoginName());
+        addMessage(0, "Eingeloggt",getLoginName() + " " + Login.getLoginPerson().getRole().getTitle());
     }
 
     public void resetVars()
@@ -144,4 +156,29 @@ public class Login
     public static void setLoginName(String loginName) {
         Login.loginName = loginName;
     }
+
+    public static Person getLoginPerson() {
+        return loginPerson;
+    }
+
+    public static void setLoginPerson(Person loginPerson) {
+        Login.loginPerson = loginPerson;
+    }
+
+    public Boolean getWrite() {
+        return write;
+    }
+
+    public void setWrite(Boolean write) {
+        this.write = write;
+    }
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
+    
 }

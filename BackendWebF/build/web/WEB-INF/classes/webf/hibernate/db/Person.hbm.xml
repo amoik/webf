@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 06.01.2016 15:44:33 by Hibernate Tools 4.3.1 -->
+<!-- Generated 07.01.2016 21:47:34 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="webf.hibernate.db.Person" table="person" catalog="web" optimistic-lock="version">
         <id name="personPk" type="java.lang.Integer">

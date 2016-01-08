@@ -5,11 +5,15 @@
         <group>
             <file>file:/home/anti88/Schreibtisch/webf/FrontendWebF/web/students.xhtml</file>
             <file>file:/home/anti88/Schreibtisch/webf/FrontendWebF/src/java/webf/beans/Persons.java</file>
+            <file>file:/home/anti88/Schreibtisch/webf/FrontendWebF/src/java/utils/Utils.java</file>
             <file>file:/home/anti88/Schreibtisch/webf/FrontendWebF/src/java/webf/beans/Courses.java</file>
             <file>file:/home/anti88/Schreibtisch/webf/FrontendWebF/src/java/webf/beans/Students.java</file>
             <file>file:/home/anti88/Schreibtisch/webf/FrontendWebF/web/courses.xhtml</file>
-            <file>file:/home/anti88/Schreibtisch/webf/FrontendWebF/web/settings.xhtml</file>
+            <file>file:/home/anti88/Schreibtisch/webf/FrontendWebF/src/java/webf/beans/Login.java</file>
+            <file>file:/home/anti88/Schreibtisch/webf/FrontendWebF/web/loggedin.xhtml</file>
+            <file>file:/home/anti88/Schreibtisch/webf/FrontendWebF/web/persons.xhtml</file>
             <file>file:/home/anti88/Schreibtisch/webf/FrontendWebF/web/roles.xhtml</file>
+            <file>file:/home/anti88/Schreibtisch/webf/FrontendWebF/src/java/webf/beans/Add.java</file>
         </group>
     </open-files>
 </project-private>

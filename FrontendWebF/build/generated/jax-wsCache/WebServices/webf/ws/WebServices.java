@@ -27,99 +27,6 @@ public interface WebServices {
 
     /**
      * 
-     * @param arg1
-     * @param arg0
-     * @return
-     *     returns int
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "login", targetNamespace = "http://webservice.webf/", className = "webf.ws.Login")
-    @ResponseWrapper(localName = "loginResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.LoginResponse")
-    @Action(input = "http://webservice.webf/WebServices/loginRequest", output = "http://webservice.webf/WebServices/loginResponse")
-    public int login(
-        @WebParam(name = "arg0", targetNamespace = "")
-        String arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        String arg1);
-
-    /**
-     * 
-     * @param arg2
-     * @param arg1
-     * @param arg0
-     * @return
-     *     returns java.lang.Boolean
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "saveMembership", targetNamespace = "http://webservice.webf/", className = "webf.ws.SaveMembership")
-    @ResponseWrapper(localName = "saveMembershipResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.SaveMembershipResponse")
-    @Action(input = "http://webservice.webf/WebServices/saveMembershipRequest", output = "http://webservice.webf/WebServices/saveMembershipResponse")
-    public Boolean saveMembership(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Course arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        Person arg1,
-        @WebParam(name = "arg2", targetNamespace = "")
-        int arg2);
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<webf.ws.Role>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getAllRoles", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetAllRoles")
-    @ResponseWrapper(localName = "getAllRolesResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetAllRolesResponse")
-    @Action(input = "http://webservice.webf/WebServices/getAllRolesRequest", output = "http://webservice.webf/WebServices/getAllRolesResponse")
-    public List<Role> getAllRoles();
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<webf.ws.Person>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getAllStudents", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetAllStudents")
-    @ResponseWrapper(localName = "getAllStudentsResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetAllStudentsResponse")
-    @Action(input = "http://webservice.webf/WebServices/getAllStudentsRequest", output = "http://webservice.webf/WebServices/getAllStudentsResponse")
-    public List<Person> getAllStudents();
-
-    /**
-     * 
-     * @param name
-     * @return
-     *     returns java.lang.String
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "hello", targetNamespace = "http://webservice.webf/", className = "webf.ws.Hello")
-    @ResponseWrapper(localName = "helloResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.HelloResponse")
-    @Action(input = "http://webservice.webf/WebServices/helloRequest", output = "http://webservice.webf/WebServices/helloResponse")
-    public String hello(
-        @WebParam(name = "name", targetNamespace = "")
-        String name);
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns java.lang.Boolean
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "deletePerson", targetNamespace = "http://webservice.webf/", className = "webf.ws.DeletePerson")
-    @ResponseWrapper(localName = "deletePersonResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.DeletePersonResponse")
-    @Action(input = "http://webservice.webf/WebServices/deletePersonRequest", output = "http://webservice.webf/WebServices/deletePersonResponse")
-    public Boolean deletePerson(
-        @WebParam(name = "arg0", targetNamespace = "")
-        int arg0);
-
-    /**
-     * 
      * @param arg0
      * @return
      *     returns webf.ws.Role
@@ -162,6 +69,60 @@ public interface WebServices {
         String arg4,
         @WebParam(name = "arg5", targetNamespace = "")
         String arg5);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<webf.ws.Role>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getAllRoles", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetAllRoles")
+    @ResponseWrapper(localName = "getAllRolesResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetAllRolesResponse")
+    @Action(input = "http://webservice.webf/WebServices/getAllRolesRequest", output = "http://webservice.webf/WebServices/getAllRolesResponse")
+    public List<Role> getAllRoles();
+
+    /**
+     * 
+     * @param name
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "hello", targetNamespace = "http://webservice.webf/", className = "webf.ws.Hello")
+    @ResponseWrapper(localName = "helloResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.HelloResponse")
+    @Action(input = "http://webservice.webf/WebServices/helloRequest", output = "http://webservice.webf/WebServices/helloResponse")
+    public String hello(
+        @WebParam(name = "name", targetNamespace = "")
+        String name);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.lang.Boolean
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "deletePerson", targetNamespace = "http://webservice.webf/", className = "webf.ws.DeletePerson")
+    @ResponseWrapper(localName = "deletePersonResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.DeletePersonResponse")
+    @Action(input = "http://webservice.webf/WebServices/deletePersonRequest", output = "http://webservice.webf/WebServices/deletePersonResponse")
+    public Boolean deletePerson(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<webf.ws.Person>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getAllStudents", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetAllStudents")
+    @ResponseWrapper(localName = "getAllStudentsResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.GetAllStudentsResponse")
+    @Action(input = "http://webservice.webf/WebServices/getAllStudentsRequest", output = "http://webservice.webf/WebServices/getAllStudentsResponse")
+    public List<Person> getAllStudents();
 
     /**
      * 
@@ -276,9 +237,13 @@ public interface WebServices {
 
     /**
      * 
+     * @param arg3
      * @param arg2
+     * @param arg5
+     * @param arg4
      * @param arg1
      * @param arg0
+     * @param arg6
      * @return
      *     returns java.lang.Boolean
      */
@@ -293,14 +258,26 @@ public interface WebServices {
         @WebParam(name = "arg1", targetNamespace = "")
         String arg1,
         @WebParam(name = "arg2", targetNamespace = "")
-        String arg2);
+        String arg2,
+        @WebParam(name = "arg3", targetNamespace = "")
+        String arg3,
+        @WebParam(name = "arg4", targetNamespace = "")
+        String arg4,
+        @WebParam(name = "arg5", targetNamespace = "")
+        String arg5,
+        @WebParam(name = "arg6", targetNamespace = "")
+        String arg6);
 
     /**
      * 
      * @param arg3
      * @param arg2
+     * @param arg5
+     * @param arg4
      * @param arg1
      * @param arg0
+     * @param arg7
+     * @param arg6
      * @return
      *     returns java.lang.Boolean
      */
@@ -317,7 +294,15 @@ public interface WebServices {
         @WebParam(name = "arg2", targetNamespace = "")
         String arg2,
         @WebParam(name = "arg3", targetNamespace = "")
-        String arg3);
+        String arg3,
+        @WebParam(name = "arg4", targetNamespace = "")
+        String arg4,
+        @WebParam(name = "arg5", targetNamespace = "")
+        String arg5,
+        @WebParam(name = "arg6", targetNamespace = "")
+        String arg6,
+        @WebParam(name = "arg7", targetNamespace = "")
+        String arg7);
 
     /**
      * 
@@ -384,21 +369,42 @@ public interface WebServices {
 
     /**
      * 
+     * @param arg2
      * @param arg1
      * @param arg0
      * @return
-     *     returns double
+     *     returns java.lang.Boolean
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "multiply", targetNamespace = "http://webservice.webf/", className = "webf.ws.Multiply")
-    @ResponseWrapper(localName = "multiplyResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.MultiplyResponse")
-    @Action(input = "http://webservice.webf/WebServices/multiplyRequest", output = "http://webservice.webf/WebServices/multiplyResponse")
-    public double multiply(
+    @RequestWrapper(localName = "saveMembership", targetNamespace = "http://webservice.webf/", className = "webf.ws.SaveMembership")
+    @ResponseWrapper(localName = "saveMembershipResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.SaveMembershipResponse")
+    @Action(input = "http://webservice.webf/WebServices/saveMembershipRequest", output = "http://webservice.webf/WebServices/saveMembershipResponse")
+    public Boolean saveMembership(
         @WebParam(name = "arg0", targetNamespace = "")
-        double arg0,
+        Course arg0,
         @WebParam(name = "arg1", targetNamespace = "")
-        double arg1);
+        Person arg1,
+        @WebParam(name = "arg2", targetNamespace = "")
+        int arg2);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns webf.ws.Person
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "login", targetNamespace = "http://webservice.webf/", className = "webf.ws.Login")
+    @ResponseWrapper(localName = "loginResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.LoginResponse")
+    @Action(input = "http://webservice.webf/WebServices/loginRequest", output = "http://webservice.webf/WebServices/loginResponse")
+    public Person login(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        String arg1);
 
     /**
      * 
@@ -413,6 +419,24 @@ public interface WebServices {
     @ResponseWrapper(localName = "subtractResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.SubtractResponse")
     @Action(input = "http://webservice.webf/WebServices/subtractRequest", output = "http://webservice.webf/WebServices/subtractResponse")
     public double subtract(
+        @WebParam(name = "arg0", targetNamespace = "")
+        double arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        double arg1);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns double
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "multiply", targetNamespace = "http://webservice.webf/", className = "webf.ws.Multiply")
+    @ResponseWrapper(localName = "multiplyResponse", targetNamespace = "http://webservice.webf/", className = "webf.ws.MultiplyResponse")
+    @Action(input = "http://webservice.webf/WebServices/multiplyRequest", output = "http://webservice.webf/WebServices/multiplyResponse")
+    public double multiply(
         @WebParam(name = "arg0", targetNamespace = "")
         double arg0,
         @WebParam(name = "arg1", targetNamespace = "")

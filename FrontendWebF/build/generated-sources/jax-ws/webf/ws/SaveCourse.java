@@ -20,6 +20,10 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="arg1" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="arg2" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="arg3" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="arg4" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="arg5" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="arg6" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="arg7" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -33,7 +37,11 @@ import javax.xml.bind.annotation.XmlType;
     "arg0",
     "arg1",
     "arg2",
-    "arg3"
+    "arg3",
+    "arg4",
+    "arg5",
+    "arg6",
+    "arg7"
 })
 public class SaveCourse {
 
@@ -41,6 +49,10 @@ public class SaveCourse {
     protected String arg1;
     protected String arg2;
     protected String arg3;
+    protected String arg4;
+    protected String arg5;
+    protected String arg6;
+    protected String arg7;
 
     /**
      * Ruft den Wert der arg0-Eigenschaft ab.
@@ -128,6 +140,102 @@ public class SaveCourse {
      */
     public void setArg3(String value) {
         this.arg3 = value;
+    }
+
+    /**
+     * Ruft den Wert der arg4-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getArg4() {
+        return arg4;
+    }
+
+    /**
+     * Legt den Wert der arg4-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setArg4(String value) {
+        this.arg4 = value;
+    }
+
+    /**
+     * Ruft den Wert der arg5-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getArg5() {
+        return arg5;
+    }
+
+    /**
+     * Legt den Wert der arg5-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setArg5(String value) {
+        this.arg5 = value;
+    }
+
+    /**
+     * Ruft den Wert der arg6-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getArg6() {
+        return arg6;
+    }
+
+    /**
+     * Legt den Wert der arg6-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setArg6(String value) {
+        this.arg6 = value;
+    }
+
+    /**
+     * Ruft den Wert der arg7-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getArg7() {
+        return arg7;
+    }
+
+    /**
+     * Legt den Wert der arg7-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setArg7(String value) {
+        this.arg7 = value;
     }
 
 }

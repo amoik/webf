@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Erstellungszeit: 07. Jan 2016 um 16:20
+-- Erstellungszeit: 08. Jan 2016 um 12:22
 -- Server-Version: 10.0.21-MariaDB
 -- PHP-Version: 5.6.16
 
@@ -30,19 +30,24 @@ CREATE TABLE `course` (
   `course_pk` int(11) NOT NULL,
   `title` varchar(30) NOT NULL,
   `description` varchar(500) NOT NULL,
-  `lector_id` int(11) DEFAULT NULL
+  `lector_id` int(11) DEFAULT NULL,
+  `end` varchar(50) NOT NULL,
+  `begin` varchar(50) NOT NULL,
+  `description_en` varchar(500) DEFAULT NULL,
+  `requirements` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `course`
 --
 
-INSERT INTO `course` (`course_pk`, `title`, `description`, `lector_id`) VALUES
-(1, 'WEBF', 'Gängige Webframeworks aus der Java Welt', 169),
-(8, 'CBAS', 'Grundlegende Eigenschaften der Programmiersprache C', 170),
-(11, 'TestTitel', 'Nur ein Test', 170),
-(15, 'CROSS', 'Crossplatform heislbesn', 170),
-(16, 'test', 'test', NULL);
+INSERT INTO `course` (`course_pk`, `title`, `description`, `lector_id`, `end`, `begin`, `description_en`, `requirements`) VALUES
+(1, 'WEBF', 'Gängige Webframeworks aus der Java Welt', 169, '05.01.2016', '01.01.2016', 'Usual web frameworks in JAVA', 'Programmierkenntnisse in rotzigen Java, Webservices'),
+(8, 'CBAS', 'Grundlegende Eigenschaften der Programmiersprache C', 169, '05.01.2016', '05.01.2016', 'Basics in C-99', 'keine'),
+(11, 'TestTitel', 'Nur ein Test', NULL, '05.01.2016', '05.01.2016', 'asdf', 'asdf'),
+(15, 'CROSS', 'Crossplatform heislbesn', 169, '05.01.2016', '05.01.2016', 'asdf', 'safd'),
+(20, 'Test2', 'Das ist nur ein Testkurs', 169, '27.01.2016', '03.01.2016', 'This is only a course for testing', 'na goa kane'),
+(21, 'Test', 'Das ist nur ein Testkurs', NULL, '27.01.2016', '03.01.2016', 'This is only a course for testing', 'na goa kane');
 
 -- --------------------------------------------------------
 
@@ -70,7 +75,9 @@ INSERT INTO `person` (`person_pk`, `username`, `password`, `firstname`, `lastnam
 (3, 'pa14l013', 'sf', 'Stefan', 'Forster', '1987-01-31', 3),
 (169, 'moik', 'am', 'Andreas', 'Moik', '1988-04-13', 2),
 (170, 'TestLektor', 'tl', 'Test', 'Lektor', '2016-01-31', 2),
-(171, 'heislbesn', 'ah', 'heisl', 'besn', '2016-01-25', 2);
+(171, 'heislbesn', 'ah', 'heisl', 'besn', '2016-01-25', 2),
+(173, 'pa14l010', 'az', 'Alexander', 'Zulechner', '2016-01-18', 3),
+(175, 'pa14l001', 'dk', 'Daniel', 'Koral', '2016-01-18', 3);
 
 -- --------------------------------------------------------
 
@@ -89,10 +96,12 @@ CREATE TABLE `person_course_membership` (
 --
 
 INSERT INTO `person_course_membership` (`person_fk`, `course_fk`, `note`) VALUES
-(2, 1, 4),
+(2, 1, 0),
 (2, 11, 3),
 (3, 1, 0),
-(3, 11, 0);
+(3, 11, 0),
+(173, 1, 0),
+(175, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -113,8 +122,7 @@ INSERT INTO `role` (`title`, `role_id`) VALUES
 ('ERROR', 0),
 ('ADMIN', 1),
 ('Lektor', 2),
-('Student', 3),
-('Assistenz', 4);
+('Student', 3);
 
 --
 -- Indizes der exportierten Tabellen
@@ -156,12 +164,12 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT für Tabelle `course`
 --
 ALTER TABLE `course`
-  MODIFY `course_pk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `course_pk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT für Tabelle `person`
 --
 ALTER TABLE `person`
-  MODIFY `person_pk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=173;
+  MODIFY `person_pk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
 --
 -- AUTO_INCREMENT für Tabelle `role`
 --

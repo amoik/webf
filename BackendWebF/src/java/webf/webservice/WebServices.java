@@ -5,6 +5,7 @@
  */
 package webf.webservice;
 
+import com.sun.xml.wss.util.DateUtils;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -39,12 +40,12 @@ public class WebServices
     }
     
     @WebMethod
-    public int login(@WebParam String name, @WebParam String password)
+    public Person login(@WebParam String name, @WebParam String password)
     {
         SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
         Session s = sf.openSession();                           //Öffne eine Session 
         Transaction tx = null;
-        int ret = -1;
+        Person ret = null;
         
         try{
             tx = s.beginTransaction();
@@ -57,10 +58,21 @@ public class WebServices
             
             if(personFromDb.getPassword().equals(password))
             {
-                ret = personFromDb.getPersonPk();
+                Role r = new Role();
+                r.setTitle(personFromDb.getRole().getTitle());
+                r.setRoleId(personFromDb.getRole().getRoleId());
+                
+                ret = new Person();
+                ret.setFirstname(personFromDb.getFirstname());
+                ret.setLastname(personFromDb.getLastname());
+                ret.setUsername(personFromDb.getUsername());
+                ret.setPersonPk(personFromDb.getPersonPk());
+                ret.setBirthday(personFromDb.getBirthday());
+                ret.setPassword(personFromDb.getPassword());
+                ret.setRole(r);
                 
             }else{
-                //failed
+                ret = null;
             }
             
             tx.commit();            //Transaktion durchführen
@@ -458,6 +470,10 @@ public class WebServices
                 Course c = new Course();
                 c.setCoursePk(((Course)result).getCoursePk());
                 c.setDescription(((Course)result).getDescription());
+                c.setDescriptionEn(((Course)result).getDescriptionEn());
+                c.setRequirements(((Course)result).getRequirements());
+                c.setBegin(((Course)result).getBegin());
+                c.setEnd(((Course)result).getEnd());
                 c.setTitle(((Course)result).getTitle());
                 
                 if(((Course)result).getPerson() != null)
@@ -509,6 +525,11 @@ public class WebServices
                 
                 c.setCoursePk(((PersonCourseMembership)result).getCourse().getCoursePk());
                 c.setTitle(((PersonCourseMembership)result).getCourse().getTitle());
+                c.setDescription(((PersonCourseMembership)result).getCourse().getDescription());
+                c.setDescriptionEn(((PersonCourseMembership)result).getCourse().getDescriptionEn());
+                c.setRequirements(((PersonCourseMembership)result).getCourse().getRequirements());
+                c.setBegin(((PersonCourseMembership)result).getCourse().getBegin());
+                c.setEnd(((PersonCourseMembership)result).getCourse().getEnd());
                 
                 p.setUsername(((PersonCourseMembership)result).getPerson().getUsername());
                 p.setPersonPk(((PersonCourseMembership)result).getPerson().getPersonPk());
@@ -517,7 +538,17 @@ public class WebServices
                 
                 m.setNote(((PersonCourseMembership)result).getNote());
                 m.setPerson(p);
+                
+                if(((PersonCourseMembership)result).getCourse().getPerson() != null)
+                {
+                    Person lector = new Person();
+                    lector.setUsername(((PersonCourseMembership)result).getCourse().getPerson().getUsername());
+                    c.setPerson(lector);
+                    
+                }
+                
                 m.setCourse(c);
+                
                 
                 ret.add(m);
             }
@@ -632,7 +663,7 @@ public class WebServices
     
     
     @WebMethod
-    public Boolean createCourse(@WebParam String title, @WebParam String descrption, @WebParam String lector)
+    public Boolean createCourse(@WebParam String title, @WebParam String descrption, @WebParam String descrption_en, @WebParam String requirements, @WebParam String begin, @WebParam String end, @WebParam String lector)
     {
         SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
         Session s = sf.openSession();                           //Öffne eine Session 
@@ -641,11 +672,17 @@ public class WebServices
         
         try{
 
+            
             tx = s.beginTransaction();
             
             Course c = new Course();
+            
             c.setTitle(title);
             c.setDescription(descrption);
+            c.setDescriptionEn(descrption_en);
+            c.setRequirements(requirements);
+            c.setBegin(begin);
+            c.setEnd(end);
             c.setPerson(getPersonByUsername(lector));
             
             s.save(c);
@@ -666,7 +703,7 @@ public class WebServices
     }
     
     @WebMethod
-    public Boolean saveCourse(@WebParam int id, @WebParam String title, @WebParam String descrption, @WebParam String lector)
+    public Boolean saveCourse(@WebParam int id, @WebParam String title, @WebParam String descrption, @WebParam String descrption_en, @WebParam String requirements, @WebParam String begin, @WebParam String end, @WebParam String lector)
     {
         SessionFactory sf = HibernateUtil.getSessionFactory();  //Initialisierung der SessionFactory
         Session s = sf.openSession();                           //Öffne eine Session 
@@ -678,9 +715,14 @@ public class WebServices
             tx = s.beginTransaction();
             
             Course c = new Course();
+            
             c.setCoursePk(id);
             c.setTitle(title);
             c.setDescription(descrption);
+            c.setDescriptionEn(descrption_en);
+            c.setRequirements(requirements);
+            c.setBegin(begin);
+            c.setEnd(end);
             c.setPerson(getPersonByUsername(lector));
             
             s.update(c);

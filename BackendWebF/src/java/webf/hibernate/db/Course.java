@@ -1,7 +1,8 @@
 package webf.hibernate.db;
-// Generated 06.01.2016 15:44:32 by Hibernate Tools 4.3.1
+// Generated 07.01.2016 21:47:34 by Hibernate Tools 4.3.1
 
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,20 +16,30 @@ public class Course  implements java.io.Serializable {
      private Person person;
      private String title;
      private String description;
+     private String end;
+     private String begin;
+     private String descriptionEn;
+     private String requirements;
      private Set personCourseMemberships = new HashSet(0);
 
     public Course() {
     }
 
 	
-    public Course(String title, String description) {
+    public Course(String title, String description, String end, String begin) {
         this.title = title;
         this.description = description;
+        this.end = end;
+        this.begin = begin;
     }
-    public Course(Person person, String title, String description, Set personCourseMemberships) {
+    public Course(Person person, String title, String description, String end, String begin, String descriptionEn, String requirements, Set personCourseMemberships) {
        this.person = person;
        this.title = title;
        this.description = description;
+       this.end = end;
+       this.begin = begin;
+       this.descriptionEn = descriptionEn;
+       this.requirements = requirements;
        this.personCourseMemberships = personCourseMemberships;
     }
    
@@ -59,6 +70,34 @@ public class Course  implements java.io.Serializable {
     
     public void setDescription(String description) {
         this.description = description;
+    }
+    public String getEnd() {
+        return this.end;
+    }
+    
+    public void setEnd(String end) {
+        this.end = end;
+    }
+    public String getBegin() {
+        return this.begin;
+    }
+    
+    public void setBegin(String begin) {
+        this.begin = begin;
+    }
+    public String getDescriptionEn() {
+        return this.descriptionEn;
+    }
+    
+    public void setDescriptionEn(String descriptionEn) {
+        this.descriptionEn = descriptionEn;
+    }
+    public String getRequirements() {
+        return this.requirements;
+    }
+    
+    public void setRequirements(String requirements) {
+        this.requirements = requirements;
     }
     public Set getPersonCourseMemberships() {
         return this.personCourseMemberships;

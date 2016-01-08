@@ -19,10 +19,14 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="begin" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="coursePk" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="descriptionEn" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="end" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="person" type="{http://webservice.webf/}person" minOccurs="0"/>
  *         &lt;element name="personCourseMemberships" type="{http://www.w3.org/2001/XMLSchema}anyType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="requirements" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -34,20 +38,52 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "course", propOrder = {
+    "begin",
     "coursePk",
     "description",
+    "descriptionEn",
+    "end",
     "person",
     "personCourseMemberships",
+    "requirements",
     "title"
 })
 public class Course {
 
+    protected String begin;
     protected Integer coursePk;
     protected String description;
+    protected String descriptionEn;
+    protected String end;
     protected Person person;
     @XmlElement(nillable = true)
     protected List<Object> personCourseMemberships;
+    protected String requirements;
     protected String title;
+
+    /**
+     * Ruft den Wert der begin-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getBegin() {
+        return begin;
+    }
+
+    /**
+     * Legt den Wert der begin-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setBegin(String value) {
+        this.begin = value;
+    }
 
     /**
      * Ruft den Wert der coursePk-Eigenschaft ab.
@@ -95,6 +131,54 @@ public class Course {
      */
     public void setDescription(String value) {
         this.description = value;
+    }
+
+    /**
+     * Ruft den Wert der descriptionEn-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDescriptionEn() {
+        return descriptionEn;
+    }
+
+    /**
+     * Legt den Wert der descriptionEn-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDescriptionEn(String value) {
+        this.descriptionEn = value;
+    }
+
+    /**
+     * Ruft den Wert der end-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getEnd() {
+        return end;
+    }
+
+    /**
+     * Legt den Wert der end-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setEnd(String value) {
+        this.end = value;
     }
 
     /**
@@ -148,6 +232,30 @@ public class Course {
             personCourseMemberships = new ArrayList<Object>();
         }
         return this.personCourseMemberships;
+    }
+
+    /**
+     * Ruft den Wert der requirements-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getRequirements() {
+        return requirements;
+    }
+
+    /**
+     * Legt den Wert der requirements-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setRequirements(String value) {
+        this.requirements = value;
     }
 
     /**

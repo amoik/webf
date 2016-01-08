@@ -1,6 +1,7 @@
 package utils;
 
 import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -32,11 +33,29 @@ public class Utils {
         }
         return da;
     }
+    public static String fDateStr(String d)
+    {
+        DateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
+        Date date;
+        
+        try
+        {
+            date = format.parse(d);
+        }
+        catch(Exception e)
+        {
+            tinf("date EXCEPTION: " + e);
+            return "00.00.0000";
+        }
+        
+        DateFormat out = new SimpleDateFormat("dd.MM.yyyy");
+        return out.format(date);
+    }
     
     public static String dateToStr(XMLGregorianCalendarImpl gcd)
     {
         if(gcd == null)
-            return "00.00.00";
+            return "Nicht angegeben";
         
         Date d = gcd.toGregorianCalendar().getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
