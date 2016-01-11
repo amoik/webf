@@ -23,11 +23,11 @@
         
         
         <h:form id="personForm">
-            <p:dataList id="personList" value="#{persons.persons}" widgetVar="personTable" var="person" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated">
+            <p:dataList id="personList" value="#{persons.persons}" widgetVar="personTable" var="person" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated" >
                 <f:facet name="header">Personen</f:facet>
-                <p:panel>
+                <p:panel style="width:96%;">
                     <h:outputLink value="#">
-                        <h3><p:commandLink update=":personForm:personList" title="#{person.firstname} #{person.lastname} löschen" actionListener="#{persons.deletePerson(person.personPk)}" styleClass="ui-icon ui-icon-trash" style="float:left;margin-right:10px"/>#{person.firstname} #{person.lastname} <span style="color:grey">#{person.username}</span></h3>
+                        <h3><p:commandButton update=":personForm:personList" title="#{person.firstname} #{person.lastname} löschen" actionListener="#{persons.deletePerson(person.personPk)}" icon="ui-icon-trash" style="width: 16px; height: 16px; float: left; margin: 5px;"/>#{person.firstname} #{person.lastname} <span style="color:grey">#{person.username}</span></h3>
                         <p><strong>#{person.role.getTitle()}</strong> #{utils.dateToStr(person.birthday)}</p>
                     </h:outputLink>
                 </p:panel>

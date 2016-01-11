@@ -7,7 +7,7 @@
     xmlns:f="http://java.sun.com/jsf/core"  
     xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Personen</title>
+        <title>Studenten</title>
     </h:head>
     <h:body>
         <h:form>
@@ -21,7 +21,9 @@
         </h:form>
         
         <h:form id="studentForm">
-            <p:selectOneMenu rendered='#{login.accountType == "ADMIN"}' id="newMembership" value="#{students.newMembership_cid}" effect="fade">
+            <p style="margin: 0px; font-family: Arial; font-size: 16pt; float: left; margin-right: 10px;">Hier den Kurs auswählen, der hinzugefügt werden soll: </p>
+               <p:selectOneMenu rendered='#{login.accountType == "ADMIN"}' id="newMembership" value="#{students.newMembership_cid}" effect="fade">
+                
                 <f:selectItems value="#{students.courses.courses}" var="c"  itemValue="#{c.coursePk}" itemLabel="#{c.title}"/>
             </p:selectOneMenu>
             <p:dataList id="studentList" value="#{students.students}" widgetVar="studentTable" var="student" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated">
@@ -31,13 +33,14 @@
                         <h3>#{student.firstname} #{student.lastname} <span style="color:grey">#{student.username}</span></h3>
                         <p>#{utils.dateToStr(student.birthday)}</p>
                     </div>
-                    <p:dataList id="courseList" value="#{students.getAllMembershipsForUsername(student.username)}" var="m" rows="10">
-                        <p>#{m.course.title}-Note: <p:inputText rendered="#{login.write}" title="Note" value="#{m.note}"/><p:outputLabel rendered="#{!login.write}" title="Note" value="#{students.getNoteString(m.note)}"/></p>
-                        <p:commandButton rendered="#{login.write}" update=":studentForm:studentList:courseList,:studentForm:studentList,:studentForm" value="Speichern" title="Speichern" actionListener="#{students.saveMembership(m.course.coursePk, m.person.personPk, m.note)}"/>
+                    <p:dataList id="courseList" value="#{students.getAllMembershipsForUsername(student.username)}" var="m" rows="10" itemType="none">
+                        <p>#{m.course.title} / Note: <p:inputText rendered="#{login.write}" title="Note" value="#{m.note}"/><p:outputLabel rendered="#{!login.write}" title="Note" value="#{students.getNoteString(m.note)}"/></p>
+                        <p:commandButton rendered="#{login.write}" update=":studentForm:studentList:courseList,:studentForm:studentList,:studentForm" value="Speichern" title="Speichern" actionListener="#{students.saveMembership(m.course.coursePk, m.person.personPk, m.note)}" style="margin-right: 5px;"/>
                         <p:commandButton rendered="#{login.write}" update=":studentForm:studentList:courseList,:studentForm:studentList,:studentForm" value="Löschen" title="Löschen" actionListener="#{students.deleteMembership(m.course.coursePk, m.person.personPk)}"/>
+                        <p></p>
                     </p:dataList>
                     
-                    <p:commandButton update=":studentForm" rendered='#{login.accountType == "ADMIN"}' value="Hinzufügen" title="Hinzufügen" actionListener="#{students.createMembership(students.newMembership_cid, student.personPk)}"/>
+                    <p:commandButton update=":studentForm" rendered='#{login.accountType == "ADMIN"}' value="Hinzufügen" title="Hinzufügen" actionListener="#{students.createMembership(students.newMembership_cid, student.personPk)}" style="margin: 4px;"/>
                 </p:panel>
             </p:dataList>
         </h:form>
