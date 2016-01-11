@@ -94,7 +94,7 @@ public class Login
             return "loggedin.xhtml?faces-redirect=true";
         }
         
-        addMessage(3, "Fehler","Login Fehlgeschlagen");
+        addMessage(3, "Fehler! ","Login fehlgeschlagen!");
         return "index.xhtml";
     }
     

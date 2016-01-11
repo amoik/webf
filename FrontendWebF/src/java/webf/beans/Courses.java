@@ -163,13 +163,13 @@ public class Courses {
 
         if(ret)
         {
-            addMessage(0, "Erfolgreich", "wurde angelegt");
+            addMessage(0, "Erfolgreich! ", "Kurs wurde angelegt.");
             resetVars();
             getAll();
         }
         else
         {
-            addMessage(3, "Fehler!", "Anlegen fehlgeschlagen!");
+            addMessage(3, "Fehler! ", "Anlegen fehlgeschlagen!");
         }
     }
 
@@ -215,13 +215,13 @@ public class Courses {
 
         if(ret)
         {
-            addMessage(0, "Erfolgreich", "wurde gespeichert");
+            addMessage(0, "Erfolgreich! ", "Kurs wurde gespeichert.");
             resetVars();
             getAll();
         }
         else
         {
-            addMessage(3, "Fehler!", "Speichern fehlgeschlagen!");
+            addMessage(3, "Fehler! ", "Speichern fehlgeschlagen!");
         }
     }
     
@@ -234,12 +234,12 @@ public class Courses {
 
         if(ret)
         {
-            addMessage(0, "Erfolgreich", "wurde gelöscht");
+            addMessage(0, "Erfolgreich! ", "Kurs wurde gelöscht.");
             getAll();
         }
         else
         {
-            addMessage(3, "Fehler!", "Löschen fehlgeschlagen!");
+            addMessage(3, "Fehler! ", "Löschen fehlgeschlagen!");
         }
     }
     

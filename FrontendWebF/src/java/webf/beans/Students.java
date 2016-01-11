@@ -132,11 +132,11 @@ public class Students
         
         if(c == null || p == null || !port.createMembership(c, p))
         {
-            addMessage(3, "Fehler!", "Anlegen fehlgeschlagen!");
+            addMessage(3, "Fehler! ", "Hinzufügen fehlgeschlagen!");
         }
         else
         {
-            addMessage(0, "Erfolgreich", "wurde angelegt");
+            addMessage(0, "Erfolgreich! ", "Kurs wurde hinzugefügt");
             getAll();
         }
     }
@@ -154,7 +154,7 @@ public class Students
         }
         else
         {
-            addMessage(3, "Fehler!", "Löschen fehlgeschlagen!");
+            addMessage(3, "Fehler! ", "Löschen fehlgeschlagen!");
         }
     }
     
@@ -320,11 +320,11 @@ public class Students
         
         if(c == null || p == null || !port.saveMembership(c, p, note))
         {
-            addMessage(3, "Fehler!", "Speichern fehlgeschlagen!");
+            addMessage(3, "Fehler! ", "Speichern fehlgeschlagen!");
         }
         else
         {
-            addMessage(0, "Erfolgreich", "wurde gespeichert");
+            addMessage(0, "Erfolgreich! ", "Note wurde gespeichert.");
             getAll();
         }
     }

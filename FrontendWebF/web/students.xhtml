@@ -10,6 +10,7 @@
         <title>Studenten</title>
     </h:head>
     <h:body>
+                   
         <h:form>
             <p><p:commandButton value="Zurück" action="loggedin.xhtml?faces-redirect=true"/></p>
         </h:form>
@@ -21,14 +22,15 @@
         </h:form>
         
         <h:form id="studentForm">
-            <p style="margin: 0px; font-family: Arial; font-size: 16pt; float: left; margin-right: 10px;">Hier den Kurs auswählen, der hinzugefügt werden soll: </p>
-               <p:selectOneMenu rendered='#{login.accountType == "ADMIN"}' id="newMembership" value="#{students.newMembership_cid}" effect="fade">
+            <h:outputText rendered='#{login.accountType == "ADMIN"}' style="margin: 0px; font-family: Arial; font-size: 16pt; float: left; margin-right: 10px;" value="Hier den Kurs auswählen, der hinzugefügt werden soll:"/>            
+            
+            <p:selectOneMenu rendered='#{login.accountType == "ADMIN"}' id="newMembership" value="#{students.newMembership_cid}" effect="fade">
                 
                 <f:selectItems value="#{students.courses.courses}" var="c"  itemValue="#{c.coursePk}" itemLabel="#{c.title}"/>
             </p:selectOneMenu>
             <p:dataList id="studentList" value="#{students.students}" widgetVar="studentTable" var="student" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated">
                 <f:facet name="header">Studenten</f:facet>
-                <p:panel >
+                <p:panel style="width: 96%;">
                     <div>
                         <h3>#{student.firstname} #{student.lastname} <span style="color:grey">#{student.username}</span></h3>
                         <p>#{utils.dateToStr(student.birthday)}</p>

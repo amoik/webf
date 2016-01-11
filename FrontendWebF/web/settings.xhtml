@@ -17,13 +17,13 @@
         <h:form id="messageForm">
             <h:inputText value="#{hello.msg}"/>
             <p><p:commandButton update=":messageForm" value="Sag hallo!" action="#{hello.hello}"/></p>
-            <p><p:outputLabel>Hello:#{hello.resp}</p:outputLabel></p>
+            <p><p:outputLabel>Hello: #{hello.resp}</p:outputLabel></p>
         </h:form>
         
         <h:form id="calcForm">
-            <p><p:inputText value="#{calculator.one}"/><p:inputText value="#{calculator.two}"/></p>
+            <p><p:inputText value="#{calculator.one}" style="margin-right: 5px;"/><p:inputText value="#{calculator.two}"/></p>
             <p><p:commandButton update=":calcForm" value="+" action="#{calculator.add}"/><p:commandButton update=":calcForm" value="-" action="#{calculator.subtract}"/><p:commandButton update=":calcForm" value="*" action="#{calculator.multiply}"/><p:commandButton update=":calcForm" value="/" action="#{calculator.divide}"/></p>
-            <p><p:outputLabel>Ergebnis:#{calculator.resp}</p:outputLabel></p>
+            <p><p:outputLabel>Ergebnis: #{calculator.resp}</p:outputLabel></p>
         </h:form>
         
     </h:body>

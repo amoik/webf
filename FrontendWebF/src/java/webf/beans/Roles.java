@@ -83,12 +83,12 @@ public class Roles {
 
         if(ret)
         {
-            addMessage(0, "Erfolgreich", "wurde gelöscht");
+            addMessage(0, "Erfolgreich! ", "Rolle wurde gelöscht.");
             getAll();
         }
         else
         {
-            addMessage(3, "Fehler!", "Löschen fehlgeschlagen!");
+            addMessage(3, "Fehler! ", "Löschen fehlgeschlagen!");
         }
     }
     public void saveRole(int id)
@@ -110,7 +110,7 @@ public class Roles {
         {
             resetVars();
             getAll();
-            addMessage(0, "Erfolgreich", "wurde angelegt");
+            addMessage(0, "Erfolgreich!", " Rolle wurde angelegt.");
         }
         else
         {
