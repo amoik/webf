@@ -25,6 +25,10 @@
             <p:messages id="messages" showDetail="true" autoUpdate="true" />
         </h:form>
         
+        <h:panelGrid columnClasses="value" style="width: 100%">
+            <p:schedule value="#{calendarView.lazyEventModel}" />
+        </h:panelGrid>
+        
         <h:form id="coursesOutput" rendered='#{login.accountType != "ADMIN"}'>
             <p:dataTable var="c" value="#{courses.courses}" id="coursesTableOutput">
                 <p:column headerText="Titel" style="width:70px" >
@@ -87,9 +91,8 @@
                 </p:column>
             </p:dataTable>
         </h:form>
-            
-        <h:outputText rendered='#{login.accountType == "ADMIN"}' style="font-family: Arial; font-size: 18pt; float: left; margin-top: 15px;" value="Neue Kurse:"/>            
- 
+
+        <h2>Neue Kurse:</h2>
 
         <h:form id="coursesNewForm" style="margin-top:15px;" rendered='#{login.accountType == "ADMIN"}'>
             <p:panelGrid columns="8" style="width:100%;" columnClasses="titel alignTop, beschreibung alignTop, beschreibungEng alignTop, voraussetzung alignTop, beginn alignTop, ende alignTop, lektor alignTop, buttons">
