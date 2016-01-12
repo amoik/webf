@@ -8,7 +8,7 @@
     xmlns:p="http://primefaces.org/ui">
     
     <h:head>
-        <title>Kurse</title>
+        <title>Kalender</title>
     </h:head>
     <h:body>
         <h:outputStylesheet library="css" name="style.css"  />
@@ -18,100 +18,17 @@
         </h:form>
 
         <h:form>
-            <p:remoteCommand name="onload" update=":coursesForm,:coursesNewForm,:coursesOutput:coursesTableOutput" action="#{courses.onload}" autoRun="true" />
+            <p:remoteCommand name="onload" update=":calendar" action="#{calendar.onload}" autoRun="true" />
         </h:form>
 
         <h:form>
             <p:messages id="messages" showDetail="true" autoUpdate="true" />
         </h:form>
         
-        <h:panelGrid columnClasses="value" style="width: 100%">
-            <p:schedule value="#{calendarView.lazyEventModel}" />
+        <h:panelGrid id="calendar" columnClasses="value" style="width: 100%">
+            <p:schedule value="#{calendar.eventModel}" widgetVar="myschedule" ></p:schedule>
         </h:panelGrid>
         
-        <h:form id="coursesOutput" rendered='#{login.accountType != "ADMIN"}'>
-            <p:dataTable var="c" value="#{courses.courses}" id="coursesTableOutput">
-                <p:column headerText="Titel" style="width:70px" >
-                    <p:outputLabel value="#{c.title}" style="width:62px" />
-                </p:column>
-                <p:column headerText="Beschreibung">
-                    <p:outputLabel value="#{c.description}"/>
-                </p:column>
-                <p:column headerText="Description">
-                    <p:outputLabel value="#{c.descriptionEn}"/>
-                </p:column>
-                <p:column headerText="Anforderungen">
-                    <p:outputLabel value="#{c.requirements}"/>
-                </p:column>
-                <p:column headerText="Beginn">
-                    <p:outputLabel value="#{c.begin}"/>
-                </p:column>
-                <p:column headerText="Ende">
-                    <p:outputLabel value="#{c.end}"/>
-                </p:column>
-                <p:column headerText="Lektor" style="width:115px">
-                    <p:outputLabel value="#{c.person.username}"/>
-                </p:column>
-            </p:dataTable>
-        </h:form>
-
-        <h:form id="coursesForm" rendered='#{login.accountType == "ADMIN"}'>
-            <p:dataTable var="c" value="#{courses.courses}" id="coursesTable">
-                <p:column headerText="Titel" style="width:70px;" styleClass="titel">
-                    <p:inputText value="#{c.title}" style="width:62px"/>
-                </p:column>
-
-                <p:column headerText="Beschreibung">
-                    <p:inputTextarea value="#{c.description}"/>
-                </p:column>
-                <p:column headerText="Description">
-                    <p:inputTextarea value="#{c.descriptionEn}"/>
-                </p:column>
-                <p:column headerText="Anforderungen">
-                    <p:inputTextarea value="#{c.requirements}"/>
-                </p:column>
-                <p:column headerText="Beginn">
-                    <p:calendar value="#{c.begin}" pattern="dd.MM.yyyy" style="width:90%;">
-                        <f:convertDateTime pattern="dd.MM.yyyy"/>
-                    </p:calendar>
-                </p:column>
-                <p:column headerText="Ende">
-                    <p:calendar value="#{c.end}" pattern="dd.MM.yyyy" style="width:90%;">
-                        <f:convertDateTime pattern="dd.MM.yyyy"/>
-                    </p:calendar>
-                </p:column>
-                <p:column headerText="Lektor" style="width:115px">
-                    <p:selectOneMenu id="lector" value="#{c.person.username}" effect="fade">
-                        <f:selectItems value="#{courses.lectors}" var="l"  itemValue="#{l.username}" itemLabel="#{l.username}" />
-                    </p:selectOneMenu>
-                </p:column>
-                <p:column style="width:40px;">
-                    <p:commandButton update=":coursesForm:coursesTable" title="#{c.title} speichern" actionListener="#{courses.saveCourse(c.coursePk, c.title, c.description, c.descriptionEn, c.requirements, c.begin, c.end, c.person.username)}" icon="ui-icon-disk" style="width: 16px; height: 16px; float: left;"/>
-                    <p:commandButton update=":coursesForm:coursesTable" title="#{c.title} löschen" actionListener="#{courses.deleteCourse(c.coursePk)}" icon="ui-icon-trash" style="width: 16px; height: 16px ;float: right;"/>
-                </p:column>
-            </p:dataTable>
-        </h:form>
-
-        <h2>Neue Kurse:</h2>
-
-        <h:form id="coursesNewForm" style="margin-top:15px;" rendered='#{login.accountType == "ADMIN"}'>
-            <p:panelGrid columns="8" style="width:100%;" columnClasses="titel alignTop, beschreibung alignTop, beschreibungEng alignTop, voraussetzung alignTop, beginn alignTop, ende alignTop, lektor alignTop, buttons">
-                <p:inputText value="#{courses.newTitle}" placeholder="Titel" required="true" style="width:95%;"/>
-                <p:inputTextarea value="#{courses.newDescription}" placeholder="Beschreibung" required="true" style="width:95%;"/>
-                <p:inputTextarea value="#{courses.newDescription_en}" placeholder="Beschreibung(en)" required="true" style="width:95%;"/>
-                <p:inputTextarea value="#{courses.newRequirements}" placeholder="Voraussetzungen" required="true" style="width:95%;"/>
-                <p:calendar value="#{courses.newBegin}" pattern="dd.MM.yyyy" required="true" style="width:95%;">
-                    <f:convertDateTime pattern="dd.MM.yyyy"/>
-                </p:calendar>
-                <p:calendar value="#{courses.newEnd}" pattern="dd.MM.yyyy" required="true" style="width:95%;">
-                    <f:convertDateTime pattern="dd.MM.yyyy"/>
-                </p:calendar>
-                <p:selectOneMenu id="newLector" value="#{courses.newLector}" effect="fade">
-                    <f:selectItems value="#{courses.lectors}" var="l"  itemValue="#{l.username}" itemLabel="#{l.username}" />
-                </p:selectOneMenu>
-                <p:commandButton update=":coursesForm:coursesTable,:coursesNewForm" title="Speichern" actionListener="#{courses.createCourse(courses.newTitle, courses.newDescription, courses.newDescription_en, courses.newRequirements, courses.newBegin, courses.newEnd, courses.newLector)}" icon="ui-icon-disk" style="width: 16px; height: 16px; float: left;"/>
-            </p:panelGrid>
-        </h:form>
     </h:body>
 </html>
 

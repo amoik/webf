@@ -33,6 +33,7 @@ public class Utils {
         }
         return da;
     }
+    
     public static String fDateStr(String d)
     {
         DateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
@@ -49,6 +50,25 @@ public class Utils {
         }
         
         DateFormat out = new SimpleDateFormat("dd.MM.yyyy");
+        return out.format(date);
+    }
+    
+    public static String fStrDate(String d)
+    {
+        DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+        Date date;
+        
+        try
+        {
+            date = format.parse(d);
+        }
+        catch(Exception e)
+        {
+            tinf("date EXCEPTION: " + e);
+            return "000 000 00 00:00:00 0 0000";
+        }
+        DateFormat out = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
+        
         return out.format(date);
     }
     
