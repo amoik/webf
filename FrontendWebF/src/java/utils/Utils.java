@@ -69,6 +69,8 @@ public class Utils {
         }
         DateFormat out = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
         
+        date.setDate(date.getDate()+1);
+        
         return out.format(date);
     }
     

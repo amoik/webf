@@ -23,7 +23,7 @@
         
         
         <h:form id="personForm">
-            <p:dataList id="personList" value="#{persons.persons}" widgetVar="personTable" var="person" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated" >
+            <p:dataList id="personList" value="#{persons.persons}" widgetVar="personTable" var="person" type="ordered" itemType="none" paginator="true" rows="10" styleClass="paginated" >
                 <f:facet name="header">Personen</f:facet>
                 <p:panel style="width:96%;">
                     <h:outputLink value="#">

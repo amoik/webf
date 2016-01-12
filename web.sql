@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Erstellungszeit: 08. Jan 2016 um 12:22
+-- Erstellungszeit: 12. Jan 2016 um 15:45
 -- Server-Version: 10.0.21-MariaDB
 -- PHP-Version: 5.6.16
 
@@ -43,11 +43,11 @@ CREATE TABLE `course` (
 
 INSERT INTO `course` (`course_pk`, `title`, `description`, `lector_id`, `end`, `begin`, `description_en`, `requirements`) VALUES
 (1, 'WEBF', 'Gängige Webframeworks aus der Java Welt', 169, '05.01.2016', '01.01.2016', 'Usual web frameworks in JAVA', 'Programmierkenntnisse in rotzigen Java, Webservices'),
-(8, 'CBAS', 'Grundlegende Eigenschaften der Programmiersprache C', 169, '05.01.2016', '05.01.2016', 'Basics in C-99', 'keine'),
+(8, 'CBAS', 'Grundlegende Eigenschaften der Programmiersprache C', 169, '06.01.2016', '05.01.2016', 'Basics in C-99', 'keine'),
 (11, 'TestTitel', 'Nur ein Test', NULL, '05.01.2016', '05.01.2016', 'asdf', 'asdf'),
-(15, 'CROSS', 'Crossplatform heislbesn', 169, '05.01.2016', '05.01.2016', 'asdf', 'safd'),
-(20, 'Test2', 'Das ist nur ein Testkurs', 169, '27.01.2016', '03.01.2016', 'This is only a course for testing', 'na goa kane'),
-(21, 'Test', 'Das ist nur ein Testkurs', NULL, '27.01.2016', '03.01.2016', 'This is only a course for testing', 'na goa kane');
+(15, 'CROSS', 'Crossplatform heislbesn', NULL, '20.01.2016', '05.01.2016', 'asdf', 'safd'),
+(21, 'Test', 'Das ist nur ein Testkurs', NULL, '27.01.2016', '02.01.2016', 'This is only a course for testing', 'na goa kane'),
+(22, 'SAUD', 'Softwaare-Architektur und Design', NULL, '19.01.2016', '05.01.2016', 'gibts kane', 'nix');
 
 -- --------------------------------------------------------
 
@@ -77,7 +77,16 @@ INSERT INTO `person` (`person_pk`, `username`, `password`, `firstname`, `lastnam
 (170, 'TestLektor', 'tl', 'Test', 'Lektor', '2016-01-31', 2),
 (171, 'heislbesn', 'ah', 'heisl', 'besn', '2016-01-25', 2),
 (173, 'pa14l010', 'az', 'Alexander', 'Zulechner', '2016-01-18', 3),
-(175, 'pa14l001', 'dk', 'Daniel', 'Koral', '2016-01-18', 3);
+(176, 'pa14l011', 'mb', 'Margerite', 'Bardeau', '2016-01-11', 3),
+(177, 'pa14l004', 'bb', 'Bernhard', 'Böck', '2016-01-11', 3),
+(178, 'pa14l006', 'jc', 'Johndrick', 'Calupas', '2016-01-10', 3),
+(179, 'pa14l012', 'bk', 'Barbara', 'Krautgartner', '2016-01-11', 3),
+(180, 'pa14l003', 'rm', 'Rebecca Anna', 'Moritz', '2016-01-03', 3),
+(181, 'pa14l008', 'rm', 'Raphael', 'Moser', '2016-01-11', 3),
+(182, 'pa14l002', 'pp', 'Patrick', 'Pöchhacker', '2016-01-03', 3),
+(183, 'pa14l009', 'mz', 'Manfred', 'Zlamala', '2016-01-11', 3),
+(184, 'pa14l010', 'az', 'Alexander', 'Zulechner', '2016-01-12', 3),
+(185, 'pa14l005', 'lg', 'Linda', 'Grubits', '2016-01-04', 3);
 
 -- --------------------------------------------------------
 
@@ -96,12 +105,15 @@ CREATE TABLE `person_course_membership` (
 --
 
 INSERT INTO `person_course_membership` (`person_fk`, `course_fk`, `note`) VALUES
-(2, 1, 0),
+(2, 1, 1),
+(2, 8, 1),
 (2, 11, 3),
 (3, 1, 0),
+(3, 8, 0),
 (3, 11, 0),
+(3, 15, 0),
 (173, 1, 0),
-(175, 1, 0);
+(173, 8, 0);
 
 -- --------------------------------------------------------
 
@@ -164,17 +176,17 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT für Tabelle `course`
 --
 ALTER TABLE `course`
-  MODIFY `course_pk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `course_pk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT für Tabelle `person`
 --
 ALTER TABLE `person`
-  MODIFY `person_pk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
+  MODIFY `person_pk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
 --
 -- AUTO_INCREMENT für Tabelle `role`
 --
 ALTER TABLE `role`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Constraints der exportierten Tabellen
 --

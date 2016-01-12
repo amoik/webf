@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.List;
 import javax.el.ELContext;
 import javax.faces.context.FacesContext;
-import static utils.Utils.tinf;
 import static utils.Utils.addMessage;
 import static utils.Utils.tinf;
 import webf.ws.Person;
