@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+    xmlns="http://www.w3.org/1999/xhtml"   
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui">
+    
+    <h:head>
+        <title>Kalender</title>
+    </h:head>
+    <h:body>
+        <h:outputStylesheet library="css" name="style.css"  />
+
+        <h:form>
+            <p><p:commandButton value="Zurück" action="loggedin.xhtml?faces-redirect=true"/></p>
+        </h:form>
+
+        <h:form>
+            <p:remoteCommand name="onload" update=":calendar" action="#{calendar.onload}" autoRun="true" />
+        </h:form>
+
+        <h:form>
+            <p:messages id="messages" showDetail="true" autoUpdate="true" />
+        </h:form>
+        
+        <h:panelGrid id="calendar" columnClasses="value" style="width: 100%">
+            <p:schedule value="#{calendar.eventModel}" widgetVar="myschedule" ></p:schedule>
+        </h:panelGrid>
+        
+    </h:body>
+</html>
+
